@@ -1,0 +1,20 @@
+﻿
+namespace BuildingBlocks.Abstractions;
+
+public class Aggregate<TId> : Entity<TId>, IAggregate<TId>
+{
+    private readonly List<IDomainEvent> _domainEvents = [];
+    public IReadOnlyList<IDomainEvent> domainEvents => _domainEvents.AsReadOnly(); 
+    public void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+    public IDomainEvent[] ClearDomainEvents()
+    {
+        IDomainEvent[] dequeuedEvents = _domainEvents.ToArray();
+
+        _domainEvents.Clear();
+
+        return dequeuedEvents;
+    }
+}
