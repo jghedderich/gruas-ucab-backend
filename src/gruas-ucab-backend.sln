@@ -7,19 +7,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{84
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{D26BC9F2-7EF7-4068-8658-2F65B9BBBE71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Catalog.API", "Services\Catalog\Catalog.API\Catalog.API.csproj", "{8FF3AF1D-B94F-4F61-8840-8F20CAD7B6F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalog.API", "Services\Catalog\Catalog.API\Catalog.API.csproj", "{8FF3AF1D-B94F-4F61-8840-8F20CAD7B6F7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{918BD5B4-D0ED-4EAD-A159-DA5E087E90BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Providers.API", "Services\Providers\Providers.API\Providers.API.csproj", "{2364E711-0D46-4556-92EC-7FAE25ECD505}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Providers.API", "Services\Providers\Providers.API\Providers.API.csproj", "{2364E711-0D46-4556-92EC-7FAE25ECD505}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{1D64813C-57EC-4690-AEA9-4C2941ED04D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.API", "Services\Orders\Orders.API\Orders.API.csproj", "{7B224C7A-0932-4C0E-93A7-B627C063E1BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.API", "Services\Orders\Orders.API\Orders.API.csproj", "{7B224C7A-0932-4C0E-93A7-B627C063E1BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{69D74159-C5C1-4C62-B8E6-77A43E0A0AD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj", "{322393FA-B7D5-44A2-B934-9747D38C752F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj", "{322393FA-B7D5-44A2-B934-9747D38C752F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{25641F91-28A9-4623-8DCC-7C842CD3B3F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{322393FA-B7D5-44A2-B934-9747D38C752F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{322393FA-B7D5-44A2-B934-9747D38C752F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{322393FA-B7D5-44A2-B934-9747D38C752F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25641F91-28A9-4623-8DCC-7C842CD3B3F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25641F91-28A9-4623-8DCC-7C842CD3B3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25641F91-28A9-4623-8DCC-7C842CD3B3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25641F91-28A9-4623-8DCC-7C842CD3B3F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
