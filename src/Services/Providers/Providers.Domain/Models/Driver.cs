@@ -1,19 +1,39 @@
 ﻿namespace Providers.Domain.Models;
 
-public class Driver : Entity<DriverId>
+public class Driver : Aggregate<DriverId>
 {
-    internal Driver(ProviderId providerId, DriverId driverId, VehicleId vehicleId, DriverName driverName)
+    public DriverName DriverName { get; private set; } = default!;
+    public Phone Phone { get; private set; } = default!;
+    public Dni Dni { get; private set; } = default!;
+    public static Driver Create(
+        DriverId id, 
+        DriverName driverName, 
+        Phone phone, 
+        Dni dni
+        )
     {
-        Id = DriverId.Of(Guid.NewGuid());
-        ProviderId = providerId;
-        VehicleId = vehicleId;
-        DriverName = driverName;
+        var driver = new Driver
+        {
+            Id = id,
+            DriverName = driverName,
+            Phone = phone,
+            Dni = dni,
+        };
+
+        driver.AddDomainEvent(new DriverCreatedEvent(driver));
+
+        return driver;
     }
 
-    public ProviderId ProviderId { get; private set; } = default!;
-    public VehicleId VehicleId { get; private set; } = default!;
-    public DriverName DriverName { get; private set; } = default!;
-    public Company Company { get; private set; } = default!;
+    public void UpdateName(DriverName driverName, Dni dni, Phone phone)
+    {
+        DriverName = driverName;
+        Phone = phone;
+        Dni = dni;
+
+        AddDomainEvent(new DriverUpdatedEvent(this));
+    }
+
+    public void 
     
-    // to be determined
 }
