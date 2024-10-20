@@ -11,6 +11,15 @@ services:
     volumes:
       - postgres_catalog:/var/lib/postgresql/data/
 
+  providersdb:
+    container_name: providersdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Equipo9#2024
+    restart: always
+    ports:
+      - "1433:1433"
+
   catalog.api:
     container_name: catalog.api
     environment:

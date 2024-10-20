@@ -1,6 +1,7 @@
 using BuildingBlocks.API;
 using BuildingBlocks.Application;
-using BuildingBlocks.Infrastructure;
+using Providers.Infrastructure;
+using Providers.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,5 +14,11 @@ builder.Services
 var app = builder.Build();
 
 // Configure HTTP run pipeline
+app.UseApiServices();
+
+if (app.Environment.IsDevelopment())
+{
+    await app.InitializeDatabase();
+}
 
 app.Run();

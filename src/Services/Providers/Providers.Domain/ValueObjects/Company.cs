@@ -6,13 +6,9 @@ public record Company
     public string Description { get; } = default!;
     public string City { get; } = default!;
     public string State { get; } = default!;
-    public RIF Rif { get; private set; } = default!;
+    public string Rif { get; private set; } = default!;
 
-    protected Company()
-    {
-    }
-    
-    private Company(string name, string description, RIF rif, string city, string state)
+    private Company(string name, string description, string rif, string city, string state)
     {
         Name = name;
         Description = description;
@@ -21,12 +17,13 @@ public record Company
         State = state;
     }
 
-    public static Company Of(string name, string description, RIF rif, string city, string state)
+    public static Company Of(string name, string description, string rif, string city, string state)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(name);
         ArgumentException.ThrowIfNullOrWhiteSpace(description);
         ArgumentException.ThrowIfNullOrWhiteSpace(city);
         ArgumentException.ThrowIfNullOrWhiteSpace(state);
+        ArgumentException.ThrowIfNullOrWhiteSpace(rif);
 
         return new Company(name, description, rif, city, state);
     }

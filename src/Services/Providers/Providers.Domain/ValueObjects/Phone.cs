@@ -2,6 +2,8 @@
 
 public record Phone
 {
+    public Phone() { }
+
     private const int DefaultLength = 11;
     public string Value { get; } = default!;
     private Phone(string value) => Value = value;

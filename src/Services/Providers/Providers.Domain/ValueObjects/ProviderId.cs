@@ -2,8 +2,8 @@
 
 public record ProviderId
 {
-    public Guid Value { get; }
-    private ProviderId(Guid value) => Value = value;
+    public Guid Value { get; set; }
+    private ProviderId(Guid value) {  Value = value; }
     public static ProviderId Of(Guid value)
     {
         ArgumentNullException.ThrowIfNull(value);

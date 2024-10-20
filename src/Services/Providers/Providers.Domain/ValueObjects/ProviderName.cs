@@ -2,7 +2,7 @@
 
 public record ProviderName
 {
-    private const int DefaultLength = 5;
+    private const int DefaultLength = 2;
     public string FirstName { get; } = default!;
     public string LastName { get; } = default!;
 
@@ -16,8 +16,6 @@ public record ProviderName
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(firstName);
         ArgumentException.ThrowIfNullOrWhiteSpace(lastName);
-        ArgumentOutOfRangeException.ThrowIfNotEqual(firstName.Length, DefaultLength);
-        ArgumentOutOfRangeException.ThrowIfNotEqual(lastName.Length, DefaultLength);
         
         return new ProviderName(firstName, lastName);
     }
