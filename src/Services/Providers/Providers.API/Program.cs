@@ -1,6 +1,6 @@
 using BuildingBlocks.API;
-using BuildingBlocks.Application;
 using Providers.Infrastructure;
+using Providers.Application;
 using Providers.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
