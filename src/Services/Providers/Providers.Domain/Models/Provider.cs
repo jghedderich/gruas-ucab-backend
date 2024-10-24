@@ -40,13 +40,10 @@ public class Provider : Aggregate<Guid>
 
         return provider;
     }
-    public void Update(ProviderName providerName, Email email, Company company, Phone phone, Dni dni)
+    public void Update(ProviderName providerName, Company company)
     {
         ProviderName = providerName;
-        Email = email;
-        Phone = phone;
         Company = company;
-        Dni = dni;
 
         AddDomainEvent(new ProviderUpdatedEvent(this));
     }

@@ -1,0 +1,11 @@
+﻿global using FluentValidation;
+global using MediatR;
+global using Providers.Domain.Events;
+global using Providers.Application.Exceptions;
+global using BuildingBlocks.CQRS;
+global using Microsoft.EntityFrameworkCore;
+global using Providers.Domain.Models;
+global using Providers.Application.Data;
+global using Providers.Domain.ValueObjects;
+global using Providers.Application.Dtos;
+global using Microsoft.Extensions.Logging;

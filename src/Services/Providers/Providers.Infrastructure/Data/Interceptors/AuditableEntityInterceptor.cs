@@ -34,6 +34,12 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
                 entry.Entity.LastModified = DateTime.UtcNow;
             }
 
+            if (entry.State == EntityState.Deleted)
+            {
+                entry.State = EntityState.Modified;
+                entry.Entity.IsActive = false;
+            }
+
         }
     }
 

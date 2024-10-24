@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Providers.Application.Data;
 using Providers.Domain.Models;
 using System.Reflection;
 namespace Providers.Infrastructure.Data;
 
-internal class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
+public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options) { }
     public DbSet<Provider> Providers => Set<Provider>();
     public DbSet<Vehicle> Vehicles => Set<Vehicle>();
     public DbSet<Driver> Drivers => Set<Driver>();
@@ -14,4 +17,6 @@ internal class ApplicationDbContext(DbContextOptions<ApplicationDbContext> optio
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         base.OnModelCreating(builder);
     }
+    
+
 }

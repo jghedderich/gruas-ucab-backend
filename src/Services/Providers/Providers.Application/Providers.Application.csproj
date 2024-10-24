@@ -11,4 +11,15 @@
     <ProjectReference Include="..\Providers.Domain\Providers.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Drivers\Commands\" />
+    <Folder Include="Drivers\Queries\" />
+    <Folder Include="Vehicles\Commands\" />
+    <Folder Include="Vehicles\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿using Providers.Infrastructure.Data.Interceptors;
+﻿using Providers.Application.Data;
+using Providers.Infrastructure.Data.Interceptors;
 
 namespace Providers.Infrastructure;
 
@@ -19,7 +20,7 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString);
         });
 
-        //services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         return services;
     }
