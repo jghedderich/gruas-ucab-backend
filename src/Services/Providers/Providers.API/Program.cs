@@ -1,7 +1,7 @@
-using BuildingBlocks.API;
 using Providers.Infrastructure;
 using Providers.Application;
 using Providers.Infrastructure.Data.Extensions;
+using Providers.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
-    .AddApiServices();
+    .AddApiServices(builder.Configuration);
 
 var app = builder.Build();
 

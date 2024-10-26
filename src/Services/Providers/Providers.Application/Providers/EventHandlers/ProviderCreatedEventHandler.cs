@@ -6,7 +6,7 @@ public class ProviderCreatedEventHandler(ILogger<ProviderCreatedEventHandler> lo
 {
     public Task Handle(ProviderCreatedEvent notification, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Domain Event handled: {DomainEvent}", notification.GetType().Name); 
-        throw new NotImplementedException();
+        logger.LogInformation("Domain Event handled: {DomainEvent}", notification.GetType().Name);
+        return Task.CompletedTask;
     }
 }
