@@ -1,9 +1,12 @@
 ﻿namespace Providers.Domain.ValueObjects;
 
-public record DriverId
+public record DriverId 
 {
-    public Guid Value { get; }
-    private DriverId(Guid value) => Value = value;
+    public Guid Value { get; set; }
+    private DriverId(Guid value)
+    {
+        Value = value;
+    }
     public static DriverId Of(Guid value)
     {
         ArgumentNullException.ThrowIfNull(value);
@@ -15,4 +18,3 @@ public record DriverId
         return new DriverId(value);
     }
 }
-

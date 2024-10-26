@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BuildingBlocks.Abstractions
+namespace Users.Domain
 {
-    internal class some
+    internal class UserDomain
     {
     }
 }
