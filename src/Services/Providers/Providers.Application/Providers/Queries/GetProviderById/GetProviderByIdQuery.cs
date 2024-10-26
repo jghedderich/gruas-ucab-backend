@@ -3,4 +3,4 @@
 public record GetProviderByIdQuery(Guid Id)
     : IQuery<GetProviderByIdResult>;
 
-public record GetProviderByIdResult(Provider Provider);
+public record GetProviderByIdResult(ProviderDto Provider);
