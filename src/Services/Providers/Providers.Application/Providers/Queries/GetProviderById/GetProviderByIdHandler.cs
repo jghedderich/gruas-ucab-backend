@@ -1,4 +1,6 @@
 ﻿
+using Providers.Application.Extensions;
+
 namespace Providers.Application.Providers.Queries.GetProviderById;
 
 public class GetProviderByIdHandler(IApplicationDbContext dbContext)
@@ -6,17 +8,14 @@ public class GetProviderByIdHandler(IApplicationDbContext dbContext)
 {
     public async Task<GetProviderByIdResult> Handle(GetProviderByIdQuery query, CancellationToken cancellationToken)
     {
-        // get orders by name using dbContext
-        // return result
-
         Provider provider = await dbContext.Providers
                 .Include(o => o.Vehicles)
                 .Include(o => o.Drivers)
                 .AsNoTracking()
-                .Where(o => o.Id.Equals(query.Id))
-                .FirstOrDefaultAsync(cancellationToken: cancellationToken) 
+                .FirstOrDefaultAsync(o => o.Id.Equals(query.Id), cancellationToken)
                 ?? throw new ProviderNotFoundException(query.Id);
 
-        return new GetProviderByIdResult(provider);
+        var providerDto = provider.ToProviderDto();
+        return new GetProviderByIdResult(providerDto);
     }
 }

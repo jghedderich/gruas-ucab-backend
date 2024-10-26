@@ -13,6 +13,7 @@ public class GetProvidersHandler(IApplicationDbContext dbContext) : IQueryHandle
 
     var providers = await dbContext.Providers
           .Include(p => p.Drivers)
+          .Include(p => p.Vehicles)
           .OrderBy(p => p.ProviderName.FirstName)
           .Skip(pageIndex * pageSize)
           .Take(pageSize)
