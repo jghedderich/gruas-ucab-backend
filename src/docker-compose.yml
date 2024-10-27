@@ -1,15 +1,5 @@
 services:
-  catalogdb:
-    image: postgres
 
   providersdb:
     image: mcr.microsoft.com/mssql/server
 
-  catalog.api:
-    image: ${DOCKER_REGISTRY-}catalogapi
-    build:
-      context: .
-      dockerfile: Services/Catalog/Catalog.API/Dockerfile
-
-volumes:
-  postgres_catalog:
