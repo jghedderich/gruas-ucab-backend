@@ -10,7 +10,7 @@ public static class DriverExtensions
                 VehicleId: p.VehicleId,
                 ProviderId: p.ProviderId,
                 Name: new NameDto(p.Name.FirstName, p.Name.LastName),
-                Dni: new DniDto(Type: p.Dni.Type, Number: p.Dni.Number),
+                Dni: new DniDto(Type: p.Dni.Type.ToString(), Number: p.Dni.Number),
                 Phone: p.Phone,
                 Email: p.Email
             ));
@@ -28,7 +28,7 @@ public static class DriverExtensions
                 VehicleId: driver.VehicleId,
                 ProviderId: driver.ProviderId,
                 Name: new NameDto(driver.DriverName.FirstName, driver.DriverName.LastName),
-                Dni: new DniDto(driver.Dni.Type, driver.Dni.Number),
+                Dni: new DniDto(driver.Dni.Type.ToString(), driver.Dni.Number),
                 Phone: driver.Phone.Value,
                 Email: driver.Email.Value
             );

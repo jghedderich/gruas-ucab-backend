@@ -1,4 +1,6 @@
-﻿namespace Providers.Application.Providers.Commands.CreateProvider;
+﻿using Providers.Application.Dtos;
+
+namespace Providers.Application.Providers.Commands.CreateProvider;
 
 public class CreateProviderHandler(IApplicationDbContext dbContext)
     : ICommandHandler<CreateProviderCommand, CreateProviderResult>
@@ -22,7 +24,9 @@ public class CreateProviderHandler(IApplicationDbContext dbContext)
             providerDto.Company.City, 
             providerDto.Company.State);
 
-        var dni = Dni.Of(providerDto.Dni.Type, providerDto.Dni.Number);
+        var dniType = providerDto.Dni.ToDniType();
+
+        var dni = Dni.Of(dniType, providerDto.Dni.Number);
 
         var newProvider = Provider.Create(
             id: Guid.NewGuid(),
