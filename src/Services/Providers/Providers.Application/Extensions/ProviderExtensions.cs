@@ -18,9 +18,9 @@ public static class ProviderExtensions
                 p.Company.City),
                 Vehicles: p.Vehicles.Select(v => new VehicleDto(v.Id, v.Type, v.Brand.Value, v.Model.Value, v.Year)).ToList(),
                 Drivers: p.Drivers.Select(d => 
-                    new DriverDto(d.Id, d.VehicleId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
+                    new DriverDto(d.Id, d.VehicleId,d.ProviderId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
                     new DniDto(d.Dni.Type, d.Dni.Number),
-                    d.Phone.Value)).ToList()
+                    d.Phone.Value, d.Email.Value)).ToList()
         ));
     }
 
@@ -45,9 +45,9 @@ public static class ProviderExtensions
                     provider.Company.City),
                 Vehicles: provider.Vehicles.Select(v => new VehicleDto(v.Id, v.Type, v.Brand.Value, v.Model.Value, v.Year)).ToList(),
                 Drivers: provider.Drivers.Select(d => 
-                    new DriverDto(d.Id, d.VehicleId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
+                    new DriverDto(d.Id, d.VehicleId,d.ProviderId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
                     new DniDto(d.Dni.Type, d.Dni.Number),
-                    d.Phone.Value)).ToList()
+                    d.Phone.Value,d.Email.Value)).ToList()
         );
     }
 }

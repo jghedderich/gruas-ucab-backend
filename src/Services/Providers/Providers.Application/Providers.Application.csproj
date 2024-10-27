@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Drivers\Commands\" />
-    <Folder Include="Drivers\Queries\" />
     <Folder Include="Vehicles\Commands\" />
     <Folder Include="Vehicles\Queries\" />
   </ItemGroup>
