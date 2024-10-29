@@ -1,5 +1,16 @@
-services:
+version: '3.4'
 
+services:
   providersdb:
     image: mcr.microsoft.com/mssql/server
+
+  messagebroker:
+    image: rabbitmq:management
+
+
+  providers.api:
+    image: ${DOCKER_REGISTRY-}providersapi
+    build:
+      context: .
+      dockerfile: Services/Providers/Providers.API/Dockerfile
 
