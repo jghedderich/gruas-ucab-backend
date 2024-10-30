@@ -1,7 +1,7 @@
 ﻿using BuildingBlocks.Pagination;
 using Providers.Application.Providers.Queries.GetProviders;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Providers;
 
 public record GetProvidersResponse(PaginatedResult<ProviderDto> Providers);
 

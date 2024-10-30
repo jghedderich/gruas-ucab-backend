@@ -1,7 +1,7 @@
 ﻿using BuildingBlocks.Pagination;
 using Providers.Application.Drivers.Queries.GetDrivers;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Drivers;
 
 public record GetDriversResponse(PaginatedResult<DriverDto> Drivers);
 

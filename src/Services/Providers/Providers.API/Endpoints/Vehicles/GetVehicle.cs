@@ -1,7 +1,8 @@
 ﻿using BuildingBlocks.Pagination;
+using Providers.API.Endpoints.Drivers;
 using Providers.Application.Vehicles.Queries.GetVehicles;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Vehicles;
 
 public record GetVehiclesResponse(PaginatedResult<VehicleDto> Vehicles);
 

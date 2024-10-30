@@ -1,6 +1,7 @@
-﻿using Providers.Application.Vehicles.Queries.GetVehicleById;
+﻿using Providers.API.Endpoints.Drivers;
+using Providers.Application.Vehicles.Queries.GetVehicleById;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Vehicles;
 
 public record GetVehicleByIdResponse(VehicleDto Vehicle);
 public class GetVehicleById : ICarterModule

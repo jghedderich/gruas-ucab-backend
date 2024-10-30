@@ -1,4 +1,5 @@
-﻿namespace Providers.Application.Extensions;
+﻿
+namespace Providers.Application.Extensions;
 
 public static class ProviderExtensions
 {
@@ -16,11 +17,15 @@ public static class ProviderExtensions
                 p.Company.Rif, 
                 p.Company.State, 
                 p.Company.City),
-            Vehicles: p.Vehicles.Select(v => new VehicleDto(v.Id,v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year)).ToList(),
+            Vehicles: p.Vehicles.Select(v => new VehicleDto(v.Id, v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year, v.IsActive)).ToList(),
             Drivers: p.Drivers.Select(d => 
-                new DriverDto(d.Id, d.VehicleId,d.ProviderId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
+                new DriverDto(d.Id, d.VehicleId, d.ProviderId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
                 new DniDto(d.Dni.Type.ToString(), d.Dni.Number),
-                d.Phone.Value, d.Email.Value)).ToList()
+                d.Phone.Value, 
+                d.Email.Value,
+                d.IsActive)).ToList(),
+                
+            IsActive: p.IsActive
         ));
     }
 
@@ -43,11 +48,12 @@ public static class ProviderExtensions
                     provider.Company.Rif,
                     provider.Company.State,
                     provider.Company.City),
-                Vehicles: provider.Vehicles.Select(v => new VehicleDto(v.Id,v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year)).ToList(),
+                Vehicles: provider.Vehicles.Select(v => new VehicleDto(v.Id,v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year, v.IsActive)).ToList(),
                 Drivers: provider.Drivers.Select(d => 
                     new DriverDto(d.Id, d.VehicleId,d.ProviderId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
                     new DniDto(d.Dni.Type.ToString(), d.Dni.Number),
-                    d.Phone.Value,d.Email.Value)).ToList()
+                    d.Phone.Value,d.Email.Value, d.IsActive)).ToList(),
+                IsActive: provider.IsActive
         );
     }
 }

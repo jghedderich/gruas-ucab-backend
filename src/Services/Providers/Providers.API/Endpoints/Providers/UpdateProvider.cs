@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Providers.Commands.UpdateProvider;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Providers;
 
 public record UpdateProviderRequest(ProviderDto Provider);
 public record UpdateProviderResponse(bool IsSuccess);

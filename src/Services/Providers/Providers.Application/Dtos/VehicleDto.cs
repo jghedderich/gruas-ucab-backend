@@ -7,4 +7,6 @@ public record VehicleDto(
     string Type, 
     string Brand, 
     string Model, 
-    int Year);
+    int Year,
+    bool? IsActive
+    );

@@ -1,6 +1,7 @@
-﻿using Providers.Application.Vehicles.Commands.UpdateVehicle;
+﻿using Providers.API.Endpoints.Providers;
+using Providers.Application.Vehicles.Commands.UpdateVehicle;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Vehicles;
 
 public record UpdateVehicleRequest(VehicleDto Vehicle);
 public record UpdateVehicleResponse(bool IsSuccess);

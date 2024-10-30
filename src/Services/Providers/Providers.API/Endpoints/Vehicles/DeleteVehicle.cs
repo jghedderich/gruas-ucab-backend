@@ -1,6 +1,7 @@
-﻿using Providers.Application.Vehicles.Commands.DeleteVehicle;
+﻿using Providers.API.Endpoints.Drivers;
+using Providers.Application.Vehicles.Commands.DeleteVehicle;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Vehicles;
 
 public record DeleteVehicleResponse(bool IsSuccess);
 

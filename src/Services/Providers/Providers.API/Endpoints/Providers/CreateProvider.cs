@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Providers.Commands.CreateProvider;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Providers;
 
 public record CreateProviderRequest(ProviderDto Provider);
 public record CreateProviderResponse(Guid Id);

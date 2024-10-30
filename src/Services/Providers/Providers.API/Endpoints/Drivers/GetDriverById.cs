@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Drivers.Queries.GetDriverById;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Drivers;
 
 public record GetDriverByIdResponse(DriverDto Driver);
 public class GetDriverById : ICarterModule

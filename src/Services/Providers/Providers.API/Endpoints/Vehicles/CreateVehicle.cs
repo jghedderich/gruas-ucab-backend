@@ -1,6 +1,7 @@
-﻿using Providers.Application.Vehicles.Commands.CreateVehicle;
+﻿using Providers.API.Endpoints.Drivers;
+using Providers.Application.Vehicles.Commands.CreateVehicle;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Vehicles;
 
 public record CreateVehicleRequest(VehicleDto Vehicle);
 

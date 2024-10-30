@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Drivers.Commands.CreateDriver;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Drivers;
 
 public record CreateDriverRequest(DriverDto Driver);
 

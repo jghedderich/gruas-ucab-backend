@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Drivers.Commands.UpdateDriver;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Drivers;
 
 public record UpdateDriverRequest(DriverDto Driver);
 

@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Drivers.Commands.DeleteDriver;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Drivers;
 
 public record DeleteDriverResponse(bool IsSuccess);
 

@@ -8,4 +8,6 @@ public record DriverDto(
     NameDto Name, 
     DniDto Dni, 
     string Phone,
-    string Email);
+    string Email,
+    bool? IsActive
+    );
