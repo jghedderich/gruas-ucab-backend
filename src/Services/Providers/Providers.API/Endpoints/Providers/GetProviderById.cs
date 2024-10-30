@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Providers.Queries.GetProviderById;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Providers;
 
 public record GetProviderByIdResponse(ProviderDto Provider);
 

@@ -1,3 +1,5 @@
+version: '3.4'
+
 services:
   providersdb:
     container_name: providersdb
@@ -7,3 +9,34 @@ services:
     restart: always
     ports:
       - "1433:1433"
+  
+  messagebroker:
+    container_name: messagebroker
+    hostname: gruas-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  providers.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=providersdb;Database=ProvidersDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
+      - MessageBroker__Host=amqp://gruas-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+      - FeatureManagement__OrderFullfilment=false
+    depends_on:
+      - providersdb
+      - messagebroker
+    ports:
+      - "6000:8080"
+      - "6060:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

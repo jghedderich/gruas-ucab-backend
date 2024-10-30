@@ -1,6 +1,6 @@
 ﻿using Providers.Application.Providers.Commands.DeleteProvider;
 
-namespace Providers.API.Endpoints;
+namespace Providers.API.Endpoints.Providers;
 
 public record DeleteProviderResponse(bool IsSuccess);
 

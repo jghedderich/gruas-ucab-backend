@@ -1,10 +1,12 @@
-﻿using Providers.Domain.Models;
-
+﻿
 namespace Providers.Application.Dtos;
 
 public record VehicleDto(
     Guid Id, 
-    VehicleType Type, 
+    Guid ProviderId,
+    string Type, 
     string Brand, 
     string Model, 
-    int Year);
+    int Year,
+    bool? IsActive
+    );

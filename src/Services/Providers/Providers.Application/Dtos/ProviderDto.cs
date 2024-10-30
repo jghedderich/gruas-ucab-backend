@@ -9,4 +9,6 @@ public record ProviderDto(
     DniDto Dni,
     CompanyDto Company,
     List<VehicleDto> Vehicles,
-    List<DriverDto> Drivers);
+    List<DriverDto> Drivers,
+    bool? IsActive
+    );
