@@ -18,4 +18,10 @@
     <ProjectReference Include="..\Orders.Application\Orders.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Extensions\" />
+    <Folder Include="Data\Interceptors\" />
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>
