@@ -1,7 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using Orders.Domain.Models;
-using Orders.Application.Data;
+﻿using Orders.Domain.Models;
 using System.Reflection;
 
 namespace Orders.Infrastructure.Data;

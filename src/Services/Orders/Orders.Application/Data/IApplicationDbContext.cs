@@ -7,7 +7,7 @@ public interface IApplicationDbContext
 {
     DbSet<Order> Orders { get; }
     DbSet<Operator> Operators { get; }
-    DbSet<Policy> Policys { get; }
+    DbSet<Policy> Policies { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
