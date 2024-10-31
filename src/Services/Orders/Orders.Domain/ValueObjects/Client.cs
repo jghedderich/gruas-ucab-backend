@@ -6,7 +6,6 @@ public record Client // CLIENTE
     public Dni Dni { get; } = default!;
     public Phone Phone { get; } = default!;
     public Email Email { get; } = default!;
-
     public ClientVehicle ClientVehicle { get; } = default!;
 
     private Client(Name name, Dni dni, Phone phone, Email email, ClientVehicle clientVehicle)
