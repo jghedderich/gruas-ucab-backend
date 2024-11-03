@@ -2,9 +2,10 @@
 
 public record Price
 {
-    public int AnnualPrice { get; } = default!;
-    public int MonthlyPrice { get; } = default!;
+    public int? AnnualPrice { get; } = default!;
+    public int? MonthlyPrice { get; } = default!;
 
+    public Price() { }
     private Price(int annualPrice, int monthlyPrice)
     {
         AnnualPrice = annualPrice;

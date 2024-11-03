@@ -8,6 +8,8 @@ public record Address
     public string State { get; } = default!;
     public string Zip { get; } = default!;
 
+    public Address() { }
+
     private Address(string address1, string address2, string city, string state, string zip) 
     {
         AddressLine1 = address1;

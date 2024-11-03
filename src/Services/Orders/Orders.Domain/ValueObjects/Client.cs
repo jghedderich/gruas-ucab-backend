@@ -8,6 +8,7 @@ public record Client // CLIENTE
     public Email Email { get; } = default!;
     public ClientVehicle ClientVehicle { get; } = default!;
 
+    public Client() { }
     private Client(Name name, Dni dni, Phone phone, Email email, ClientVehicle clientVehicle)
     {
         Name = name;

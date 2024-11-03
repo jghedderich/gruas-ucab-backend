@@ -7,7 +7,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 {
     public DbSet<Order> Orders => Set<Order>();
     public DbSet<Operator> Operators => Set<Operator>();
-    public DbSet<Policy> Policys => Set<Policy>();
+    public DbSet<Policy> Policies => Set<Policy>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
