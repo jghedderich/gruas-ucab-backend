@@ -5,6 +5,7 @@ public record Fee
     public int BaseFee { get; } = default!;
     public int PerKm { get; } = default!;
 
+    public Fee() { }
     private Fee(int baseF, int perKm)
     {
         BaseFee = baseF;
