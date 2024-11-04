@@ -21,6 +21,15 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  ordersdb:
+    container_name: ordersdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Equipo9#2024
+    restart: always
+    ports:
+      - "1434:1434"
+
   providers.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
