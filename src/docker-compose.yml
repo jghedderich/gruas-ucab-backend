@@ -4,6 +4,9 @@ services:
   providersdb:
     image: mcr.microsoft.com/mssql/server
 
+  ordersdb:
+    image: mcr.microsoft.com/mssql/server
+
   messagebroker:
     image: rabbitmq:management
 
