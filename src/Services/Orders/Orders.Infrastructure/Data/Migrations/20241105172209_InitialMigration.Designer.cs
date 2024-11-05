@@ -13,7 +13,7 @@ using Orders.Infrastructure.Data;
 namespace Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241103225339_InitialMigration")]
+    [Migration("20241105172209_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -301,7 +301,7 @@ namespace Orders.Infrastructure.Migrations
                                         .HasMaxLength(100)
                                         .HasColumnType("nvarchar(100)");
 
-                                    b2.Property<string>("Type")
+                                    b2.Property<string>("TypeV")
                                         .IsRequired()
                                         .HasColumnType("nvarchar(max)");
 

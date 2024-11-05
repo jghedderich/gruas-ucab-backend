@@ -71,7 +71,7 @@ namespace Orders.Infrastructure.Migrations
                     Client_ClientVehicle_Brand = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Client_ClientVehicle_Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Client_ClientVehicle_Year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
-                    Client_ClientVehicle_Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Client_ClientVehicle_TypeV = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DestinationAddress_AddressLine1 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DestinationAddress_AddressLine2 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DestinationAddress_City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),

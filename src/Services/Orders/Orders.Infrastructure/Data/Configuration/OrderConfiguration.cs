@@ -42,7 +42,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 vehicleBuilder.Property( v => v.Brand).HasMaxLength(100).IsRequired();
                 vehicleBuilder.Property( v => v.Model).HasMaxLength(100).IsRequired(); 
                 vehicleBuilder.Property( v => v.Year).HasMaxLength(4);
-                vehicleBuilder.Property( v => v.Type)
+                vehicleBuilder.Property( v => v.TypeV)
                     .HasConversion(t => t.ToString(),
                     vehicleType => (VehicleType)Enum.Parse(typeof(VehicleType), vehicleType));
             });
