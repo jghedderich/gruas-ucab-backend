@@ -45,15 +45,15 @@ internal class InitialData
                     ),
             ];
 
-        AddOrdersToOperator(_operators[0], _policies[0]);
-        AddOrdersToOperator(_operators[1],_policies[1]);
+        AddOrdersToOperator1(_operators[0], _policies[0]);
+        AddOrdersToOperator2(_operators[1],_policies[1]);
     }
 
     public static IEnumerable<Operator> Operators() => _operators;
     public static IEnumerable<Policy> Policies() => _policies;
     public static IEnumerable<Order> Orders() => _operators.SelectMany(o => o.Orders);
 
-    private static void AddOrdersToOperator(Operator operatorN, Policy policy)
+    private static void AddOrdersToOperator1(Operator operatorN, Policy policy)
     {
         operatorN.AddOrder(
                 Guid.NewGuid(),
@@ -71,6 +71,29 @@ internal class InitialData
                 OrderStatus.Of(Status.Accepted),
                 Address.Of("Parque Agustín Codazzi", "Padros del Este", "Caracas", "Distrito Capital", "1080"),
                 Address.Of("Paseo Las Mercedes","Las Mercedes", "Caracas", "Distrito Capital", "1060"),
+                new List<CostDetail>()
+            );
+
+    }
+
+    private static void AddOrdersToOperator2(Operator operatorN, Policy policy)
+    {
+        operatorN.AddOrder(
+                Guid.NewGuid(),
+                policy.Id,
+                Client.Of(Name.Of("Pablo", "Rodriguez"), Dni.Of(DniType.V, "30981738"), Phone.Of("04248271927"), Email.Of("pablorodriguez@gmail.com"), ClientVehicle.Of("Chevrolet", "Camaro", 2012, VehicleType.Suv)),
+                OrderStatus.Of(Status.ToBeAccepted),
+                Address.Of("Torre Phelps, Piso 6, Oficina B", "Plaza Venezuela", "Caracas", "Distrito Capital", "1050"),
+                Address.Of("Avenida Francisco de Miranda, Torre La Primera, Oficina 12-A", "Chacao", "Caracas", "Distrito Capital", "1080"),
+                new List<CostDetail>()
+            );
+        operatorN.AddOrder(
+                Guid.NewGuid(),
+                policy.Id,
+                Client.Of(Name.Of("Kissy", "Santander"), Dni.Of(DniType.V, "28719282"), Phone.Of("04128291837"), Email.Of("kissysantander@gmail.com"), ClientVehicle.Of("Dodge", "Charger", 2008, VehicleType.Suv)),
+                OrderStatus.Of(Status.Accepted),
+                Address.Of("Calle Sucre, Quinta No. 23", "El Rosal", "Caracas", "Distrito Capital", "1010"),
+                Address.Of("Calle Guaicaipuro", "Las Mercedes", "Caracas", "Distrito Capital", "1060"),
                 new List<CostDetail>()
             );
 
