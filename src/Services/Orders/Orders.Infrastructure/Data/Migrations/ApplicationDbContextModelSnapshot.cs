@@ -298,7 +298,7 @@ namespace Orders.Infrastructure.Migrations
                                         .HasMaxLength(100)
                                         .HasColumnType("nvarchar(100)");
 
-                                    b2.Property<string>("Type")
+                                    b2.Property<string>("TypeV")
                                         .IsRequired()
                                         .HasColumnType("nvarchar(max)");
 

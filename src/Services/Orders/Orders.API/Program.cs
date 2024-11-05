@@ -1,6 +1,7 @@
 using Orders.Infrastructure;
 using Orders.Application;
 using Orders.API;
+using Orders.Infrastructure.Data.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +16,9 @@ var app = builder.Build();
 // Configure HTTP run pipeline
 app.UseApiServices();
 
-// if (app.Environment.IsDevelopment())
-// {
-//    await app.InitializeDatabase();
-// }
+if (app.Environment.IsDevelopment())
+{
+    await app.InitializeDatabase();
+}
 
 app.Run();
