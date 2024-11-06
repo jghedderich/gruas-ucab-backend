@@ -44,6 +44,19 @@ builder.Services
         .RequireClaim("second-api-access", true.ToString()));
 
 
+var AllowedOrigins = "clientApps";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(AllowedOrigins, builder =>
+    {
+        builder.WithOrigins("http://localhost:3000");
+        builder.AllowAnyMethod();
+        builder.AllowAnyHeader();
+        builder.AllowCredentials();
+    });
+});
+
 var app = builder.Build();
 
 // talvez sea eliminado o cambiado, repito, no se lo que estoy haciendo
@@ -62,6 +75,8 @@ app.MapGet("login", (bool firstApi = false, bool secondApi = false) =>
     ));
 
 app.UseRateLimiter();
+
+app.UseCors(AllowedOrigins);
 
 app.UseAuthentication();
 
