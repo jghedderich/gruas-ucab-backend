@@ -1,5 +1,4 @@
 ﻿
-using Microsoft.VisualBasic;
 
 namespace Providers.Domain.Models;
 
