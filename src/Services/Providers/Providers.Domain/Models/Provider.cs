@@ -12,6 +12,7 @@ public class Provider : Aggregate<Guid>
     public IReadOnlyList<Vehicle> Vehicles => _vehicles.AsReadOnly();
     public ProviderName ProviderName { get; private set; } = default!;
     public Email Email { get; private set; } = default!;
+    public Password Password { get; private set; } = default!;
     public Phone Phone { get; private set; } = default!;
     public Dni Dni { get; private set; } = default!;
     public Company Company { get; private set; } = default!;
@@ -20,6 +21,7 @@ public class Provider : Aggregate<Guid>
          Guid id,
          ProviderName providerName,
          Email email,
+         Password password,
          Phone phone,
          Dni dni,
          Company company
@@ -30,6 +32,7 @@ public class Provider : Aggregate<Guid>
             Id = id,
             ProviderName = providerName,
             Email = email,
+            Password = password,
             Phone = phone,
             Dni = dni,
             Company = company
@@ -39,17 +42,18 @@ public class Provider : Aggregate<Guid>
 
         return provider;
     }
-    public void Update(ProviderName providerName, Company company)
+    public void Update(ProviderName providerName, Password password, Company company)
     {
         ProviderName = providerName;
+        Password = password;
         Company = company;
 
         AddDomainEvent(new ProviderUpdatedEvent(this));
     }
 
-    public void AddDriver(Guid driverId, DriverName driverName, Guid providerId, Guid vehicleId, Email email, Phone phone, Dni dni)
+    public void AddDriver(Guid driverId, DriverName driverName, Guid providerId, Guid vehicleId, Email email, Password password, Phone phone, Dni dni, Status status)
     {
-        var driver = Driver.Create(driverId, driverName,providerId, vehicleId, email, phone, dni);
+        var driver = Driver.Create(driverId, driverName, providerId, vehicleId, email, password, phone, dni, status );
         _drivers.Add(driver);
     }
 

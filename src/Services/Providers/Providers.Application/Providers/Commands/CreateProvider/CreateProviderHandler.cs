@@ -32,6 +32,7 @@ public class CreateProviderHandler(IApplicationDbContext dbContext)
             id: Guid.NewGuid(),
             providerName: ProviderName.Of(providerDto.Name.FirstName, providerDto.Name.LastName),
             email: Email.Of(providerDto.Email),
+            password: Password.Of(providerDto.Password),
             phone: Phone.Of(providerDto.Phone),
             company: company,
             dni: dni

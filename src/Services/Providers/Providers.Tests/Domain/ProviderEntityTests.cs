@@ -14,12 +14,13 @@ public class ProviderEntityTests
         Guid id = Guid.NewGuid();
         ProviderName providerName = ProviderName.Of("testFirst", "lastTest");
         Email email = Email.Of("test@gmail.com");
+        Password password = Password.Of("123456");
         Phone phone = Phone.Of("04123345785");
         Dni dni = Dni.Of(DniType.V, "12345678");
         Company company = Company.Of("testName", "testDesc", "testrif", "testCity", "testState");
 
         // Act
-        var provider = Provider.Create(id, providerName, email, phone, dni, company);
+        var provider = Provider.Create(id, providerName, email, password, phone, dni, company);
 
         // Assert
         provider.Should().NotBeNull();
@@ -40,19 +41,20 @@ public class ProviderEntityTests
         Guid id = Guid.NewGuid();
         ProviderName initialProviderName = ProviderName.Of("initialFirst", "initialLast");
         Email email = Email.Of("test@gmail.com");
+        Password password = Password.Of("123456");
         Phone phone = Phone.Of("04123345785");
         Dni dni = Dni.Of(DniType.V, "12345678");
         Company initialCompany = Company.Of("initialName", "initialDesc", "initialrif", "initialCity", "initialState");
 
         // Create the initial provider
-        var provider = Provider.Create(id, initialProviderName, email, phone, dni, initialCompany);
+        var provider = Provider.Create(id, initialProviderName, email, password, phone, dni, initialCompany);
 
         // New values for update
         ProviderName newProviderName = ProviderName.Of("updatedFirst", "updatedLast");
         Company newCompany = Company.Of("updatedName", "updatedDesc", "updatedrif", "updatedCity", "updatedState");
 
         // Act
-        provider.Update(newProviderName, newCompany);
+        provider.Update(newProviderName, password, newCompany);
 
         // Assert
         provider.ProviderName.Should().Be(newProviderName);

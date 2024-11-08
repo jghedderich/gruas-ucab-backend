@@ -32,6 +32,11 @@ public class ProviderConfiguration : IEntityTypeConfiguration<Provider>
             emailBuilder.Property(p => p.Value).HasMaxLength(255);
         });
 
+        builder.ComplexProperty(p => p.Password, passwordBuilder =>
+        {
+            passwordBuilder.Property(p => p.Value).HasMaxLength(255);
+        });
+
         builder.ComplexProperty(p => p.Dni, dniBuilder =>
         {
             dniBuilder.Property(d => d.Number).HasMaxLength(8).IsRequired();

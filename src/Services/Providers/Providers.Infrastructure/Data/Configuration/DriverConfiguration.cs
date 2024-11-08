@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Providers.Domain.Models;
 using Providers.Domain.ValueObjects;
 
@@ -22,6 +21,11 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
             emailBuilder.Property(e => e.Value).HasMaxLength(255);
         });
 
+        builder.ComplexProperty(p => p.Password, passwordBuilder =>
+        {
+            passwordBuilder.Property(p => p.Value).HasMaxLength(255);
+        });
+
         builder.ComplexProperty(d => d.Dni, dniBuilder =>
         {
             dniBuilder.Property(d => d.Number).HasMaxLength(8).IsRequired();
@@ -34,6 +38,14 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
         builder.ComplexProperty(d => d.Phone, phoneBuilder =>
         {
             phoneBuilder.Property(p => p.Value).HasMaxLength(11).IsRequired();
+        });
+
+
+        builder.ComplexProperty(d => d.Status, statusBuilder =>
+        {
+            statusBuilder.Property(s => s.Type)
+                .HasConversion(n => n.ToString(),
+                statusType => (StatusType)Enum.Parse(typeof(StatusType), statusType));
         });
     }
 }
