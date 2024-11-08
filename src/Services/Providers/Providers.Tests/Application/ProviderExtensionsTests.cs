@@ -30,12 +30,13 @@ public class ProviderExtensionsTests
             Guid id = Guid.NewGuid();
             ProviderName providerName = ProviderName.Of($"FirstName{i}", $"LastName{i}");
             Email email = Email.Of($"test{i}@gmail.com");
+            Password password = Password.Of("123456");
             Phone phone = Phone.Of($"0412334578{i}");
             Dni dni = Dni.Of(DniType.V, $"12345678{i}");
             Company company = Company.Of($"CompanyName{i}", "Description", "RIF", "City", "State");
 
             // Create the provider and add it to the list
-            var provider = Provider.Create(id, providerName, email, phone, dni, company);
+            var provider = Provider.Create(id, providerName, email, password, phone, dni, company);
             providers.Add(provider);
         }
 

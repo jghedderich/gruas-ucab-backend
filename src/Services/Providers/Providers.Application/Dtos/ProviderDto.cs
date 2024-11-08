@@ -6,6 +6,7 @@ public record ProviderDto(
     NameDto Name,
     string Phone,
     string Email,
+    string Password,
     DniDto Dni,
     CompanyDto Company,
     List<VehicleDto> Vehicles,

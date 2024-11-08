@@ -11,8 +11,10 @@ public static class DriverExtensions
                 ProviderId: p.ProviderId,
                 Name: new NameDto(p.Name.FirstName, p.Name.LastName),
                 Dni: new DniDto(Type: p.Dni.Type.ToString(), Number: p.Dni.Number),
+                Status: p.Status,
                 Phone: p.Phone,
                 Email: p.Email,
+                Password: p.Password,
                 IsActive: p.IsActive
             ));
     }
@@ -32,6 +34,8 @@ public static class DriverExtensions
                 Dni: new DniDto(driver.Dni.Type.ToString(), driver.Dni.Number),
                 Phone: driver.Phone.Value,
                 Email: driver.Email.Value,
+                Password: driver.Password.Value,
+                Status: new StatusDto(driver.Status.ToString()),
                 IsActive: driver.IsActive
             );
     }

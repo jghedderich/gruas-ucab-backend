@@ -9,5 +9,7 @@ public record DriverDto(
     DniDto Dni, 
     string Phone,
     string Email,
+    string Password,
+    StatusDto Status,
     bool? IsActive
     );

@@ -6,8 +6,10 @@ public class Driver : Aggregate<Guid>
     public Guid VehicleId { get; private set; } = default!;
     public DriverName DriverName { get; private set; } = default!;
     public Email Email { get; private set; } = default!;
+    public Password Password { get; private set; } = default!;
     public Phone Phone { get; private set; } = default!;
     public Dni Dni { get; private set; } = default!;
+    public Status Status { get; private set; } = default!;
 
     
     public static Driver Create(
@@ -16,8 +18,10 @@ public class Driver : Aggregate<Guid>
         Guid providerId,
         Guid vehicleId,
         Email email,
+        Password password,
         Phone phone, 
-        Dni dni
+        Dni dni,
+        Status status
      )
     {
         var driver = new Driver
@@ -27,8 +31,10 @@ public class Driver : Aggregate<Guid>
             ProviderId = providerId,
             VehicleId = vehicleId,
             Email = email,
+            Password = password,
             Phone = phone,
             Dni = dni,
+            Status = status
         };
 
         driver.AddDomainEvent(new DriverCreatedEvent(driver));
@@ -36,12 +42,14 @@ public class Driver : Aggregate<Guid>
         return driver;
     }
 
-    public void Update(DriverName driverName, Email email, Dni dni, Phone phone)
+    public void Update(DriverName driverName, Email email, Password password, Dni dni, Phone phone, Status status)
     {
         DriverName = driverName;
         Email = email;
+        Password = password;
         Phone = phone;
         Dni = dni;
+        Status = status;
 
         AddDomainEvent(new DriverUpdatedEvent(this));
     }

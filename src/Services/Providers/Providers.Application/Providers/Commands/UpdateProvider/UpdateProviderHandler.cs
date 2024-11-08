@@ -36,6 +36,7 @@ public class UpdateProviderHandlerI(IApplicationDbContext dbContext)
 
         provider.Update(
             providerName: ProviderName.Of(updatedName.FirstName, updatedName.LastName), 
+            password: Password.Of(providerDto.Password),
             company: company);
     }
 }

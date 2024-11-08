@@ -24,8 +24,11 @@ public class CreateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
                 providerId: driverDto.ProviderId,
                 vehicleId: driverDto.VehicleId,
                 email: Email.Of(driverDto.Email),
+                password: Password.Of(driverDto.Password),
                 phone: Phone.Of(driverDto.Phone),
-                dni: dni
+                dni: dni,
+                status: Status.Of(driverDto.Status.ToStatusType())
+                
         );
 
         return newDriver;

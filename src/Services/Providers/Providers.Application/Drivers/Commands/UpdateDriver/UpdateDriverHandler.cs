@@ -21,15 +21,22 @@ public class UpdateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
         return new UpdateDriverResult(true);
     }
 
-    public void UpdateDriverWithNewValues(Driver driver, DriverDto driverDto)
+    public static void UpdateDriverWithNewValues(Driver driver, DriverDto driverDto)
     {
         var updatedName = driverDto.Name;
         var updatedEmail = driverDto.Email;
-        var updateddniType = driverDto.Dni.ToDniType();
+        var updatedPassword = driverDto.Password;
+        var updatedDniType = driverDto.Dni.ToDniType();
         var updatedNumber = driverDto.Dni.Number;
         var updatedPhone = driverDto.Phone;
 
         driver.Update(
-            driverName: DriverName.Of(updatedName.FirstName, updatedName.LastName),Email.Of(updatedEmail),Dni.Of(updateddniType, updatedNumber), Phone.Of(updatedPhone));
+            driverName: DriverName.Of(updatedName.FirstName, updatedName.LastName),
+            Email.Of(updatedEmail),
+            Password.Of(updatedPassword),
+            Dni.Of(updatedDniType, updatedNumber),
+            Phone.Of(updatedPhone),
+            Status.Of(driverDto.Status.ToStatusType())
+            );
     }
 }
