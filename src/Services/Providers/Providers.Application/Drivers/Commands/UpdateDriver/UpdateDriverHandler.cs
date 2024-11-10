@@ -31,12 +31,14 @@ public class UpdateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
         var updatedPhone = driverDto.Phone;
 
         driver.Update(
+            vehicleId: driverDto.VehicleId,
+            providerId: driverDto.ProviderId,
             driverName: DriverName.Of(updatedName.FirstName, updatedName.LastName),
-            Email.Of(updatedEmail),
-            Password.Of(updatedPassword),
-            Dni.Of(updatedDniType, updatedNumber),
-            Phone.Of(updatedPhone),
-            Status.Of(driverDto.Status.ToStatusType())
+            email: Email.Of(updatedEmail),
+            password: Password.Of(updatedPassword),
+            dni: Dni.Of(updatedDniType, updatedNumber),
+            phone: Phone.Of(updatedPhone),
+            status: (Status)Enum.Parse(typeof(Status), driverDto.Status)
             );
     }
 }

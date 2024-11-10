@@ -10,6 +10,6 @@ public record DriverDto(
     string Phone,
     string Email,
     string Password,
-    StatusDto Status,
+    string Status,
     bool? IsActive
     );

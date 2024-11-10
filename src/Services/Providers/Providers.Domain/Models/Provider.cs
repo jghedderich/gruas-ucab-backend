@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.VisualBasic;
 
 namespace Providers.Domain.Models;
 
@@ -9,6 +10,7 @@ public class Provider : Aggregate<Guid>
     public IReadOnlyList<Driver> Drivers => _drivers.AsReadOnly();
 
     private readonly List<Vehicle> _vehicles = [];
+
     public IReadOnlyList<Vehicle> Vehicles => _vehicles.AsReadOnly();
     public ProviderName ProviderName { get; private set; } = default!;
     public Email Email { get; private set; } = default!;

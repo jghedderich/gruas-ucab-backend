@@ -76,7 +76,7 @@ internal class InitialData
             Password.Of("123456"),
             Phone.Of("04123349280"),
             Dni.Of(DniType.V, "29625840"),
-            Status.Of(StatusType.Available)
+            Status.Available
         );
 
         provider.AddDriver(
@@ -88,7 +88,7 @@ internal class InitialData
             Password.Of("123456"),
             Phone.Of("04123349281"),
             Dni.Of(DniType.V, "29625841"),
-            Status.Of(StatusType.Available)
+            Status.Available
         );
     }
 }

@@ -35,7 +35,7 @@ public static class DriverExtensions
                 Phone: driver.Phone.Value,
                 Email: driver.Email.Value,
                 Password: driver.Password.Value,
-                Status: new StatusDto(driver.Status.ToString()),
+                Status: driver.Status.ToString(),
                 IsActive: driver.IsActive
             );
     }
