@@ -26,7 +26,7 @@ public static class ProviderExtensions
                     d.Phone.Value,
                     d.Email.Value,
                     d.Password.Value,
-                    new StatusDto(d.Status.ToString()),
+                    d.Status.ToString(),
                     d.IsActive)).ToList(),
 
             IsActive: p.IsActive
@@ -57,7 +57,7 @@ public static class ProviderExtensions
                 Drivers: provider.Drivers.Select(d => 
                     new DriverDto(d.Id, d.VehicleId,d.ProviderId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName), 
                     new DniDto(d.Dni.Type.ToString(), d.Dni.Number),
-                    d.Phone.Value,d.Email.Value, d.Password.Value, new StatusDto(d.Status.ToString()), d.IsActive)).ToList(),
+                    d.Phone.Value,d.Email.Value, d.Password.Value, d.Status.ToString(), d.IsActive)).ToList(),
                 IsActive: provider.IsActive
         );
     }

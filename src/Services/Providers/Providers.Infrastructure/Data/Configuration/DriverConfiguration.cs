@@ -40,12 +40,9 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
             phoneBuilder.Property(p => p.Value).HasMaxLength(11).IsRequired();
         });
 
+        builder.Property(d => d.Status)
+            .HasConversion(s => s.ToString(),
+            status => (Status)Enum.Parse(typeof(Status), status));
 
-        builder.ComplexProperty(d => d.Status, statusBuilder =>
-        {
-            statusBuilder.Property(s => s.Type)
-                .HasConversion(n => n.ToString(),
-                statusType => (StatusType)Enum.Parse(typeof(StatusType), statusType));
-        });
     }
 }

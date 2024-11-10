@@ -42,8 +42,10 @@ public class Driver : Aggregate<Guid>
         return driver;
     }
 
-    public void Update(DriverName driverName, Email email, Password password, Dni dni, Phone phone, Status status)
+    public void Update(Guid vehicleId, Guid providerId, DriverName driverName, Email email, Password password, Dni dni, Phone phone, Status status)
     {
+        VehicleId = vehicleId;
+        ProviderId = providerId;
         DriverName = driverName;
         Email = email;
         Password = password;
@@ -53,4 +55,10 @@ public class Driver : Aggregate<Guid>
 
         AddDomainEvent(new DriverUpdatedEvent(this));
     }
+}
+
+public enum Status
+{
+    Available,
+    Unavailable
 }
