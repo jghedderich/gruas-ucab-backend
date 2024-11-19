@@ -13,7 +13,7 @@ using Orders.Infrastructure.Data;
 namespace Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241105204656_InitialMigration")]
+    [Migration("20241119163859_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -85,6 +85,16 @@ namespace Orders.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
+                        });
+
+                    b.ComplexProperty<Dictionary<string, object>>("Password", "Orders.Domain.Models.Operator.Password#Password", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("Phone", "Orders.Domain.Models.Operator.Phone#Phone", b1 =>

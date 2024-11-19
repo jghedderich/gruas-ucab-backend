@@ -12,13 +12,15 @@ public class Operator : Aggregate<Guid>
     public Email Email { get; private set; } = default!;
     public Phone Phone { get; private set; } = default!;
     public Dni Dni { get; private set; } = default!;
+    public Password Password { get; private set; } = default!;
 
     public static Operator Create(
             Guid id,
             Name operatorName,
             Email email,
             Phone phone,
-            Dni dni
+            Dni dni,
+            Password password
         )
     {
         var operatorD = new Operator
@@ -27,7 +29,8 @@ public class Operator : Aggregate<Guid>
             OperatorName = operatorName,
             Email = email,
             Phone = phone,
-            Dni = dni
+            Dni = dni,
+            Password = password
         };
 
         operatorD.AddDomainEvent(new OperatorCreatedEvent(operatorD));
@@ -35,12 +38,13 @@ public class Operator : Aggregate<Guid>
         return operatorD;
     }
 
-    public void Update(Name operatorName, Email email, Phone phone, Dni dni)
+    public void Update(Name operatorName, Email email, Phone phone, Dni dni, Password password)
     {
         OperatorName = operatorName;
         Email = email;
         Phone = phone;
         Dni = dni;
+        Password = password;
 
         AddDomainEvent(new OperatorUpdatedEvent(this));
     }

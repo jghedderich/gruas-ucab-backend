@@ -16,8 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Operators\Commands\" />
-    <Folder Include="Operators\Queries\GetOperatorById\" />
     <Folder Include="Orders\Commands\" />
     <Folder Include="Orders\EventHandlers\" />
     <Folder Include="Policies\" />

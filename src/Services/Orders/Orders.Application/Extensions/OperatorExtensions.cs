@@ -19,7 +19,8 @@ public static class OperatorExtensions
                 new ClientVehicleDto(or.Client.ClientVehicle.Brand, or.Client.ClientVehicle.Model,or.Client.ClientVehicle.Year, or.Client.ClientVehicle.TypeV.ToString())), or.OrderStatus.ToString(), 
                 new AddressDto(or.IncidentAddress.AddressLine1,or.IncidentAddress.AddressLine2,or.IncidentAddress.City,or.IncidentAddress.State,or.IncidentAddress.Zip),
                 new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip),
-                or.AdditionalCost.Select(a => new CostDetailDto(a.Description,a.Amount,a.IsApproved)).ToList())).ToList()
+                or.AdditionalCost.Select(a => new CostDetailDto(a.Description,a.Amount,a.IsApproved)).ToList())).ToList(),
+                Password: o.Password.Value
             ));
     }
 
@@ -43,7 +44,8 @@ public static class OperatorExtensions
                 new ClientVehicleDto(or.Client.ClientVehicle.Brand, or.Client.ClientVehicle.Model, or.Client.ClientVehicle.Year, or.Client.ClientVehicle.TypeV.ToString())), or.OrderStatus.ToString(),
                 new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip),
                 new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip),
-                or.AdditionalCost.Select(a => new CostDetailDto(a.Description, a.Amount, a.IsApproved)).ToList())).ToList()
+                or.AdditionalCost.Select(a => new CostDetailDto(a.Description, a.Amount, a.IsApproved)).ToList())).ToList(),
+                Password: operatorN.Password.Value
             );    
     }
 }
