@@ -17,14 +17,16 @@ internal class InitialData
                     Name.Of("Alex", "Fergurson"),
                     Email.Of("alexfergurson@gmail.com"),
                     Phone.Of("04242404544"),
-                    Dni.Of(DniType.V, "27941859")
+                    Dni.Of(DniType.V, "27941859"),
+                    Password.Of("123456")
                 ),
             Operator.Create(
                     Guid.NewGuid(),
                     Name.Of("Juan", "Soto"),
                     Email.Of("juansoto@gmail.com"),
                     Phone.Of("04143333751"),
-                    Dni.Of(DniType.V, "29483872")
+                    Dni.Of(DniType.V, "29483872"),
+                    Password.Of("123456")
                 ),
             ];
 

@@ -39,5 +39,10 @@ public class OperatorConfiguration : IEntityTypeConfiguration<Operator>
                 .HasConversion(t => t.ToString(),
                 dniType => (DniType)Enum.Parse(typeof(DniType), dniType));
         });
+
+        builder.ComplexProperty(o => o.Password, passwordBuilder =>
+        {
+            passwordBuilder.Property(p => p.Value).HasMaxLength(255);
+        });
     }
 }

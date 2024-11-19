@@ -84,6 +84,16 @@ namespace Orders.Infrastructure.Migrations
                                 .HasColumnType("nvarchar(50)");
                         });
 
+                    b.ComplexProperty<Dictionary<string, object>>("Password", "Orders.Domain.Models.Operator.Password#Password", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasMaxLength(255)
+                                .HasColumnType("nvarchar(255)");
+                        });
+
                     b.ComplexProperty<Dictionary<string, object>>("Phone", "Orders.Domain.Models.Operator.Phone#Phone", b1 =>
                         {
                             b1.IsRequired();

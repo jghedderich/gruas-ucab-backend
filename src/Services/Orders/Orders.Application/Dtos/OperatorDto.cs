@@ -7,6 +7,7 @@ public record OperatorDto(
     string Email,
     string Phone,
     DniDto Dni,
-    List<OrderDto> Orders);
+    List<OrderDto>? Orders,
+    string Password);
 
 
