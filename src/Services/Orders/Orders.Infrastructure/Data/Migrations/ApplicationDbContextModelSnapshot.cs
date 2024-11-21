@@ -23,6 +23,50 @@ namespace Orders.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Orders.Domain.Models.CostDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Amount")
+                        .HasMaxLength(20)
+                        .HasColumnType("float");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsApproved")
+                        .HasMaxLength(5)
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("CostDetails");
+                });
+
             modelBuilder.Entity("Orders.Domain.Models.Operator", b =>
                 {
                     b.Property<Guid>("Id")
@@ -273,6 +317,15 @@ namespace Orders.Infrastructure.Migrations
                     b.ToTable("Policies");
                 });
 
+            modelBuilder.Entity("Orders.Domain.Models.CostDetail", b =>
+                {
+                    b.HasOne("Orders.Domain.Models.Order", null)
+                        .WithMany("CostDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Orders.Domain.Models.Order", b =>
                 {
                     b.HasOne("Orders.Domain.Models.Operator", null)
@@ -422,39 +475,6 @@ namespace Orders.Infrastructure.Migrations
                                 .IsRequired();
                         });
 
-                    b.OwnsMany("Orders.Domain.ValueObjects.CostDetail", "AdditionalCost", b1 =>
-                        {
-                            b1.Property<Guid>("OrderId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int");
-
-                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
-
-                            b1.Property<string>("Amount")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Description")
-                                .IsRequired()
-                                .HasMaxLength(300)
-                                .HasColumnType("nvarchar(300)");
-
-                            b1.Property<int>("IsApproved")
-                                .HasColumnType("int");
-
-                            b1.HasKey("OrderId", "Id");
-
-                            b1.ToTable("CostDetail");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.Navigation("AdditionalCost");
-
                     b.Navigation("Client")
                         .IsRequired();
                 });
@@ -462,6 +482,11 @@ namespace Orders.Infrastructure.Migrations
             modelBuilder.Entity("Orders.Domain.Models.Operator", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Orders.Domain.Models.Order", b =>
+                {
+                    b.Navigation("CostDetails");
                 });
 #pragma warning restore 612, 618
         }

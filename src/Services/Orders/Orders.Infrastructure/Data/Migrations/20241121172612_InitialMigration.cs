@@ -102,26 +102,35 @@ namespace Orders.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CostDetail",
+                name: "CostDetails",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Amount = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsApproved = table.Column<int>(type: "int", nullable: false)
+                    Amount = table.Column<double>(type: "float", maxLength: 20, nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", maxLength: 5, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CostDetail", x => new { x.OrderId, x.Id });
+                    table.PrimaryKey("PK_CostDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CostDetail_Orders_OrderId",
+                        name: "FK_CostDetails_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CostDetails_OrderId",
+                table: "CostDetails",
+                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_OperatorId",
@@ -133,7 +142,7 @@ namespace Orders.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CostDetail");
+                name: "CostDetails");
 
             migrationBuilder.DropTable(
                 name: "Policies");

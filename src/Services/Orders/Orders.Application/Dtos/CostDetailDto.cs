@@ -2,7 +2,9 @@
 namespace Orders.Application.Dtos;
 
 public record CostDetailDto(
+        Guid Id,
+        Guid OrderId,
         string Description,
-        decimal Amount,
+        double Amount,
         bool IsApproved
     );

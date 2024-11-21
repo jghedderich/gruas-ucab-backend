@@ -10,6 +10,10 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         builder.HasKey(o => o.Id);
 
+        builder.HasMany(a => a.CostDetails)
+            .WithOne()
+            .HasForeignKey(a => a.OrderId);
+
         builder.OwnsOne(o => o.Client, clientBuilder =>
         {
             clientBuilder.OwnsOne(n => n.Name, nameBuilder =>
@@ -73,11 +77,5 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             destinationAddresBuilder.Property(da => da.Zip).HasMaxLength(4).IsRequired();
         });
 
-        builder.OwnsMany(o => o.AdditionalCost, additionalCostBuilder =>
-        {
-            additionalCostBuilder.Property(a => a.Description).HasMaxLength(300).IsRequired();
-            additionalCostBuilder.Property(a => a.Amount).HasConversion(v => ToString(), v => v != null ? decimal.Parse(v) : 0).IsRequired();
-            additionalCostBuilder.Property(a => a.IsApproved).HasConversion(v => v ? 1 : 0, v => v == 1);
-        });
     }
 }

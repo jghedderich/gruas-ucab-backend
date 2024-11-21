@@ -1,5 +1,4 @@
-﻿using Orders.Application.Dtos;
-using Orders.Application.Operators.Commands.CreateOperator;
+﻿
 
 namespace Orders.Application.Orders.Commands.CreateOrder;
 
@@ -26,13 +25,6 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
 
         var status = Enum.Parse<Status>(orderDto.OrderStatus, true);
 
-        var additionalCostsList = orderDto.AdditionalCost != null
-            ? orderDto.AdditionalCost
-            .Select(c => CostDetail.Of(c.Description, c.Amount, c.IsApproved))
-            .ToList()
-            : new List<CostDetail>();
-
-
 
         var newOrder = Order.Create(
                 id: Guid.NewGuid(),
@@ -42,8 +34,7 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
                 orderDto.Client.ClientVehicle.Year, vehicleType)),
                 orderStatus: OrderStatus.Of(status),
                 incidentAddress: Address.Of(orderDto.IncidentAddress.AddressLine1,orderDto.IncidentAddress.AddressLine2,orderDto.IncidentAddress.City,orderDto.IncidentAddress.State,orderDto.IncidentAddress.Zip),
-                destinationAddress: Address.Of(orderDto.DestinationAddress.AddressLine1, orderDto.DestinationAddress.AddressLine2, orderDto.DestinationAddress.City, orderDto.DestinationAddress.State, orderDto.DestinationAddress.Zip),
-                additionalCost: additionalCostsList
+                destinationAddress: Address.Of(orderDto.DestinationAddress.AddressLine1, orderDto.DestinationAddress.AddressLine2, orderDto.DestinationAddress.City, orderDto.DestinationAddress.State, orderDto.DestinationAddress.Zip)
             );
 
         return newOrder;

@@ -14,6 +14,7 @@ public class GetOrdersHandler(IApplicationDbContext dbContext) : IQueryHandler<G
         var totalCount = await dbContext.Operators.LongCountAsync(cancellationToken);
 
         var orders = await dbContext.Orders
+            .Include(o => o.CostDetails)
             .OrderBy(o => o.Client.Name.FirstName)
             .Skip(pageIndex * pageSize)
             .Take(pageSize)
