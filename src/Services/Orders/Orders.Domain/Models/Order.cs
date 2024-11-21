@@ -42,12 +42,11 @@ public class Order : Aggregate<Guid>
         return order;
     }
 
-    public void Update( Client client, Address incidentAddress, Address destinationAddress, List<CostDetail> additionalCost)
+    public void Update( Client client, Address incidentAddress, Address destinationAddress)
     {
         Client = client;
         IncidentAddress = incidentAddress;
         DestinationAddress = destinationAddress;
-        AdditionalCost = [.. additionalCost];
 
         AddDomainEvent(new OrderUpdatedEvent(this));
     }
