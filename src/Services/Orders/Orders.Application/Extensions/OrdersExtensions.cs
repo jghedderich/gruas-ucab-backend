@@ -15,7 +15,7 @@ public static class OrderExtensions
                 new ClientVehicleDto(o.Client.ClientVehicle.Brand, o.Client.ClientVehicle.Model, o.Client.ClientVehicle.Year, o.Client.ClientVehicle.TypeV.ToString())), o.OrderStatus.ToString(),
                 new AddressDto(o.IncidentAddress.AddressLine1, o.IncidentAddress.AddressLine2, o.IncidentAddress.City, o.IncidentAddress.State, o.IncidentAddress.Zip),
                 new AddressDto(o.DestinationAddress.AddressLine1, o.DestinationAddress.AddressLine2, o.DestinationAddress.City, o.DestinationAddress.State, o.DestinationAddress.Zip),
-                o.AdditionalCost.Select(a => new CostDetailDto(a.Description, a.Amount, a.IsApproved)).ToList().ToList()
+                CostDetails: o.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList()
             ));
     }
 
@@ -36,7 +36,7 @@ public static class OrderExtensions
                 new ClientVehicleDto(order.Client.ClientVehicle.Brand, order.Client.ClientVehicle.Model, order.Client.ClientVehicle.Year, order.Client.ClientVehicle.TypeV.ToString())), order.OrderStatus.ToString(),
                 new AddressDto(order.IncidentAddress.AddressLine1, order.IncidentAddress.AddressLine2, order.IncidentAddress.City, order.IncidentAddress.State, order.IncidentAddress.Zip),
                 new AddressDto(order.DestinationAddress.AddressLine1, order.DestinationAddress.AddressLine2, order.DestinationAddress.City, order.DestinationAddress.State, order.DestinationAddress.Zip),
-                order.AdditionalCost.Select(a => new CostDetailDto(a.Description, a.Amount, a.IsApproved)).ToList().ToList()
+                CostDetails: order.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList()
             );
     }
 }

@@ -1,5 +1,4 @@
 ﻿
-using Orders.Domain.Models;
 
 namespace Orders.Application.Orders.Commands.CreateOrder;
 

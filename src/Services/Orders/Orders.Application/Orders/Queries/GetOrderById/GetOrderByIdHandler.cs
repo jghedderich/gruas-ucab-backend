@@ -8,6 +8,7 @@ public class GetOrderByIdHandler(IApplicationDbContext dbContext) : IQueryHandle
     public async Task<GetOrderByIdResult> Handle(GetOrderByIdQuery query, CancellationToken cancellationToken)
     {
         Order order = await dbContext.Orders
+                .Include(o => o.CostDetails)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(o => o.Id.Equals(query.Id), cancellationToken)
                 ?? throw new OrderNotFoundException(query.Id);

@@ -49,9 +49,9 @@ public class Operator : Aggregate<Guid>
         AddDomainEvent(new OperatorUpdatedEvent(this));
     }
 
-    public void AddOrder(Guid orderId, Guid policyId, Client client, OrderStatus orderStatus, Address incidentAddress, Address destinationAddress, List<CostDetail> additionalCost)
+    public void AddOrder(Guid orderId, Guid policyId, Client client, OrderStatus orderStatus, Address incidentAddress, Address destinationAddress)
     {
-        var order = Order.Create(orderId, Id, policyId, client, orderStatus, incidentAddress, destinationAddress, additionalCost);
+        var order = Order.Create(orderId, Id, policyId, client, orderStatus, incidentAddress, destinationAddress);
         _orders.Add(order);
     }
 

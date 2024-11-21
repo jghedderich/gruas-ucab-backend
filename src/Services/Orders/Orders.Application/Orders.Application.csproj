@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="CostDetails\Queries\" />
     <Folder Include="Policies\" />
   </ItemGroup>
 
