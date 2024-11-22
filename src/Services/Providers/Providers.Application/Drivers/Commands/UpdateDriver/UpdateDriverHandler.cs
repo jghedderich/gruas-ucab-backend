@@ -25,7 +25,6 @@ public class UpdateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
     {
         var updatedName = driverDto.Name;
         var updatedEmail = driverDto.Email;
-        var updatedPassword = driverDto.Password;
         var updatedDniType = driverDto.Dni.ToDniType();
         var updatedNumber = driverDto.Dni.Number;
         var updatedPhone = driverDto.Phone;
@@ -35,7 +34,6 @@ public class UpdateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
             providerId: driverDto.ProviderId,
             driverName: DriverName.Of(updatedName.FirstName, updatedName.LastName),
             email: Email.Of(updatedEmail),
-            password: Password.Of(updatedPassword),
             dni: Dni.Of(updatedDniType, updatedNumber),
             phone: Phone.Of(updatedPhone),
             status: (Status)Enum.Parse(typeof(Status), driverDto.Status)

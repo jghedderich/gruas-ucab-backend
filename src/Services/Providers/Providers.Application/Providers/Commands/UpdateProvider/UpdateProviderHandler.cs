@@ -23,7 +23,7 @@ public class UpdateProviderHandlerI(IApplicationDbContext dbContext)
         return new UpdateProviderResult(true);
     }
 
-    public void UpdateProviderWithNewValues(Provider provider, ProviderDto providerDto)
+    public static void UpdateProviderWithNewValues(Provider provider, ProviderDto providerDto)
     {
         var updatedName = providerDto.Name;
         
