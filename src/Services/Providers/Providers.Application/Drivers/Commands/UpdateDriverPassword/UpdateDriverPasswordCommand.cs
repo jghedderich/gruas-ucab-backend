@@ -1,12 +1,12 @@
 ﻿
 namespace Providers.Application.Drivers.Commands.UpdateDriverPassword;
 
-public record UpdateDriverPasswordCommand(UpdatePasswordDto Driver)
+public record UpdateDriverStatusCommand(UpdatePasswordDto Driver)
     : ICommand<UpdateDriverPasswordResult>;
 
 public record UpdateDriverPasswordResult(bool IsSuccess);
 
-public class UpdateDriverPasswordCommandValidator : AbstractValidator<UpdateDriverPasswordCommand>
+public class UpdateDriverPasswordCommandValidator : AbstractValidator<UpdateDriverStatusCommand>
 {
     public UpdateDriverPasswordCommandValidator()
     {

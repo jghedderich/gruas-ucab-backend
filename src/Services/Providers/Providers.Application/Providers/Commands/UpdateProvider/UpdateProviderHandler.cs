@@ -8,13 +8,9 @@ public class UpdateProviderHandlerI(IApplicationDbContext dbContext)
     {
         var providerId = command.Provider.Id;
         var provider = await dbContext.Providers
-            .FindAsync([providerId], cancellationToken: cancellationToken);
-
-        if (provider == null) 
-        {
-            throw new ProviderNotFoundException(command.Provider.Id);
-        }
-
+            .FindAsync([providerId], cancellationToken: cancellationToken) 
+            ?? throw new ProviderNotFoundException(command.Provider.Id);
+        
         UpdateProviderWithNewValues(provider, command.Provider);
 
         dbContext.Providers.Update(provider);
@@ -36,7 +32,6 @@ public class UpdateProviderHandlerI(IApplicationDbContext dbContext)
 
         provider.Update(
             providerName: ProviderName.Of(updatedName.FirstName, updatedName.LastName), 
-            password: Password.Of(providerDto.Password),
             company: company);
     }
 }

@@ -7,9 +7,9 @@ public record DriverDto(
     Guid ProviderId,
     NameDto Name, 
     DniDto Dni, 
-    string Phone,
-    string Email,
-    string Password,
-    string Status,
+    string? Phone,
+    string? Email,
+    string? Password,
+    string? Status,
     bool? IsActive
     );
