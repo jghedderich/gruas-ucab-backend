@@ -1,9 +1,9 @@
 ﻿namespace Providers.Application.Drivers.Commands.UpdateDriverPassword;
 
 public class UpdateDriverPasswordHandlerI(IApplicationDbContext dbContext)
-    : ICommandHandler<UpdateDriverPasswordCommand, UpdateDriverPasswordResult>
+    : ICommandHandler<UpdateDriverStatusCommand, UpdateDriverPasswordResult>
 {
-    public async Task<UpdateDriverPasswordResult> Handle(UpdateDriverPasswordCommand command, CancellationToken cancellationToken)
+    public async Task<UpdateDriverPasswordResult> Handle(UpdateDriverStatusCommand command, CancellationToken cancellationToken)
     {
         var driverId = command.Driver.Id;
         var driver = await dbContext.Drivers

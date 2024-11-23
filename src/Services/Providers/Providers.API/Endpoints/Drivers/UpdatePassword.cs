@@ -11,7 +11,7 @@ public class UpdateDriverPassword : ICarterModule
     {
         app.MapPut("/drivers/password", async (UpdateDriverPasswordRequest request, ISender sender) =>
         {
-            var command = request.Adapt<UpdateDriverPasswordCommand>();
+            var command = request.Adapt<UpdateDriverStatusCommand>();
 
             var result = await sender.Send(command);
 

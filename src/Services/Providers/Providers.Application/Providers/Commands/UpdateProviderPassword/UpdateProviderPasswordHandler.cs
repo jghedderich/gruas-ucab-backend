@@ -8,13 +8,9 @@ public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext)
     {
         var providerId = command.Provider.Id;
         var provider = await dbContext.Providers
-            .FindAsync([providerId], cancellationToken: cancellationToken);
-
-        if (provider == null)
-        {
-            throw new ProviderNotFoundException(command.Provider.Id);
-        }
-
+            .FindAsync([providerId], cancellationToken: cancellationToken) 
+            ?? throw new ProviderNotFoundException(command.Provider.Id);
+        
         if (provider.Password.Value != command.Provider.Password) {
             throw new WrongPasswordException(command.Provider.Id);
         }
@@ -29,6 +25,6 @@ public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext)
 
     public static void UpdateProviderPassword(Provider provider, UpdatePasswordDto dto)
     {
-        provider.Update(providerName: provider.ProviderName, password: Password.Of(dto.NewPassword), company: provider.Company);
+        provider.UpdatePassword(password: Password.Of(dto.NewPassword));
     }
 }

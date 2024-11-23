@@ -44,10 +44,9 @@ public class Provider : Aggregate<Guid>
 
         return provider;
     }
-    public void Update(ProviderName providerName, Password password, Company company)
+    public void Update(ProviderName providerName, Company company)
     {
         ProviderName = providerName;
-        Password = password;
         Company = company;
 
         AddDomainEvent(new ProviderUpdatedEvent(this));
@@ -74,5 +73,11 @@ public class Provider : Aggregate<Guid>
 
         var vehicle = Vehicle.Create(vehicleId, Id, type, brand, model, year);
         _vehicles.Add(vehicle);
+    }
+
+    public void UpdatePassword(Password password)
+    {
+        Password = password;
+        AddDomainEvent(new ProviderPasswordUpdatedEvent(ProviderName,  password));
     }
 }
