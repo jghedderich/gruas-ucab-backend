@@ -28,10 +28,14 @@ public class CostDetail : Aggregate<Guid>
         return costDetail;
     }
 
-    public void Update(string description, double amount, bool isApproved)
+    public void Update(string description, double amount)
     {
         Description = description;
         Amount = amount;
+    }
+
+    public void UpdateStatus(bool isApproved)
+    {
         IsApproved = isApproved;
     }
 
