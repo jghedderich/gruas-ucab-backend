@@ -10,5 +10,6 @@ public record OrderDto(
         string OrderStatus,
         AddressDto IncidentAddress,
         AddressDto DestinationAddress,
-        List<CostDetailDto>? CostDetails
+        List<CostDetailDto>? CostDetails,
+        bool? IsActive
     );

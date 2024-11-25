@@ -8,6 +8,7 @@ public record OperatorDto(
     string Phone,
     DniDto Dni,
     List<OrderDto>? Orders,
-    string Password);
+    string Password,
+    bool? IsActive);
 
 
