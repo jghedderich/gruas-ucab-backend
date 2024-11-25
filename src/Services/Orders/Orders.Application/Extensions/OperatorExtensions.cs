@@ -1,8 +1,4 @@
-﻿
-
-using System.Linq;
-
-namespace Orders.Application.Extensions;
+﻿namespace Orders.Application.Extensions;
 
 public static class OperatorExtensions
 {
