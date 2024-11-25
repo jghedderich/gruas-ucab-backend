@@ -31,8 +31,9 @@ public class Policy : Aggregate<Guid>
         return policy;
     }
 
-    public void Update( int ammountCovered, Price price, Fee fees)
+    public void Update( string name, int ammountCovered, Price price, Fee fees)
     {
+        Name = name;
         AmountCovered = ammountCovered;
         Price = price;
         Fees = fees;
