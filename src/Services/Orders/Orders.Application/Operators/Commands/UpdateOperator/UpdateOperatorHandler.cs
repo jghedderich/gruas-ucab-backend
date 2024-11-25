@@ -7,12 +7,7 @@ public class UpdateOperatorHandler(IApplicationDbContext dbContext) : ICommandHa
     {
         var operatorId = command.Operator.Id;
         var operatorN = await dbContext.Operators
-            .FindAsync([operatorId], cancellationToken: cancellationToken);
-
-        if (operatorN == null)
-        {
-            throw new OperatorNotFoundException(command.Operator.Id);
-        }
+            .FindAsync([operatorId], cancellationToken: cancellationToken) ?? throw new OperatorNotFoundException(command.Operator.Id);
 
         UpdateOperatorWithNewValues(operatorN, command.Operator);
 
@@ -25,18 +20,14 @@ public class UpdateOperatorHandler(IApplicationDbContext dbContext) : ICommandHa
     public static void UpdateOperatorWithNewValues(Operator operatorN, OperatorDto operatorDto)
     {
         var updatedName = operatorDto.Name;
-        var updatedEmail = operatorDto.Email;
-        var updatedPassword = operatorDto.Password;
         var updatedDniType = operatorDto.Dni.ToDniType();
         var updatedNumber = operatorDto.Dni.Number;
         var updatedPhone = operatorDto.Phone;
 
         operatorN.Update(
             operatorName: Name.Of(updatedName.FirstName, updatedName.LastName),
-            email: Email.Of(updatedEmail),
-            password: Password.Of(updatedPassword),
-            dni: Dni.Of(updatedDniType, updatedNumber),
-            phone: Phone.Of(updatedPhone)
+            phone: Phone.Of(updatedPhone),
+            dni: Dni.Of(updatedDniType, updatedNumber)
             );
     }
 }

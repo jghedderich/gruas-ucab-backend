@@ -38,15 +38,18 @@ public class Operator : Aggregate<Guid>
         return operatorD;
     }
 
-    public void Update(Name operatorName, Email email, Phone phone, Dni dni, Password password)
+    public void Update(Name operatorName, Phone phone, Dni dni)
     {
         OperatorName = operatorName;
-        Email = email;
         Phone = phone;
         Dni = dni;
-        Password = password;
 
         AddDomainEvent(new OperatorUpdatedEvent(this));
+    }
+
+    public void UpdatePassword(Password password)
+    {
+        Password = password;
     }
 
     public void AddOrder(Guid orderId, Guid policyId, Client client, OrderStatus orderStatus, Address incidentAddress, Address destinationAddress)
