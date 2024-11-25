@@ -12,7 +12,6 @@ public class UpdateOperatorCommandValidator : AbstractValidator<UpdateOperatorCo
         RuleFor(x => x.Operator.Name.FirstName).NotEmpty().WithMessage("First name is required");
         RuleFor(x => x.Operator.Name.LastName).NotEmpty().WithMessage("Last name is required");
         RuleFor(x => x.Operator.Phone).NotEmpty().WithMessage("Phone is required");
-        RuleFor(x => x.Operator.Email).NotEmpty().WithMessage("Email is required");
         RuleFor(x => x.Operator.Dni.Number).NotEmpty().WithMessage("Dni number is required");
     }
 }
