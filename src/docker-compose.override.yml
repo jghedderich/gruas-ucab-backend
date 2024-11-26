@@ -1,4 +1,4 @@
-version: '3.4'
+# version: '3.4'
 
 services:
   providersdb:
@@ -9,7 +9,15 @@ services:
     restart: always
     ports:
       - "1433:1433"
-  
+  adminsdb:
+    container_name: adminsdb
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD=Equipo9#2024
+    restart: always
+    ports:
+        - "9999:9999" 
+
   messagebroker:
     container_name: messagebroker
     hostname: gruas-mq
@@ -40,3 +48,23 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+  admins.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8082
+      - ASPNETCORE_HTTPS_PORTS=8083
+      - ConnectionStrings__Database=Server=adminsdb;Database=AdminsDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
+      - MessageBroker__Host=amqp://gruas-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+      - FeatureManagement__OrderFullfilment=false
+    depends_on:
+      - adminsdb
+      - messagebroker
+    ports:
+      - "7000:8082"
+      - "7060:8083"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
