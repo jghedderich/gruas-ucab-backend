@@ -14,11 +14,6 @@ public class UpdateDriverPasswordHandlerI(IApplicationDbContext dbContext)
             throw new DriverNotFoundException(command.Driver.Id);
         }
 
-        if (driver.Password.Value != command.Driver.Password)
-        {
-            throw new WrongPasswordException(command.Driver.Id);
-        }
-
         UpdateDriverPassword(driver, command.Driver);
 
         dbContext.Drivers.Update(driver);

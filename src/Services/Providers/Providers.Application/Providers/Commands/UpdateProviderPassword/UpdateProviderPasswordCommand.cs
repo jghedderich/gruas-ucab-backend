@@ -11,7 +11,6 @@ public class UpdateProviderPasswordCommandValidator : AbstractValidator<UpdatePr
     public UpdateProviderPasswordCommandValidator()
     {
         RuleFor(x => x.Provider.Id).NotEmpty().WithMessage("Id is required");
-        RuleFor(x => x.Provider.Password).NotEmpty().WithMessage("Current Password is required");
         RuleFor(x => x.Provider.NewPassword).NotEmpty().WithMessage("New Password is required");
     }
 }
