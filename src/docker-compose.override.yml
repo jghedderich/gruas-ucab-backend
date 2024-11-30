@@ -21,6 +21,12 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  redis:
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
   ordersdb:
     container_name: ordersdb
     environment:
