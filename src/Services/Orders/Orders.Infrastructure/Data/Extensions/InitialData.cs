@@ -15,7 +15,7 @@ internal class InitialData
             Operator.Create(
                     Guid.NewGuid(),
                     Name.Of("Alex", "Fergurson"),
-                    Email.Of("alexfergurson@gmail.com"),
+                    Email.Of("pedromanuelrc132@gmail.com"),
                     Phone.Of("04242404544"),
                     Dni.Of(DniType.V, "27941859"),
                     Password.Of("123456")
