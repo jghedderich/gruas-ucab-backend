@@ -44,5 +44,18 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
             .HasConversion(s => s.ToString(),
             status => (Status)Enum.Parse(typeof(Status), status));
 
+        builder.OwnsOne(d => d.Location, locationBuilder =>
+        {
+            locationBuilder.Property(l => l.AddressLine1).HasMaxLength(50).IsRequired();
+            locationBuilder.Property(l => l.AddressLine2).HasMaxLength(50).IsRequired(false);
+            locationBuilder.Property(l => l.State).HasMaxLength(50).IsRequired();
+            locationBuilder.Property(l => l.Zip).HasMaxLength(4).IsRequired();
+            locationBuilder.Property(l => l.City).HasMaxLength(50).IsRequired();
+            locationBuilder.OwnsOne(l => l.Coordinates, coordinatesBuilder =>
+            {
+                coordinatesBuilder.Property(c => c.Latitude).HasMaxLength(50).IsRequired(true);
+                coordinatesBuilder.Property(c => c.Longitude).HasMaxLength(50).IsRequired(true);
+            });
+        });
     }
 }
