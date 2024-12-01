@@ -54,7 +54,7 @@ public class ProviderEntityTests
         Company newCompany = Company.Of("updatedName", "updatedDesc", "updatedrif", "updatedCity", "updatedState");
 
         // Act
-        provider.Update(newProviderName, password, newCompany);
+        provider.Update(newProviderName, newCompany);
 
         // Assert
         provider.ProviderName.Should().Be(newProviderName);
