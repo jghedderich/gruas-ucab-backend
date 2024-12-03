@@ -77,5 +77,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             destinationAddresBuilder.Property(da => da.Zip).HasMaxLength(4).IsRequired();
         });
 
+        builder.Property(c => c.DriverId).IsRequired().HasMaxLength(255);
     }
 }

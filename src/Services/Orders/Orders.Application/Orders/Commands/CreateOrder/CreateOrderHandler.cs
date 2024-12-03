@@ -34,7 +34,8 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
                 orderDto.Client.ClientVehicle.Year, vehicleType)),
                 orderStatus: OrderStatus.Of(status),
                 incidentAddress: Address.Of(orderDto.IncidentAddress.AddressLine1,orderDto.IncidentAddress.AddressLine2,orderDto.IncidentAddress.City,orderDto.IncidentAddress.State,orderDto.IncidentAddress.Zip),
-                destinationAddress: Address.Of(orderDto.DestinationAddress.AddressLine1, orderDto.DestinationAddress.AddressLine2, orderDto.DestinationAddress.City, orderDto.DestinationAddress.State, orderDto.DestinationAddress.Zip)
+                destinationAddress: Address.Of(orderDto.DestinationAddress.AddressLine1, orderDto.DestinationAddress.AddressLine2, orderDto.DestinationAddress.City, orderDto.DestinationAddress.State, orderDto.DestinationAddress.Zip),
+                driverId: orderDto.DriverId
             );
 
         return newOrder;
