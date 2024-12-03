@@ -13,6 +13,7 @@ public class Order : Aggregate<Guid>
     public OrderStatus OrderStatus { get; private set; } = default!;
     public Address IncidentAddress { get; private set; } = default!; // DIRECCION DEL ACCIDENTE-INCIDENTE
     public Address DestinationAddress { get; private set; } = default!; // DIRECCION DESTINO
+    public Guid DriverId { get; private set; } = default!;
 
 
     public static Order Create(
@@ -22,7 +23,8 @@ public class Order : Aggregate<Guid>
             Client client,
             OrderStatus orderStatus,
             Address incidentAddress,
-            Address destinationAddress
+            Address destinationAddress,
+            Guid driverId
         )
     {
         var order = new Order
@@ -33,7 +35,8 @@ public class Order : Aggregate<Guid>
             Client = client,
             OrderStatus = orderStatus,
             IncidentAddress = incidentAddress,
-            DestinationAddress = destinationAddress
+            DestinationAddress = destinationAddress,
+            DriverId = driverId
         };
 
         order.AddDomainEvent(new OrderCreatedEvent(order));

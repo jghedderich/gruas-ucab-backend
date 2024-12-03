@@ -12,6 +12,7 @@ public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
     {
         RuleFor(o => o.Order.OperatorId).NotEmpty().WithMessage("Operator is required");
         RuleFor(o => o.Order.PolicyId).NotEmpty().WithMessage("Policy is required");
+        RuleFor(o => o.Order.DriverId).NotEmpty().WithMessage("Driver is required");
         RuleFor(o => o.Order.Client).NotEmpty().WithMessage("Client is required");
         RuleFor(o => o.Order.OrderStatus).NotEmpty().WithMessage("Status is required");
         RuleFor(o => o.Order.IncidentAddress).NotEmpty().WithMessage("Incident Address is required");

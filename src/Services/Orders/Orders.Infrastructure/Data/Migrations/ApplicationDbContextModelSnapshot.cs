@@ -165,6 +165,10 @@ namespace Orders.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("DriverId")
+                        .HasMaxLength(255)
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
@@ -303,11 +307,11 @@ namespace Orders.Infrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<int?>("AnnualPrice")
+                            b1.Property<int>("AnnualPrice")
                                 .HasMaxLength(5)
                                 .HasColumnType("int");
 
-                            b1.Property<int?>("MonthlyPrice")
+                            b1.Property<int>("MonthlyPrice")
                                 .HasMaxLength(5)
                                 .HasColumnType("int");
                         });
