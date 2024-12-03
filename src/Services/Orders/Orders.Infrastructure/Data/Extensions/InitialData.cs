@@ -55,7 +55,8 @@ internal class InitialData
                 Client.Of(Name.Of("Nacho", "Ignacio"), Dni.Of(DniType.V, "29871029"), Phone.Of("04146281920"), Email.Of("nachoignacio@gmail.com"), ClientVehicle.Of("Chery","Fortune",2024,VehicleType.Suv)),
                 OrderStatus.Of(Status.ToBeAccepted),
                 Address.Of("La Previsora","Plaza Venezuela","Caracas", "Distrito Capital", "1020"),
-                Address.Of("La Concha Acustica", "Bello Monte", "Caracas", "Distrito Capital", "1080")
+                Address.Of("La Concha Acustica", "Bello Monte", "Caracas", "Distrito Capital", "1080"),
+                Guid.NewGuid()
                 )
             ];
 
@@ -78,7 +79,8 @@ internal class InitialData
                 Client.Of(Name.Of("Carlos", "Herrera"), Dni.Of(DniType.V, "28761928"), Phone.Of("04128271627"), Email.Of("carlosherrera@gmail.com"), ClientVehicle.Of("Toyota","Fortuner",2012,VehicleType.Suv)),
                 OrderStatus.Of(Status.ToBeAccepted),
                 Address.Of("Avenida Teherán","Universidad Catolica Andres Bello","Caracas", "Distrito Capital", "1020"),
-                Address.Of("Ruta C", "Los Campitos", "Caracas", "Distrito Capital", "1080")
+                Address.Of("Ruta C", "Los Campitos", "Caracas", "Distrito Capital", "1080"),
+                Guid.NewGuid()
             );
         operatorN.AddOrder(
                 order.Id,
@@ -86,7 +88,8 @@ internal class InitialData
                 order.Client,
                 order.OrderStatus,
                 order.IncidentAddress,
-                order.DestinationAddress
+                order.DestinationAddress,
+                order.DriverId
             );
 
 
@@ -100,7 +103,8 @@ internal class InitialData
                 Client.Of(Name.Of("Pablo", "Rodriguez"), Dni.Of(DniType.V, "30981738"), Phone.Of("04248271927"), Email.Of("pablorodriguez@gmail.com"), ClientVehicle.Of("Chevrolet", "Camaro", 2012, VehicleType.Suv)),
                 OrderStatus.Of(Status.ToBeAccepted),
                 Address.Of("Torre Phelps, Piso 6, Oficina B", "Plaza Venezuela", "Caracas", "Distrito Capital", "1050"),
-                Address.Of("Avenida Francisco de Miranda, Torre La Primera, Oficina 12-A", "Chacao", "Caracas", "Distrito Capital", "1080")
+                Address.Of("Avenida Francisco de Miranda, Torre La Primera, Oficina 12-A", "Chacao", "Caracas", "Distrito Capital", "1080"),
+                Guid.NewGuid()
             );
         operatorN.AddOrder(
                 Guid.NewGuid(),
@@ -108,7 +112,8 @@ internal class InitialData
                 Client.Of(Name.Of("Kissy", "Santander"), Dni.Of(DniType.V, "28719282"), Phone.Of("04128291837"), Email.Of("kissysantander@gmail.com"), ClientVehicle.Of("Dodge", "Charger", 2008, VehicleType.Suv)),
                 OrderStatus.Of(Status.Accepted),
                 Address.Of("Calle Sucre, Quinta No. 23", "El Rosal", "Caracas", "Distrito Capital", "1010"),
-                Address.Of("Calle Guaicaipuro", "Las Mercedes", "Caracas", "Distrito Capital", "1060")
+                Address.Of("Calle Guaicaipuro", "Las Mercedes", "Caracas", "Distrito Capital", "1060"),
+                Guid.NewGuid()
             );
 
     }
