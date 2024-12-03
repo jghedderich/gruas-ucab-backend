@@ -27,7 +27,17 @@ public static class ProviderExtensions
                     d.Email.Value,
                     d.Password.Value,
                     d.Status.ToString(),
-                    new LocationDto(d.Location.AddressLine1, d.Location.AddressLine2, d.Location.Zip, d.Location.State, d.Location.City, new CoordinatesDto(d.Location.Coordinates.Latitude, d.Location.Coordinates.Longitude)),
+                    d.Location != null ? new LocationDto(
+                        d.Location.AddressLine1,
+                        d.Location.AddressLine2,
+                        d.Location.Zip,
+                        d.Location.State,
+                        d.Location.City,
+                        new CoordinatesDto(
+                            d.Location.Coordinates.Latitude,
+                            d.Location.Coordinates.Longitude
+                        )
+                    ) : null,
                     d.IsActive)).ToList(),
 
             IsActive: p.IsActive
@@ -63,7 +73,7 @@ public static class ProviderExtensions
                         d.Email.Value, 
                         d.Password.Value, 
                         d.Status.ToString(),
-                        new LocationDto(
+                        d.Location != null ? new LocationDto(
                             d.Location.AddressLine1,
                             d.Location.AddressLine2,
                             d.Location.State,
@@ -73,7 +83,7 @@ public static class ProviderExtensions
                                 d.Location.Coordinates.Latitude,
                                 d.Location.Coordinates.Longitude
                             )
-                        ),
+                        ) : null,
                         d.IsActive)).ToList(),
                 IsActive: provider.IsActive
         );
