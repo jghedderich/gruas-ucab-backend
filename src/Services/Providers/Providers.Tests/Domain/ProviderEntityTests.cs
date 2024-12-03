@@ -7,10 +7,11 @@ namespace Providers.Tests.Domain;
 
 public class ProviderEntityTests
 {
-    [Fact]
-    public void Provider_Create_ReturnsValidProvider()
+    private readonly Provider _provider;
+    
+    public ProviderEntityTests()
     {
-        // Arrange
+
         Guid id = Guid.NewGuid();
         ProviderName providerName = ProviderName.Of("testFirst", "lastTest");
         Email email = Email.Of("test@gmail.com");
@@ -19,48 +20,72 @@ public class ProviderEntityTests
         Dni dni = Dni.Of(DniType.V, "12345678");
         Company company = Company.Of("testName", "testDesc", "testrif", "testCity", "testState");
 
-        // Act
-        var provider = Provider.Create(id, providerName, email, password, phone, dni, company);
+        _provider = Provider.Create(id, providerName, email, password, phone, dni, company);
+    }
 
+    [Fact]
+    public void Provider_Create_ReturnsValidProvider()
+    {
         // Assert
-        provider.Should().NotBeNull();
-        provider.Id.Should().Be(id);
-        provider.ProviderName.Should().Be(providerName);
-        provider.Email.Should().Be(email);
-        provider.Phone.Should().Be(phone);
-        provider.Dni.Should().Be(dni);
-        provider.Company.Should().Be(company);
-
-        provider.DomainEvents.Should().ContainSingle(e => e is ProviderCreatedEvent);
+        _provider.Should().NotBeNull();
+        _provider.Id.Should().Be(_provider.Id);
+        _provider.ProviderName.Should().Be(_provider.ProviderName);
+        _provider.Email.Should().Be(_provider.Email);
+        _provider.Phone.Should().Be(_provider.Phone);
+        _provider.Company.Should().Be(_provider.Company);
+        _provider.DomainEvents.Should().ContainSingle(e => e is ProviderCreatedEvent);
     }
 
     [Fact]
     public void Provider_Update_UpdatesPropertiesAndRaisesEvent()
     {
         // Arrange
-        Guid id = Guid.NewGuid();
-        ProviderName initialProviderName = ProviderName.Of("initialFirst", "initialLast");
-        Email email = Email.Of("test@gmail.com");
-        Password password = Password.Of("123456");
-        Phone phone = Phone.Of("04123345785");
-        Dni dni = Dni.Of(DniType.V, "12345678");
-        Company initialCompany = Company.Of("initialName", "initialDesc", "initialrif", "initialCity", "initialState");
-
-        // Create the initial provider
-        var provider = Provider.Create(id, initialProviderName, email, password, phone, dni, initialCompany);
-
-        // New values for update
         ProviderName newProviderName = ProviderName.Of("updatedFirst", "updatedLast");
         Company newCompany = Company.Of("updatedName", "updatedDesc", "updatedrif", "updatedCity", "updatedState");
 
         // Act
-        provider.Update(newProviderName, newCompany);
+        _provider.Update(newProviderName, newCompany);
 
         // Assert
-        provider.ProviderName.Should().Be(newProviderName);
-        provider.Company.Should().Be(newCompany);
+        _provider.ProviderName.Should().Be(newProviderName);
+        _provider.Company.Should().Be(newCompany);
 
-        provider.DomainEvents.Should().ContainSingle(e => e is ProviderUpdatedEvent);
+        _provider.DomainEvents.Should().ContainSingle(e => e is ProviderUpdatedEvent);
+    }
+
+    [Fact]
+    public void Provider_AddDriver_AddsDriverToProvider()
+    {
+        // Arrange
+        var id = Guid.NewGuid();
+        var driverName = DriverName.Of("John", "Doe");
+        var providerId = Guid.NewGuid();
+        var vehicleId = Guid.NewGuid();
+        var email = Email.Of("john.doe@gmail.com");
+        var password = Password.Of("password123");
+        var dni = Dni.Of(DniType.V, "87654321");
+        var phone = Phone.Of("04123456789");
+        var status = Status.Available;
+
+        // Act
+        _provider.AddDriver(id, driverName, providerId, vehicleId, email, password, phone, dni, status);
+        
+        // Assert
+        _provider.Drivers.Count().Should().Be(1);
+        _provider.Drivers[0].DriverName.Should().Be(driverName);
+    }
+
+    [Fact]
+    public void Provider_UpdatePassword_UpdatesPassword()
+    {
+        // Arrange
+        Password NewPassword = Password.Of("newPassword");
+
+        // Act
+        _provider.UpdatePassword(NewPassword);
+
+        // Assert
+        _provider.Password.Should().Be(NewPassword);
     }
 
 

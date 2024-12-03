@@ -58,7 +58,7 @@ public class Driver : Aggregate<Guid>
     public void UpdatePassword(Password password)
     {
         Password = password;
-        AddDomainEvent(new DriverUpdatedEvent(this));
+        AddDomainEvent(new DriverPasswordUpdatedEvent(DriverName, password));
     }
 
     public void UpdateStatus(Status status)
