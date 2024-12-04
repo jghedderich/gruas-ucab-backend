@@ -6,5 +6,7 @@ public record AddressDto(
         string AddressLine2,
         string City,
         string State,
-        string Zip
+        string Zip,
+        string Latitud,
+        string Longitud
     );

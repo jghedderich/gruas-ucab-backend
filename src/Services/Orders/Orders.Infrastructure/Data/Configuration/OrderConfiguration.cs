@@ -66,6 +66,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             incidentAddressBuilder.Property( ia => ia.City).HasMaxLength(50).IsRequired();
             incidentAddressBuilder.Property( ia => ia.State).HasMaxLength(50).IsRequired();
             incidentAddressBuilder.Property(ia => ia.Zip).HasMaxLength(4).IsRequired();
+            incidentAddressBuilder.Property(ia => ia.Latitud).HasMaxLength(20).IsRequired();
+            incidentAddressBuilder.Property(ia => ia.Longitud).HasMaxLength(20).IsRequired();
         });
 
         builder.ComplexProperty(o => o.DestinationAddress, destinationAddresBuilder =>
@@ -75,6 +77,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             destinationAddresBuilder.Property(da => da.City).HasMaxLength(50).IsRequired();
             destinationAddresBuilder.Property(da => da.State).HasMaxLength(50).IsRequired();
             destinationAddresBuilder.Property(da => da.Zip).HasMaxLength(4).IsRequired();
+            destinationAddresBuilder.Property(da => da.Latitud).HasMaxLength(20).IsRequired();
+            destinationAddresBuilder.Property(da => da.Longitud).HasMaxLength(20).IsRequired();
         });
 
         builder.Property(c => c.DriverId).IsRequired().HasMaxLength(255);
