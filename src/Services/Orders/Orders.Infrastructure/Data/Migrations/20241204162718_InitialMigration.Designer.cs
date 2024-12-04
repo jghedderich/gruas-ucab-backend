@@ -13,7 +13,7 @@ using Orders.Infrastructure.Data;
 namespace Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241203181411_InitialMigration")]
+    [Migration("20241204162718_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -206,6 +206,16 @@ namespace Orders.Infrastructure.Migrations
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
+                            b1.Property<string>("Latitud")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("nvarchar(20)");
+
+                            b1.Property<string>("Longitud")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("nvarchar(20)");
+
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(50)
@@ -235,6 +245,16 @@ namespace Orders.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("Latitud")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("nvarchar(20)");
+
+                            b1.Property<string>("Longitud")
+                                .IsRequired()
+                                .HasMaxLength(20)
+                                .HasColumnType("nvarchar(20)");
 
                             b1.Property<string>("State")
                                 .IsRequired()
