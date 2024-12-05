@@ -61,7 +61,7 @@ namespace Orders.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OperatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OperatorId = table.Column<Guid>(type: "uniqueidentifier", maxLength: 255, nullable: false),
                     PolicyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Client_Name_FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Client_Name_LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -98,12 +98,6 @@ namespace Orders.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Orders_Operators_OperatorId",
-                        column: x => x.OperatorId,
-                        principalTable: "Operators",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

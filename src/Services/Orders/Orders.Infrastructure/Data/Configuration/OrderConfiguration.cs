@@ -10,6 +10,8 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         builder.HasKey(o => o.Id);
 
+        builder.Property(c => c.OperatorId).IsRequired().HasMaxLength(255);
+
         builder.HasMany(a => a.CostDetails)
             .WithOne()
             .HasForeignKey(a => a.OrderId);
