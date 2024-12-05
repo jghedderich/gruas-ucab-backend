@@ -13,7 +13,7 @@ using Orders.Infrastructure.Data;
 namespace Orders.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241204162718_InitialMigration")]
+    [Migration("20241205155336_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -182,6 +182,7 @@ namespace Orders.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("OperatorId")
+                        .HasMaxLength(255)
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PolicyId")

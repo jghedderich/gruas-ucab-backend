@@ -179,6 +179,7 @@ namespace Orders.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("OperatorId")
+                        .HasMaxLength(255)
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PolicyId")
@@ -274,8 +275,6 @@ namespace Orders.Infrastructure.Migrations
                         });
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OperatorId");
 
                     b.ToTable("Orders");
                 });

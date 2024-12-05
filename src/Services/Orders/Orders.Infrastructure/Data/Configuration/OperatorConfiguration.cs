@@ -11,9 +11,9 @@ public class OperatorConfiguration : IEntityTypeConfiguration<Operator>
         builder.HasKey(o => o.Id);
 
         // Operator has many orders
-        builder.HasMany(a => a.Orders)
-            .WithOne()
-            .HasForeignKey(a => a.OperatorId);
+        // builder.HasMany(a => a.Orders)
+            // .WithOne()
+            // .HasForeignKey(a => a.OperatorId);
 
         builder.ComplexProperty(o => o.OperatorName, nameBuilder =>
         {
