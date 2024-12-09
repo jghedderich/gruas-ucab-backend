@@ -4,6 +4,8 @@ namespace Orders.Domain.Models;
 
 public class Policy : Aggregate<Guid>
 {
+    private readonly List<Order> _orders = [];
+    public ICollection<Order> Orders => _orders;
     public string Name { get; private set; } = default!;
     public int AmountCovered { get; private set; } = default!;
     public Price Price { get; private set; } = default!;
