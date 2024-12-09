@@ -68,8 +68,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             incidentAddressBuilder.Property( ia => ia.City).HasMaxLength(50).IsRequired();
             incidentAddressBuilder.Property( ia => ia.State).HasMaxLength(50).IsRequired();
             incidentAddressBuilder.Property(ia => ia.Zip).HasMaxLength(4).IsRequired();
-            incidentAddressBuilder.Property(ia => ia.Latitude).HasMaxLength(20).IsRequired();
-            incidentAddressBuilder.Property(ia => ia.Longitude).HasMaxLength(20).IsRequired();
+            incidentAddressBuilder.ComplexProperty(o => o.Coordinates, a =>
+            {
+                a.Property(os => os.Latitude).HasMaxLength(100).IsRequired();
+                a.Property(os => os.Longitude).HasMaxLength(100).IsRequired();
+            });
         });
 
         builder.ComplexProperty(o => o.DestinationAddress, destinationAddresBuilder =>
@@ -79,8 +82,11 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             destinationAddresBuilder.Property(da => da.City).HasMaxLength(50).IsRequired();
             destinationAddresBuilder.Property(da => da.State).HasMaxLength(50).IsRequired();
             destinationAddresBuilder.Property(da => da.Zip).HasMaxLength(4).IsRequired();
-            destinationAddresBuilder.Property(da => da.Latitude).HasMaxLength(20).IsRequired();
-            destinationAddresBuilder.Property(da => da.Longitude).HasMaxLength(20).IsRequired();
+            destinationAddresBuilder.ComplexProperty(o => o.Coordinates, a =>
+            {
+                a.Property(os => os.Latitude).HasMaxLength(100).IsRequired();
+                a.Property(os => os.Longitude).HasMaxLength(100).IsRequired();
+            });
         });
 
         builder.Property(c => c.DriverId).IsRequired().HasMaxLength(255);

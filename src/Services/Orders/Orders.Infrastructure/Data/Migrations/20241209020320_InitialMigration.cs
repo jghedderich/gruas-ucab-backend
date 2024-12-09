@@ -77,17 +77,17 @@ namespace Orders.Infrastructure.Migrations
                     DestinationAddress_AddressLine1 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DestinationAddress_AddressLine2 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DestinationAddress_City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    DestinationAddress_Latitude = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    DestinationAddress_Longitude = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     DestinationAddress_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DestinationAddress_Zip = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    DestinationAddress_Coordinates_Latitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DestinationAddress_Coordinates_Longitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IncidentAddress_AddressLine1 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     IncidentAddress_AddressLine2 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     IncidentAddress_City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    IncidentAddress_Latitude = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    IncidentAddress_Longitude = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     IncidentAddress_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IncidentAddress_Zip = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    IncidentAddress_Coordinates_Latitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IncidentAddress_Coordinates_Longitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     OrderStatus_Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -136,6 +136,11 @@ namespace Orders.Infrastructure.Migrations
                 name: "IX_CostDetails_OrderId",
                 table: "CostDetails",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_OperatorId",
+                table: "Orders",
+                column: "OperatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_PolicyId",

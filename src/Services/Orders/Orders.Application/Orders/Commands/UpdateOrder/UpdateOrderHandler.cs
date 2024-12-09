@@ -35,9 +35,9 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
         order.Update(
             client: Client.Of(Name.Of(updatedName.FirstName,updatedName.LastName),Dni.Of(updatedDniType,updatedNumber),Phone.Of(updatedPhone),Email.Of(updatedEmail), ClientVehicle.Of(updatedClientVehicle.Brand, updatedClientVehicle.Model, updatedClientVehicle.Year, vehicleType)),
             incidentAddress: Address.Of(updatedIncidentAddress.AddressLine1,updatedIncidentAddress.AddressLine2,
-            updatedIncidentAddress.City,updatedIncidentAddress.State,updatedIncidentAddress.Zip, updatedIncidentAddress.Latitude, updatedIncidentAddress.Longitude),
+            updatedIncidentAddress.City,updatedIncidentAddress.State,updatedIncidentAddress.Zip, Coordinates.Of(updatedIncidentAddress.Coordinates.Latitude, updatedIncidentAddress.Coordinates.Longitude)),
             destinationAddress: Address.Of(updatedDestinationAddres.AddressLine1, updatedDestinationAddres.AddressLine2,
-            updatedDestinationAddres.City, updatedDestinationAddres.State, updatedDestinationAddres.Zip, updatedDestinationAddres.Latitude, updatedDestinationAddres.Longitude)
+            updatedDestinationAddres.City, updatedDestinationAddres.State, updatedDestinationAddres.Zip, Coordinates.Of(updatedDestinationAddres.Coordinates.Latitude,updatedDestinationAddres.Coordinates.Longitude))
             );
     }
 }

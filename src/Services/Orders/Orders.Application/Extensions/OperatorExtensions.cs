@@ -17,8 +17,8 @@ public static class OperatorExtensions
                 new DniDto(Type: or.Client.Dni.Type.ToString(), Number: or.Client.Dni.Number),
                 or.Client.Phone.Value, or.Client.Email.Value,
                 new ClientVehicleDto(or.Client.ClientVehicle.Brand, or.Client.ClientVehicle.Model, or.Client.ClientVehicle.Year, or.Client.ClientVehicle.TypeV.ToString())), or.OrderStatus.Status.ToString(),
-                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip, or.IncidentAddress.Latitude,or.IncidentAddress.Longitude),
-                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip, or.DestinationAddress.Latitude, or.DestinationAddress.Longitude),
+                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip, new CoordinatesDto(or.IncidentAddress.Coordinates.Latitude, or.IncidentAddress.Coordinates.Longitude)),
+                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip, new CoordinatesDto(or.DestinationAddress.Coordinates.Latitude, or.DestinationAddress.Coordinates.Longitude)),
                 CostDetails: or.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList(),
                 IsActive: or.IsActive
             )).ToList()));
@@ -44,8 +44,8 @@ public static class OperatorExtensions
                 new DniDto(Type: or.Client.Dni.Type.ToString(), Number: or.Client.Dni.Number),
                 or.Client.Phone.Value, or.Client.Email.Value,
                 new ClientVehicleDto(or.Client.ClientVehicle.Brand, or.Client.ClientVehicle.Model, or.Client.ClientVehicle.Year, or.Client.ClientVehicle.TypeV.ToString())), or.OrderStatus.Status.ToString(),
-                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip, or.IncidentAddress.Latitude, or.IncidentAddress.Longitude),
-                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip, or.DestinationAddress.Latitude, or.DestinationAddress.Longitude),
+                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip, new CoordinatesDto(or.IncidentAddress.Coordinates.Latitude, or.IncidentAddress.Coordinates.Longitude)),
+                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip, new CoordinatesDto(or.DestinationAddress.Coordinates.Latitude, or.DestinationAddress.Coordinates.Longitude)),
                 CostDetails: or.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList(),
                 IsActive: or.IsActive
             )).ToList());    
