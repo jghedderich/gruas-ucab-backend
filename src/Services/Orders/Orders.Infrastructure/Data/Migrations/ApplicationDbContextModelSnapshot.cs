@@ -204,16 +204,6 @@ namespace Orders.Infrastructure.Migrations
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
-                            b1.Property<string>("Latitude")
-                                .IsRequired()
-                                .HasMaxLength(20)
-                                .HasColumnType("nvarchar(20)");
-
-                            b1.Property<string>("Longitude")
-                                .IsRequired()
-                                .HasMaxLength(20)
-                                .HasColumnType("nvarchar(20)");
-
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(50)
@@ -223,6 +213,21 @@ namespace Orders.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(4)
                                 .HasColumnType("nvarchar(4)");
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Coordinates", "Orders.Domain.Models.Order.DestinationAddress#Address.Coordinates#Coordinates", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Latitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+
+                                    b2.Property<string>("Longitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+                                });
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("IncidentAddress", "Orders.Domain.Models.Order.IncidentAddress#Address", b1 =>
@@ -244,16 +249,6 @@ namespace Orders.Infrastructure.Migrations
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
-                            b1.Property<string>("Latitude")
-                                .IsRequired()
-                                .HasMaxLength(20)
-                                .HasColumnType("nvarchar(20)");
-
-                            b1.Property<string>("Longitude")
-                                .IsRequired()
-                                .HasMaxLength(20)
-                                .HasColumnType("nvarchar(20)");
-
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(50)
@@ -263,6 +258,21 @@ namespace Orders.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(4)
                                 .HasColumnType("nvarchar(4)");
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Coordinates", "Orders.Domain.Models.Order.IncidentAddress#Address.Coordinates#Coordinates", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Latitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+
+                                    b2.Property<string>("Longitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+                                });
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("OrderStatus", "Orders.Domain.Models.Order.OrderStatus#OrderStatus", b1 =>
