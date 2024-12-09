@@ -204,12 +204,12 @@ namespace Orders.Infrastructure.Migrations
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
-                            b1.Property<string>("Latitud")
+                            b1.Property<string>("Latitude")
                                 .IsRequired()
                                 .HasMaxLength(20)
                                 .HasColumnType("nvarchar(20)");
 
-                            b1.Property<string>("Longitud")
+                            b1.Property<string>("Longitude")
                                 .IsRequired()
                                 .HasMaxLength(20)
                                 .HasColumnType("nvarchar(20)");
@@ -244,12 +244,12 @@ namespace Orders.Infrastructure.Migrations
                                 .HasMaxLength(50)
                                 .HasColumnType("nvarchar(50)");
 
-                            b1.Property<string>("Latitud")
+                            b1.Property<string>("Latitude")
                                 .IsRequired()
                                 .HasMaxLength(20)
                                 .HasColumnType("nvarchar(20)");
 
-                            b1.Property<string>("Longitud")
+                            b1.Property<string>("Longitude")
                                 .IsRequired()
                                 .HasMaxLength(20)
                                 .HasColumnType("nvarchar(20)");
@@ -275,6 +275,8 @@ namespace Orders.Infrastructure.Migrations
                         });
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PolicyId");
 
                     b.ToTable("Orders");
                 });
@@ -351,9 +353,10 @@ namespace Orders.Infrastructure.Migrations
 
             modelBuilder.Entity("Orders.Domain.Models.Order", b =>
                 {
-                    b.HasOne("Orders.Domain.Models.Operator", null)
+
+                    b.HasOne("Orders.Domain.Models.Policy", null)
                         .WithMany("Orders")
-                        .HasForeignKey("OperatorId")
+                        .HasForeignKey("PolicyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -502,14 +505,15 @@ namespace Orders.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Orders.Domain.Models.Operator", b =>
-                {
-                    b.Navigation("Orders");
-                });
 
             modelBuilder.Entity("Orders.Domain.Models.Order", b =>
                 {
                     b.Navigation("CostDetails");
+                });
+
+            modelBuilder.Entity("Orders.Domain.Models.Policy", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
