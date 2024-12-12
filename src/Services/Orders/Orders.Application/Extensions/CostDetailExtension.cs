@@ -12,7 +12,7 @@ public static class CostDetailExtensions
                 OrderId: c.OrderId,
                 Description: c.Description,
                 Amount: c.Amount,
-                IsApproved: c.IsApproved
+                StatusC: c.StatusC.StatusCO.ToString()
             ));   
     }
 
@@ -28,7 +28,7 @@ public static class CostDetailExtensions
                 OrderId: costDetail.OrderId,
                 Description: costDetail.Description,
                 Amount: costDetail.Amount,
-                IsApproved: costDetail.IsApproved
+                StatusC: costDetail.StatusC.StatusCO.ToString()
             );
     }
 }

@@ -6,5 +6,5 @@ public record CostDetailDto(
         Guid OrderId,
         string Description,
         double Amount,
-        bool IsApproved
+        string StatusC
     );
