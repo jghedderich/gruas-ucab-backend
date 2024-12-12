@@ -11,6 +11,6 @@ public class UpdateCostDetailStatusCommandValidator : AbstractValidator<UpdateCo
     public UpdateCostDetailStatusCommandValidator()
     {
         RuleFor(x => x.CostDetail.Id).NotEmpty().WithMessage("Id is required");
-        RuleFor(x => x.CostDetail.IsApproved).NotEmpty().WithMessage("IsApproved is required");
+        RuleFor(x => x.CostDetail.StatusC).NotEmpty().WithMessage("Status is required");
     }
 }

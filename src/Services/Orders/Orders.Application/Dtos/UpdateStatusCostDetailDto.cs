@@ -1,3 +1,3 @@
 ﻿namespace Orders.Application.Dtos;
 
-public record UpdateStatusCostDetailDto(Guid Id, bool IsApproved);
+public record UpdateStatusCostDetailDto(Guid Id, string StatusC);

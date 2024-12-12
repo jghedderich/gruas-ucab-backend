@@ -6,14 +6,14 @@ public class CostDetail : Aggregate<Guid>
     public Guid OrderId { get; private set; } = default!;
     public string Description { get; private set; } = default!;
     public double Amount { get; private set; } = default!;
-    public bool IsApproved { get; private set; } = default!;
+    public CostDetailStatus StatusC { get; private set; } = default!;
 
     public static CostDetail Create(
             Guid id,
             Guid orderId,
             string description,
             double amount,
-            bool isApproved
+            CostDetailStatus statusC
         )
     {
         var costDetail = new CostDetail
@@ -22,7 +22,7 @@ public class CostDetail : Aggregate<Guid>
             OrderId = orderId,
             Description = description,
             Amount = amount,
-            IsApproved = isApproved
+            StatusC = statusC
         };
 
         return costDetail;
@@ -34,9 +34,9 @@ public class CostDetail : Aggregate<Guid>
         Amount = amount;
     }
 
-    public void UpdateStatus(bool isApproved)
+    public void UpdateStatus(CostDetailStatus statusC)
     {
-        IsApproved = isApproved;
+        StatusC = statusC;
     }
 
 }

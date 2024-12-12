@@ -16,13 +16,14 @@ public class CreateCostDetailHandler(IApplicationDbContext dbContext) : ICommand
 
     private static CostDetail CreateNewCostDetail(CostDetailDto costDetailDto)
     {
+        var status = Enum.Parse<StatusCO>("Pending", true);
 
         var newCostDetail = CostDetail.Create(
                 id: Guid.NewGuid(),
                 orderId: costDetailDto.OrderId,
                 description: costDetailDto.Description,
                 amount: costDetailDto.Amount,
-                isApproved: costDetailDto.IsApproved
+                statusC: CostDetailStatus.Of(status)
             );
 
         return newCostDetail;

@@ -60,9 +60,9 @@ public class Order : Aggregate<Guid>
         AddDomainEvent(new OrderUpdatedEvent(this));
     }
  
-    public void AddCostDetail(Guid costDetailId, string description, double amount, bool isApproved)
+    public void AddCostDetail(Guid costDetailId, string description, double amount, CostDetailStatus statusC)
     {
-        var costDetail = CostDetail.Create(costDetailId, Id, description, amount, isApproved);
+        var costDetail = CostDetail.Create(costDetailId, Id, description, amount, statusC);
         _costDetail.Add(costDetail);
     }
 

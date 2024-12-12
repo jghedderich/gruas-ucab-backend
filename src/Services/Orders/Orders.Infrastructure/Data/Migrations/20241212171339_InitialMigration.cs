@@ -114,7 +114,7 @@ namespace Orders.Infrastructure.Migrations
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Amount = table.Column<double>(type: "float", maxLength: 20, nullable: false),
-                    IsApproved = table.Column<bool>(type: "bit", maxLength: 5, nullable: false),
+                    StatusC_StatusCO = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -136,11 +136,6 @@ namespace Orders.Infrastructure.Migrations
                 name: "IX_CostDetails_OrderId",
                 table: "CostDetails",
                 column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_OperatorId",
-                table: "Orders",
-                column: "OperatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_PolicyId",

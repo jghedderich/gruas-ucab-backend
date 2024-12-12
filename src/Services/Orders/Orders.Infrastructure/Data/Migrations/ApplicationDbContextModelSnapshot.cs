@@ -47,10 +47,6 @@ namespace Orders.Infrastructure.Migrations
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsApproved")
-                        .HasMaxLength(5)
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -59,6 +55,15 @@ namespace Orders.Infrastructure.Migrations
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.ComplexProperty<Dictionary<string, object>>("StatusC", "Orders.Domain.Models.CostDetail.StatusC#CostDetailStatus", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("StatusCO")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+                        });
 
                     b.HasKey("Id");
 

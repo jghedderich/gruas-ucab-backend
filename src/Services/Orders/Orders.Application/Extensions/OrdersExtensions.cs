@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 namespace Orders.Application.Extensions;
 
 public static class OrderExtensions
@@ -22,7 +24,7 @@ public static class OrderExtensions
                     o.DestinationAddress.Coordinates.Latitude,
                     o.DestinationAddress.Coordinates.Longitude
                 )),
-                CostDetails: o.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList(),
+                CostDetails: o.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.StatusC.StatusCO.ToString())).ToList(),
                 IsActive: o.IsActive
             ));
     }
@@ -51,7 +53,7 @@ public static class OrderExtensions
                     order.DestinationAddress.Coordinates.Latitude,
                     order.DestinationAddress.Coordinates.Longitude
                 )),
-                CostDetails: order.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList(),
+                CostDetails: order.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.StatusC.StatusCO.ToString())).ToList(),
                 IsActive: order.IsActive
             );
     }
