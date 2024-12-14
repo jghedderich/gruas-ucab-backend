@@ -5,27 +5,38 @@ namespace Orders.Domain.Models;
 
 public class Order : Aggregate<Guid>
 {
+    private readonly List<CostDetail> _costDetail = [];
+    public ICollection<CostDetail> CostDetails => _costDetail;
     public Guid OperatorId { get; private set; } = default!;
-    public PolicyDetails PolicyDetails { get; private set; } = default!;
+    public Guid PolicyId { get; private set; } = default!;
+    public Client Client { get; private set; } = default!; // CLIENTE
     public OrderStatus OrderStatus { get; private set; } = default!;
-    public List<CostDetail> AdditionalCost { get; private set; } = default!;
+    public Address IncidentAddress { get; private set; } = default!; // DIRECCION DEL ACCIDENTE-INCIDENTE
+    public Address DestinationAddress { get; private set; } = default!; // DIRECCION DESTINO
+    public Guid DriverId { get; private set; } = default!;
 
 
     public static Order Create(
             Guid id,
             Guid operatorId,
-            PolicyDetails policyDetails,
+            Guid policyId,
+            Client client,
             OrderStatus orderStatus,
-            List<CostDetail> additionalCost
+            Address incidentAddress,
+            Address destinationAddress,
+            Guid driverId
         )
     {
         var order = new Order
         {
             Id = id,
             OperatorId = operatorId,
-            PolicyDetails = policyDetails,
+            PolicyId = policyId,
+            Client = client,
             OrderStatus = orderStatus,
-            AdditionalCost = additionalCost
+            IncidentAddress = incidentAddress,
+            DestinationAddress = destinationAddress,
+            DriverId = driverId
         };
 
         order.AddDomainEvent(new OrderCreatedEvent(order));
@@ -33,10 +44,11 @@ public class Order : Aggregate<Guid>
         return order;
     }
 
-    public void Update(PolicyDetails policyDetails, List<CostDetail> additionalCost)
+    public void Update( Client client, Address incidentAddress, Address destinationAddress)
     {
-        PolicyDetails = policyDetails;
-        AdditionalCost = additionalCost;
+        Client = client;
+        IncidentAddress = incidentAddress;
+        DestinationAddress = destinationAddress;
 
         AddDomainEvent(new OrderUpdatedEvent(this));
     }
@@ -47,10 +59,19 @@ public class Order : Aggregate<Guid>
 
         AddDomainEvent(new OrderUpdatedEvent(this));
     }
-    
-
-    public void AddAdditionalCost(CostDetail cost)
+ 
+    public void AddCostDetail(Guid costDetailId, string description, double amount, CostDetailStatus statusC)
     {
-        AdditionalCost.Add(cost);
+        var costDetail = CostDetail.Create(costDetailId, Id, description, amount, statusC);
+        _costDetail.Add(costDetail);
+    }
+
+    public void RemoveCostDetail(Guid costDetailId)
+    { 
+        var costDetail = _costDetail.FirstOrDefault(c => c.Id == costDetailId);
+        if (costDetail != null) 
+        { 
+            _costDetail.Remove(costDetail);
+        }
     }
 }

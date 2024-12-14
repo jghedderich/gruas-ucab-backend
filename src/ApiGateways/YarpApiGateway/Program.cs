@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.RateLimiting;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,50 +16,29 @@ builder.Services.AddRateLimiter(rateLimiterOptions =>
     });
 });
 
-// Esta relacionado con Keycloak, no se lo que estoy haciendo
-builder.Services
-    .AddAuthentication()
-    .AddJwtBearer(options =>
+var AllowedOrigins = "clientApps";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(AllowedOrigins, builder =>
     {
-        options.Authority = "http://localhost:8080/realms/gruas";
-        options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            ValidAudiences = ["account"],
-            ValidIssuers = ["http://localhost:8080/realms/gruas"]
-        };
+        builder.WithOrigins("http://localhost:3000");
+        builder.WithOrigins("http://localhost:3001");
+        builder.AllowAnyMethod();
+        builder.AllowAnyHeader();
+        builder.AllowCredentials();
     });
+});
 
-// talvez sea eliminado, o cambiado, no se que estoy haciendo
 builder.Services
-    .AddAuthorizationBuilder()
-    .AddPolicy("first-api-access", policy =>
-        policy.RequireAuthenticatedUser()
-        .RequireClaim("first-api-access", true.ToString()))
-    .AddPolicy("second-api-access", policy =>
-        policy.RequireAuthenticatedUser()
-        .RequireClaim("second-api-access", true.ToString()));
-
+    .AddAuthentication(BearerTokenDefaults.AuthenticationScheme)
+    .AddBearerToken();
 
 var app = builder.Build();
 
-// talvez sea eliminado o cambiado, repito, no se lo que estoy haciendo
-app.MapGet("login", (bool firstApi = false, bool secondApi = false) => 
-    Results.SignIn(
-    new ClaimsPrincipal(
-        new ClaimsIdentity(
-            [
-                new Claim("sub", Guid.NewGuid().ToString()),
-                new Claim("first-api-access", firstApi.ToString()),
-                new Claim("second-api-access", secondApi.ToString()),
-            ],
-            BearerTokenDefaults.AuthenticationScheme
-            )),
-    authenticationScheme: BearerTokenDefaults.AuthenticationScheme
-    ));
-
 app.UseRateLimiter();
+
+app.UseCors(AllowedOrigins);
 
 app.UseAuthentication();
 

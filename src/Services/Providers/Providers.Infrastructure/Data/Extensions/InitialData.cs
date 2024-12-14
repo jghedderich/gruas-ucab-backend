@@ -16,6 +16,7 @@ internal class InitialData
                 Guid.NewGuid(),
                 ProviderName.Of("John", "Truckerson"),
                 Email.Of("johntruck@gmail.com"),
+                Password.Of("123456"),
                 Phone.Of("04123349277"),
                 Dni.Of(DniType.V, "29625837"),
                 Company.Of("Super Trucks", "Tow truck company", "V-00006797", "Caracas", "Miranda")
@@ -24,6 +25,7 @@ internal class InitialData
                 Guid.NewGuid(),
                 ProviderName.Of("Lisa", "Towferson"),
                 Email.Of("lisatow@gmail.com"),
+                Password.Of("123456"),
                 Phone.Of("04123349278"),
                 Dni.Of(DniType.V, "29625838"),
                 Company.Of("Bomba Trucks", "Super tow company", "V-00006778", "Maracaibo", "Zulia")
@@ -71,8 +73,10 @@ internal class InitialData
             provider.Id,
             vehicles[0].Id,
             Email.Of($"{firstName1.ToLower()}.rodriguez@example.com"),
+            Password.Of("123456"),
             Phone.Of("04123349280"),
-            Dni.Of(DniType.V, "29625840")
+            Dni.Of(DniType.V, "29625840"),
+            Status.Available
         );
 
         provider.AddDriver(
@@ -81,8 +85,10 @@ internal class InitialData
             provider.Id,
             vehicles[1].Id,
             Email.Of($"{firstName2.ToLower()}.gonzalez@example.com"),
+            Password.Of("123456"),
             Phone.Of("04123349281"),
-            Dni.Of(DniType.V, "29625841")
+            Dni.Of(DniType.V, "29625841"),
+            Status.Available
         );
     }
 }

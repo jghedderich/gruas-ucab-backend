@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Providers.Domain.Models;
 using Providers.Domain.ValueObjects;
 
@@ -22,6 +21,11 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
             emailBuilder.Property(e => e.Value).HasMaxLength(255);
         });
 
+        builder.ComplexProperty(p => p.Password, passwordBuilder =>
+        {
+            passwordBuilder.Property(p => p.Value).HasMaxLength(255);
+        });
+
         builder.ComplexProperty(d => d.Dni, dniBuilder =>
         {
             dniBuilder.Property(d => d.Number).HasMaxLength(8).IsRequired();
@@ -34,6 +38,24 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
         builder.ComplexProperty(d => d.Phone, phoneBuilder =>
         {
             phoneBuilder.Property(p => p.Value).HasMaxLength(11).IsRequired();
+        });
+
+        builder.Property(d => d.Status)
+            .HasConversion(s => s.ToString(),
+            status => (Status)Enum.Parse(typeof(Status), status));
+
+        builder.OwnsOne(d => d.Location, locationBuilder =>
+        {
+            locationBuilder.Property(l => l.AddressLine1).HasMaxLength(50).IsRequired();
+            locationBuilder.Property(l => l.AddressLine2).HasMaxLength(50).IsRequired(false);
+            locationBuilder.Property(l => l.State).HasMaxLength(50).IsRequired();
+            locationBuilder.Property(l => l.Zip).HasMaxLength(4).IsRequired();
+            locationBuilder.Property(l => l.City).HasMaxLength(50).IsRequired();
+            locationBuilder.OwnsOne(l => l.Coordinates, coordinatesBuilder =>
+            {
+                coordinatesBuilder.Property(c => c.Latitude).HasMaxLength(50).IsRequired(true);
+                coordinatesBuilder.Property(c => c.Longitude).HasMaxLength(50).IsRequired(true);
+            });
         });
     }
 }

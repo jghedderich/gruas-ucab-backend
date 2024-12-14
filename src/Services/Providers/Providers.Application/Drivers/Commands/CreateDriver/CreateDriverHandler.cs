@@ -18,14 +18,19 @@ public class CreateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
 
         var dni = Dni.Of(dniType, driverDto.Dni.Number);
 
-        var newDriver = Driver.Create(
+        Status status = Status.Available; // Default value
+        if (!string.IsNullOrEmpty(driverDto.Status) && !Enum.TryParse(driverDto.Status, out status)) ;
+
+            var newDriver = Driver.Create(
                 id: Guid.NewGuid(),
                 driverName: DriverName.Of(driverDto.Name.FirstName, driverDto.Name.LastName),
                 providerId: driverDto.ProviderId,
                 vehicleId: driverDto.VehicleId,
                 email: Email.Of(driverDto.Email),
+                password: Password.Of(driverDto.Password),
                 phone: Phone.Of(driverDto.Phone),
-                dni: dni
+                dni: dni,
+                status: status
         );
 
         return newDriver;

@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Providers\Queries\Authenticate\**" />
+    <EmbeddedResource Remove="Providers\Queries\Authenticate\**" />
+    <None Remove="Providers\Queries\Authenticate\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj" />
     <ProjectReference Include="..\Providers.Domain\Providers.Domain.csproj" />
   </ItemGroup>

@@ -1,5 +1,4 @@
-﻿using Providers.Application.Dtos;
-
+﻿
 namespace Providers.Application.Providers.Commands.UpdateProvider;
 
 public record UpdateProviderCommand(ProviderDto Provider) 

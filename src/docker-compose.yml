@@ -4,21 +4,39 @@ services:
   providersdb:
     image: mcr.microsoft.com/mssql/server
 
-  adminsdb:
+  ordersdb:
+    image: mcr.microsoft.com/mssql/server
+
+  admindb:
     image: mcr.microsoft.com/mssql/server
 
   messagebroker:
     image: rabbitmq:management
+    
+  redis:
+    image: redis
 
   providers.api:
     image: ${DOCKER_REGISTRY-}providersapi
     build:
       context: .
       dockerfile: Services/Providers/Providers.API/Dockerfile
-  admins.api:
-    image: ${DOCKER_REGISTRY-}adminsapi
+
+  admin.api:
+    image: ${DOCKER_REGISTRY-}adminapi
     build:
       context: .
       dockerfile: Services/Admin/Admin.API/Dockerfile
 
+  yarpapigateway:
+    image: ${DOCKER_REGISTRY-}yarpapigateway
+    build:
+      context: .
+      dockerfile: ApiGateways/YarpApiGateway/Dockerfile
+
+  orders.api:
+    image: ${DOCKER_REGISTRY-}ordersapi
+    build:
+      context: .
+      dockerfile: Services/Orders/Orders.API/Dockerfile
 

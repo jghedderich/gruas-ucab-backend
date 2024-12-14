@@ -1,0 +1,10 @@
+﻿global using FluentValidation;
+global using MediatR;
+global using Orders.Domain.Events;
+global using BuildingBlocks.CQRS;
+global using Microsoft.EntityFrameworkCore;
+global using Orders.Domain.Models;
+global using Orders.Application.Data;
+global using Orders.Domain.ValueObjects;
+global using Orders.Application.Dtos;
+global using Microsoft.Extensions.Logging;

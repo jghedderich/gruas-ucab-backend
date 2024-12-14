@@ -1,4 +1,3 @@
-# version: '3.4'
 
 services:
   providersdb:
@@ -9,14 +8,14 @@ services:
     restart: always
     ports:
       - "1433:1433"
-  adminsdb:
-    container_name: adminsdb
+  admindb:
+    container_name: admindb
     environment:
         - ACCEPT_EULA=Y
         - SA_PASSWORD=Equipo9#2024
     restart: always
     ports:
-        - "9999:9999" 
+        - "1435:1435" 
 
   messagebroker:
     container_name: messagebroker
@@ -28,6 +27,21 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
+  redis:
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  ordersdb:
+    container_name: ordersdb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Equipo9#2024
+    restart: always
+    ports:
+      - "1434:1434"
 
   providers.api:
     environment:
@@ -48,23 +62,60 @@ services:
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
-  admins.api:
+
+  admin.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_HTTP_PORTS=8082
-      - ASPNETCORE_HTTPS_PORTS=8083
-      - ConnectionStrings__Database=Server=adminsdb;Database=AdminsDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=admindb;Database=AdminDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
       - MessageBroker__Host=amqp://gruas-mq:5672
       - MessageBroker__UserName=guest
       - MessageBroker__Password=guest
       - FeatureManagement__OrderFullfilment=false
     depends_on:
-      - adminsdb
+      - admindb
       - messagebroker
     ports:
-      - "7000:8082"
-      - "7060:8083"
+      - "6001:8080"
+      - "6061:8081"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
 
+
+  orders.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ConnectionStrings__Database=Server=ordersdb;Database=OrdersDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
+      - MessageBroker__Host=amqp://gruas-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+      - FeatureManagement__OrderFullfilment=false 
+    depends_on:
+      - ordersdb
+      - messagebroker
+    ports:
+      - "6002:8080"
+      - "6062:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+  
+  yarpapigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    depends_on:
+      - providers.api
+      - orders.api
+      - admin.api
+    ports:
+      - "6004:8080"
+      - "6064:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro

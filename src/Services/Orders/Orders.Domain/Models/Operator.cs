@@ -8,17 +8,19 @@ public class Operator : Aggregate<Guid>
 {
     private readonly List<Order> _orders = [];
     public IReadOnlyList<Order> Orders => _orders.AsReadOnly();
-    public OperatorName OperatorName { get; private set; } = default!;
+    public Name OperatorName { get; private set; } = default!;
     public Email Email { get; private set; } = default!;
     public Phone Phone { get; private set; } = default!;
     public Dni Dni { get; private set; } = default!;
+    public Password Password { get; private set; } = default!;
 
     public static Operator Create(
             Guid id,
-            OperatorName operatorName,
+            Name operatorName,
             Email email,
             Phone phone,
-            Dni dni
+            Dni dni,
+            Password password
         )
     {
         var operatorD = new Operator
@@ -27,7 +29,8 @@ public class Operator : Aggregate<Guid>
             OperatorName = operatorName,
             Email = email,
             Phone = phone,
-            Dni = dni
+            Dni = dni,
+            Password = password
         };
 
         operatorD.AddDomainEvent(new OperatorCreatedEvent(operatorD));
@@ -35,26 +38,32 @@ public class Operator : Aggregate<Guid>
         return operatorD;
     }
 
-    public void Update(OperatorName operatorName)
+    public void Update(Name operatorName, Phone phone, Dni dni)
     {
         OperatorName = operatorName;
+        Phone = phone;
+        Dni = dni;
 
         AddDomainEvent(new OperatorUpdatedEvent(this));
     }
 
-    public void AddOrder(Guid orderId, PolicyDetails policyDetails,OrderStatus orderStatus, List<CostDetail> additionalCost)
+    public void UpdatePassword(Password password)
     {
-        var order = Order.Create(orderId,Id,policyDetails,orderStatus,additionalCost);
+        Password = password;
+    }
+
+    public void AddOrder(Guid orderId, Guid policyId, Client client, OrderStatus orderStatus, Address incidentAddress, Address destinationAddress, Guid driverId)
+    {
+        var order = Order.Create(orderId, Id, policyId, client, orderStatus, incidentAddress, destinationAddress, driverId);
         _orders.Add(order);
     }
 
-    public void RemoveOrder(Guid orderId) 
-    { 
+    public void RemoveOrder(Guid orderId)
+    {
         var order = _orders.FirstOrDefault(o => o.Id == orderId);
         if (order != null)
         {
             _orders.Remove(order);
         }
     }
-
 }

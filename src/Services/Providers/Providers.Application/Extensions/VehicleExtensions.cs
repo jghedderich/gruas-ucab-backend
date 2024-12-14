@@ -10,7 +10,8 @@ public static class VehicleExtensions
                 Type: v.Type,
                 Brand: v.Brand,
                 Model: v.Model,
-                Year: v.Year
+                Year: v.Year,
+                IsActive: v.IsActive
             ));
     }
 
@@ -27,7 +28,8 @@ public static class VehicleExtensions
                 Type: vehicle.Type.ToString(),
                 Brand: vehicle.Brand.Value,
                 Model: vehicle.Model.Value,
-                Year: vehicle.Year 
+                Year: vehicle.Year,
+                IsActive: vehicle.IsActive
             );
     }
 }

@@ -1,4 +1,6 @@
-﻿using Providers.Application.Data;
+﻿using BuildingBlocks.Caching;
+using BuildingBlocks.Emails;
+using Providers.Application.Data;
 using Providers.Infrastructure.Data.Interceptors;
 
 namespace Providers.Infrastructure;
@@ -13,6 +15,17 @@ public static class DependencyInjection
         // Add services to the container.
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+
+        services.AddTransient<IEmailSender, EmailSender>();
+
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = configuration.GetConnectionString("Redis");
+            options.InstanceName = "Codes_";
+        });
+
+        services.AddScoped<IRedisCacheService, RedisCacheService>();
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {

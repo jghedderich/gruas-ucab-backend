@@ -8,13 +8,9 @@ public class UpdateProviderHandlerI(IApplicationDbContext dbContext)
     {
         var providerId = command.Provider.Id;
         var provider = await dbContext.Providers
-            .FindAsync([providerId], cancellationToken: cancellationToken);
-
-        if (provider == null) 
-        {
-            throw new ProviderNotFoundException(command.Provider.Id);
-        }
-
+            .FindAsync([providerId], cancellationToken: cancellationToken) 
+            ?? throw new ProviderNotFoundException(command.Provider.Id);
+        
         UpdateProviderWithNewValues(provider, command.Provider);
 
         dbContext.Providers.Update(provider);
@@ -23,7 +19,7 @@ public class UpdateProviderHandlerI(IApplicationDbContext dbContext)
         return new UpdateProviderResult(true);
     }
 
-    public void UpdateProviderWithNewValues(Provider provider, ProviderDto providerDto)
+    public static void UpdateProviderWithNewValues(Provider provider, ProviderDto providerDto)
     {
         var updatedName = providerDto.Name;
         
