@@ -14,6 +14,7 @@ public static class DriverExtensions
                 Status: p.Status,
                 Phone: p.Phone,
                 Email: p.Email,
+                Location: p.Location,
                 Password: p.Password,
                 IsActive: p.IsActive
             ));
@@ -27,16 +28,27 @@ public static class DriverExtensions
     private static DriverDto DtoFromDriver(Driver driver)
     {
         return new DriverDto(
-                Id: driver.Id,
-                VehicleId: driver.VehicleId,
-                ProviderId: driver.ProviderId,
-                Name: new NameDto(driver.DriverName.FirstName, driver.DriverName.LastName),
-                Dni: new DniDto(driver.Dni.Type.ToString(), driver.Dni.Number),
-                Phone: driver.Phone.Value,
-                Email: driver.Email.Value,
-                Password: driver.Password.Value,
-                Status: driver.Status.ToString(),
-                IsActive: driver.IsActive
-            );
+            Id: driver.Id,
+            VehicleId: driver.VehicleId,
+            ProviderId: driver.ProviderId,
+            Name: new NameDto(driver.DriverName.FirstName, driver.DriverName.LastName),
+            Dni: new DniDto(driver.Dni.Type.ToString(), driver.Dni.Number),
+            Phone: driver.Phone.Value,
+            Email: driver.Email.Value,
+            Password: driver.Password.Value,
+            Status: driver.Status.ToString(),
+            Location: driver.Location != null ? new LocationDto(
+                driver.Location.AddressLine1,
+                driver.Location.AddressLine2,
+                driver.Location.Zip,
+                driver.Location.State,
+                driver.Location.City,
+                new CoordinatesDto(
+                    driver.Location.Coordinates.Latitude,
+                    driver.Location.Coordinates.Longitude
+                )
+            ) : null,
+            IsActive: driver.IsActive
+        );
     }
 }

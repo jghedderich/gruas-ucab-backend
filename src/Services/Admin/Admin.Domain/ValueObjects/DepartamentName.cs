@@ -7,12 +7,12 @@ public class DepartmentName
 {
     public string Value { get; }
 
-    private DepartmentName(string value) 
+    private DepartmentName(string value)
     {
         Value = value;
     }
-    public override string ToString() => Value;
-    public static DepartmentName Create(string value) 
+
+    public static DepartmentName Create(string value)
     {
         if (string.IsNullOrWhiteSpace(value))
             throw new ArgumentException("El nombre del departamento no puede estar vacío.");
@@ -20,7 +20,7 @@ public class DepartmentName
         if (!Regex.IsMatch(value, @"^[a-zA-Z\s]+$"))
             throw new ArgumentException("El nombre del departamento solo debe tener letras y espacios.");
 
-        return new DepartmentName(value); 
+        return new DepartmentName(value);
     }
 
     public override bool Equals(object? obj)

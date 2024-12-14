@@ -9,12 +9,12 @@ public class UpdateCostDetailStatusHandlerI(IApplicationDbContext dbContext)
     public async Task<UpdateCostDetailStatusResult> Handle(UpdateCostDetailStatusCommand command, CancellationToken cancellationToken)
     {
         var costDetailId = command.CostDetail.Id;
-        var status = command.CostDetail.IsApproved;
+        var statusC = command.CostDetail.StatusC;
         var costDetail = await dbContext.CostDetails
             .FindAsync([costDetailId], cancellationToken: cancellationToken) ?? throw new CostDetailNotFoundException(command.CostDetail.Id);
 
 
-        UpdateCostDetailStatus(costDetail, status);
+        UpdateCostDetailStatus(costDetail, statusC);
 
         dbContext.CostDetails.Update(costDetail);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -22,9 +22,10 @@ public class UpdateCostDetailStatusHandlerI(IApplicationDbContext dbContext)
         return new UpdateCostDetailStatusResult(true);
     }
 
-    public static void UpdateCostDetailStatus(CostDetail costDetail, bool status)
+    public static void UpdateCostDetailStatus(CostDetail costDetail, string statusC)
     {
-        costDetail.UpdateStatus(status);
+        if (Enum.TryParse<StatusCO>(statusC, out StatusCO statusEnum))
+        costDetail.UpdateStatus(CostDetailStatus.Of(statusEnum));
 
     }
 }

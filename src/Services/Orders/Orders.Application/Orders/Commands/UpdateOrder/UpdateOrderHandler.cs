@@ -9,13 +9,7 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
     {
         var orderId = command.Order.Id;
         var order = await dbContext.Orders
-            .FindAsync([orderId], cancellationToken: cancellationToken);
-
-        if (order == null)
-        {
-            throw new OrderNotFoundException(command.Order.Id);
-        }
-
+            .FindAsync([orderId], cancellationToken: cancellationToken) ?? throw new OrderNotFoundException(command.Order.Id);
         UpdateOrderWithNewValues(order, command.Order);
 
         dbContext.Orders.Update(order);
@@ -33,7 +27,6 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
         var updatedNumber = orderDto.Client.Dni.Number;
         var updatedPhone = orderDto.Client.Phone;
         var updatedClientVehicle = orderDto.Client.ClientVehicle;
-        var updatedStatus = orderDto.OrderStatus;
         var updatedIncidentAddress = orderDto.IncidentAddress;
         var updatedDestinationAddres = orderDto.DestinationAddress;
         var vehicleType = Enum.Parse<VehicleType>(updatedClientVehicle.Type, true);
@@ -42,9 +35,9 @@ public class UpdateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
         order.Update(
             client: Client.Of(Name.Of(updatedName.FirstName,updatedName.LastName),Dni.Of(updatedDniType,updatedNumber),Phone.Of(updatedPhone),Email.Of(updatedEmail), ClientVehicle.Of(updatedClientVehicle.Brand, updatedClientVehicle.Model, updatedClientVehicle.Year, vehicleType)),
             incidentAddress: Address.Of(updatedIncidentAddress.AddressLine1,updatedIncidentAddress.AddressLine2,
-            updatedIncidentAddress.City,updatedIncidentAddress.State,updatedIncidentAddress.Zip),
+            updatedIncidentAddress.City,updatedIncidentAddress.State,updatedIncidentAddress.Zip, Coordinates.Of(updatedIncidentAddress.Coordinates.Latitude, updatedIncidentAddress.Coordinates.Longitude)),
             destinationAddress: Address.Of(updatedDestinationAddres.AddressLine1, updatedDestinationAddres.AddressLine2,
-            updatedDestinationAddres.City, updatedDestinationAddres.State, updatedDestinationAddres.Zip)
+            updatedDestinationAddres.City, updatedDestinationAddres.State, updatedDestinationAddres.Zip, Coordinates.Of(updatedDestinationAddres.Coordinates.Latitude,updatedDestinationAddres.Coordinates.Longitude))
             );
     }
 }

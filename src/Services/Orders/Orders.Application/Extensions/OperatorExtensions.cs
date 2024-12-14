@@ -12,14 +12,14 @@ public static class OperatorExtensions
                 Dni: new DniDto(Type: o.Dni.Type.ToString(), Number: o.Dni.Number),
                 Password: o.Password.Value,
                 IsActive: o.IsActive,
-                Orders: o.Orders.Select(or => new OrderDto(or.Id, or.OperatorId, or.PolicyId,
+                Orders: o.Orders.Select(or => new OrderDto(or.Id, or.OperatorId, or.PolicyId, DriverId: or.DriverId,
                 new ClientDto(new NameDto(or.Client.Name.FirstName, or.Client.Name.LastName),
                 new DniDto(Type: or.Client.Dni.Type.ToString(), Number: or.Client.Dni.Number),
                 or.Client.Phone.Value, or.Client.Email.Value,
                 new ClientVehicleDto(or.Client.ClientVehicle.Brand, or.Client.ClientVehicle.Model, or.Client.ClientVehicle.Year, or.Client.ClientVehicle.TypeV.ToString())), or.OrderStatus.Status.ToString(),
-                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip),
-                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip),
-                CostDetails: or.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList(),
+                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip, new CoordinatesDto(or.IncidentAddress.Coordinates.Latitude, or.IncidentAddress.Coordinates.Longitude)),
+                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip, new CoordinatesDto(or.DestinationAddress.Coordinates.Latitude, or.DestinationAddress.Coordinates.Longitude)),
+                CostDetails: or.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.StatusC.ToString())).ToList(),
                 IsActive: or.IsActive
             )).ToList()));
     }
@@ -39,14 +39,14 @@ public static class OperatorExtensions
                 Dni: new DniDto(operatorN.Dni.Type.ToString(),operatorN.Dni.Number),
                 Password: operatorN.Password.Value,
                 IsActive: operatorN.IsActive,
-                Orders: operatorN.Orders.Select(or => new OrderDto(or.Id, or.OperatorId, or.PolicyId,
+                Orders: operatorN.Orders.Select(or => new OrderDto(or.Id, or.OperatorId, or.PolicyId, DriverId: or.DriverId,
                 new ClientDto(new NameDto(or.Client.Name.FirstName, or.Client.Name.LastName),
                 new DniDto(Type: or.Client.Dni.Type.ToString(), Number: or.Client.Dni.Number),
                 or.Client.Phone.Value, or.Client.Email.Value,
                 new ClientVehicleDto(or.Client.ClientVehicle.Brand, or.Client.ClientVehicle.Model, or.Client.ClientVehicle.Year, or.Client.ClientVehicle.TypeV.ToString())), or.OrderStatus.Status.ToString(),
-                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip),
-                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip),
-                CostDetails: or.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.IsApproved)).ToList(),
+                new AddressDto(or.IncidentAddress.AddressLine1, or.IncidentAddress.AddressLine2, or.IncidentAddress.City, or.IncidentAddress.State, or.IncidentAddress.Zip, new CoordinatesDto(or.IncidentAddress.Coordinates.Latitude, or.IncidentAddress.Coordinates.Longitude)),
+                new AddressDto(or.DestinationAddress.AddressLine1, or.DestinationAddress.AddressLine2, or.DestinationAddress.City, or.DestinationAddress.State, or.DestinationAddress.Zip, new CoordinatesDto(or.DestinationAddress.Coordinates.Latitude, or.DestinationAddress.Coordinates.Longitude)),
+                CostDetails: or.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.StatusC.ToString())).ToList(),
                 IsActive: or.IsActive
             )).ToList());    
     }

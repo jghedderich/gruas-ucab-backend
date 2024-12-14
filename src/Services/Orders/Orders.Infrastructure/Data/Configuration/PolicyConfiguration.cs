@@ -10,6 +10,10 @@ public class PolicyConfiguration : IEntityTypeConfiguration<Policy>
     {
         builder.HasKey(o => o.Id);
 
+        builder.HasMany(a => a.Orders)
+            .WithOne()
+            .HasForeignKey(a => a.PolicyId);
+
         builder.Property(o => o.Name).HasMaxLength(55).IsRequired();
 
         builder.Property(o => o.AmountCovered).HasMaxLength(5).IsRequired();

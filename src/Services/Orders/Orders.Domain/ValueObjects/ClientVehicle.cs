@@ -34,5 +34,8 @@ public enum VehicleType
     Suv,
     Sedan,
     Pickup,
-    Motorcycle
+    Motorcycle,
+    Van,
+    HatchBack,
+    Coupe
 }

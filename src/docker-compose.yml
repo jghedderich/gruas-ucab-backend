@@ -1,4 +1,4 @@
-version: '3.4'
+# version: '3.4'
 
 services:
   providersdb:
@@ -7,9 +7,14 @@ services:
   ordersdb:
     image: mcr.microsoft.com/mssql/server
 
+  admindb:
+    image: mcr.microsoft.com/mssql/server
+
   messagebroker:
     image: rabbitmq:management
-
+    
+  redis:
+    image: redis
 
   providers.api:
     image: ${DOCKER_REGISTRY-}providersapi
@@ -17,13 +22,17 @@ services:
       context: .
       dockerfile: Services/Providers/Providers.API/Dockerfile
 
+  admin.api:
+    image: ${DOCKER_REGISTRY-}adminapi
+    build:
+      context: .
+      dockerfile: Services/Admin/Admin.API/Dockerfile
 
   yarpapigateway:
     image: ${DOCKER_REGISTRY-}yarpapigateway
     build:
       context: .
       dockerfile: ApiGateways/YarpApiGateway/Dockerfile
-
 
   orders.api:
     image: ${DOCKER_REGISTRY-}ordersapi

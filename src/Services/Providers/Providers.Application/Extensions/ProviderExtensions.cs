@@ -27,6 +27,17 @@ public static class ProviderExtensions
                     d.Email.Value,
                     d.Password.Value,
                     d.Status.ToString(),
+                    d.Location != null ? new LocationDto(
+                        d.Location.AddressLine1,
+                        d.Location.AddressLine2,
+                        d.Location.Zip,
+                        d.Location.State,
+                        d.Location.City,
+                        new CoordinatesDto(
+                            d.Location.Coordinates.Latitude,
+                            d.Location.Coordinates.Longitude
+                        )
+                    ) : null,
                     d.IsActive)).ToList(),
 
             IsActive: p.IsActive
@@ -55,9 +66,25 @@ public static class ProviderExtensions
                     provider.Company.City),
                 Vehicles: provider.Vehicles.Select(v => new VehicleDto(v.Id,v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year, v.IsActive)).ToList(),
                 Drivers: provider.Drivers.Select(d => 
-                    new DriverDto(d.Id, d.VehicleId,d.ProviderId, new NameDto(d.DriverName.FirstName, d.DriverName.LastName), 
-                    new DniDto(d.Dni.Type.ToString(), d.Dni.Number),
-                    d.Phone.Value,d.Email.Value, d.Password.Value, d.Status.ToString(), d.IsActive)).ToList(),
+                    new DriverDto(d.Id, d.VehicleId,d.ProviderId, 
+                        new NameDto(d.DriverName.FirstName, d.DriverName.LastName), 
+                        new DniDto(d.Dni.Type.ToString(), d.Dni.Number),
+                        d.Phone.Value,
+                        d.Email.Value, 
+                        d.Password.Value, 
+                        d.Status.ToString(),
+                        d.Location != null ? new LocationDto(
+                            d.Location.AddressLine1,
+                            d.Location.AddressLine2,
+                            d.Location.State,
+                            d.Location.City,
+                            d.Location.Zip,
+                            new CoordinatesDto(
+                                d.Location.Coordinates.Latitude,
+                                d.Location.Coordinates.Longitude
+                            )
+                        ) : null,
+                        d.IsActive)).ToList(),
                 IsActive: provider.IsActive
         );
     }

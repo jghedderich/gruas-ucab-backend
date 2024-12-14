@@ -10,18 +10,19 @@ public class Driver : Aggregate<Guid>
     public Phone Phone { get; private set; } = default!;
     public Dni Dni { get; private set; } = default!;
     public Status Status { get; private set; } = default!;
+    public Location? Location { get; private set; } 
 
-    
     public static Driver Create(
         Guid id,
-        DriverName driverName, 
+        DriverName driverName,
         Guid providerId,
         Guid vehicleId,
         Email email,
         Password password,
-        Phone phone, 
+        Phone phone,
         Dni dni,
-        Status status
+        Status status,
+        Location? location = null
      )
     {
         var driver = new Driver
@@ -34,7 +35,8 @@ public class Driver : Aggregate<Guid>
             Password = password,
             Phone = phone,
             Dni = dni,
-            Status = status
+            Status = status,
+            Location = location
         };
 
         driver.AddDomainEvent(new DriverCreatedEvent(driver));
@@ -56,13 +58,19 @@ public class Driver : Aggregate<Guid>
     public void UpdatePassword(Password password)
     {
         Password = password;
-        AddDomainEvent(new DriverUpdatedEvent(this));
+        AddDomainEvent(new DriverPasswordUpdatedEvent(DriverName, password));
     }
 
     public void UpdateStatus(Status status)
     {
         Status = status;
-        AddDomainEvent(new DriverStatusUpdatedEvent(DriverName, status));
+        AddDomainEvent(new DriverStatusUpdatedEvent(Id, status));
+    }
+
+    public void UpdateLocation(Location location)
+    {
+        Location = location;
+        AddDomainEvent(new DriverLocationUpdatedEvent(Id, location));
     }
 }
 

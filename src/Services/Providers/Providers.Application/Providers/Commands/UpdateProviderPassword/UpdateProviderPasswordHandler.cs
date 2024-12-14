@@ -11,10 +11,6 @@ public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext)
             .FindAsync([providerId], cancellationToken: cancellationToken) 
             ?? throw new ProviderNotFoundException(command.Provider.Id);
         
-        if (provider.Password.Value != command.Provider.Password) {
-            throw new WrongPasswordException(command.Provider.Id);
-        }
-
         UpdateProviderPassword(provider, command.Provider);
 
         dbContext.Providers.Update(provider);

@@ -1,5 +1,6 @@
 ﻿using global::Orders.Domain.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Orders.Domain.ValueObjects;
 
 namespace Orders.Infrastructure.Data.Configuration;
 public class CostDetailConfiguration : IEntityTypeConfiguration<CostDetail>
@@ -13,6 +14,11 @@ public class CostDetailConfiguration : IEntityTypeConfiguration<CostDetail>
 
         builder.Property(c => c.Amount).IsRequired().HasMaxLength(20);
 
-        builder.Property(c => c.IsApproved).IsRequired().HasMaxLength(5);
+        builder.ComplexProperty(o => o.StatusC, costDetailStatusBuilder =>
+        {
+            costDetailStatusBuilder.Property(os => os.StatusCO)
+                .HasConversion(os => os.ToString(),
+                statusCO => (StatusCO)Enum.Parse(typeof(StatusCO), statusCO));
+        });
     }
 }

@@ -23,7 +23,7 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
 
         var vehicleType = Enum.Parse<VehicleType>(orderDto.Client.ClientVehicle.Type, true);
 
-        var status = Enum.Parse<Status>(orderDto.OrderStatus, true);
+        var status = Enum.Parse<Status>("ToBeAccepted", true);
 
 
         var newOrder = Order.Create(
@@ -33,8 +33,9 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
                 client: Client.Of(Name.Of(orderDto.Client.Name.FirstName, orderDto.Client.Name.LastName),dni,Phone.Of(orderDto.Client.Phone),Email.Of(orderDto.Client.Email),ClientVehicle.Of(orderDto.Client.ClientVehicle.Brand,orderDto.Client.ClientVehicle.Model,
                 orderDto.Client.ClientVehicle.Year, vehicleType)),
                 orderStatus: OrderStatus.Of(status),
-                incidentAddress: Address.Of(orderDto.IncidentAddress.AddressLine1,orderDto.IncidentAddress.AddressLine2,orderDto.IncidentAddress.City,orderDto.IncidentAddress.State,orderDto.IncidentAddress.Zip),
-                destinationAddress: Address.Of(orderDto.DestinationAddress.AddressLine1, orderDto.DestinationAddress.AddressLine2, orderDto.DestinationAddress.City, orderDto.DestinationAddress.State, orderDto.DestinationAddress.Zip)
+                incidentAddress: Address.Of(orderDto.IncidentAddress.AddressLine1,orderDto.IncidentAddress.AddressLine2,orderDto.IncidentAddress.City,orderDto.IncidentAddress.State,orderDto.IncidentAddress.Zip, Coordinates.Of(orderDto.IncidentAddress.Coordinates.Latitude,orderDto.IncidentAddress.Coordinates.Longitude)),
+                destinationAddress: Address.Of(orderDto.DestinationAddress.AddressLine1, orderDto.DestinationAddress.AddressLine2, orderDto.DestinationAddress.City, orderDto.DestinationAddress.State, orderDto.DestinationAddress.Zip, Coordinates.Of(orderDto.DestinationAddress.Coordinates.Latitude, orderDto.DestinationAddress.Coordinates.Longitude)),
+                driverId: orderDto.DriverId
             );
 
         return newOrder;

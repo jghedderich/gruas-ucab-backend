@@ -303,6 +303,71 @@ namespace Providers.Infrastructure.Data.Migrations
                         .HasForeignKey("ProviderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.OwnsOne("Providers.Domain.ValueObjects.Location", "Location", b1 =>
+                        {
+                            b1.Property<Guid>("DriverId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("AddressLine1")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("AddressLine2")
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("State")
+                                .IsRequired()
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
+
+                            b1.Property<string>("Zip")
+                                .IsRequired()
+                                .HasMaxLength(4)
+                                .HasColumnType("nvarchar(4)");
+
+                            b1.HasKey("DriverId");
+
+                            b1.ToTable("Drivers");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DriverId");
+
+                            b1.OwnsOne("Providers.Domain.ValueObjects.Coordinates", "Coordinates", b2 =>
+                                {
+                                    b2.Property<Guid>("LocationDriverId")
+                                        .HasColumnType("uniqueidentifier");
+
+                                    b2.Property<string>("Latitude")
+                                        .IsRequired()
+                                        .HasMaxLength(50)
+                                        .HasColumnType("nvarchar(50)");
+
+                                    b2.Property<string>("Longitude")
+                                        .IsRequired()
+                                        .HasMaxLength(50)
+                                        .HasColumnType("nvarchar(50)");
+
+                                    b2.HasKey("LocationDriverId");
+
+                                    b2.ToTable("Drivers");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("LocationDriverId");
+                                });
+
+                            b1.Navigation("Coordinates")
+                                .IsRequired();
+                        });
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("Providers.Domain.Models.Vehicle", b =>

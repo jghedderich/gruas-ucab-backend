@@ -12,7 +12,7 @@ public class CreateCostDetailCommandValidator : AbstractValidator<CreateCostDeta
         RuleFor(o => o.CostDetail.OrderId).NotEmpty().WithMessage("OrderId is required");
         RuleFor(o => o.CostDetail.Description).NotEmpty().WithMessage("Description is required");
         RuleFor(o => o.CostDetail.Amount).NotEmpty().WithMessage("Amount is required");
-        RuleFor(o => o.CostDetail.IsApproved).NotEmpty().WithMessage("IsApproved is required");
+        RuleFor(o => o.CostDetail.StatusC).NotEmpty().WithMessage("Status is required");
     }
 }
 

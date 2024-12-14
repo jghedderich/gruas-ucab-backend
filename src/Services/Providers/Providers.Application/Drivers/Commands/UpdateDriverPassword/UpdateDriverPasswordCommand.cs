@@ -11,7 +11,6 @@ public class UpdateDriverPasswordCommandValidator : AbstractValidator<UpdateDriv
     public UpdateDriverPasswordCommandValidator()
     {
         RuleFor(x => x.Driver.Id).NotEmpty().WithMessage("Id is required");
-        RuleFor(x => x.Driver.Password).NotEmpty().WithMessage("Current Password is required");
         RuleFor(x => x.Driver.NewPassword).NotEmpty().WithMessage("New Password is required");
     }
 }

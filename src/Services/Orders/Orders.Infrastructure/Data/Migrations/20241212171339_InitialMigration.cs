@@ -43,8 +43,8 @@ namespace Orders.Infrastructure.Migrations
                     AmountCovered = table.Column<int>(type: "int", maxLength: 5, nullable: false),
                     Fees_BaseFee = table.Column<int>(type: "int", maxLength: 5, nullable: false),
                     Fees_PerKm = table.Column<int>(type: "int", maxLength: 10, nullable: false),
-                    Price_AnnualPrice = table.Column<int>(type: "int", maxLength: 5, nullable: true),
-                    Price_MonthlyPrice = table.Column<int>(type: "int", maxLength: 5, nullable: true),
+                    Price_AnnualPrice = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    Price_MonthlyPrice = table.Column<int>(type: "int", maxLength: 5, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -61,7 +61,7 @@ namespace Orders.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OperatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OperatorId = table.Column<Guid>(type: "uniqueidentifier", maxLength: 255, nullable: false),
                     PolicyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Client_Name_FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Client_Name_LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -73,16 +73,21 @@ namespace Orders.Infrastructure.Migrations
                     Client_ClientVehicle_Model = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Client_ClientVehicle_Year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
                     Client_ClientVehicle_TypeV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DriverId = table.Column<Guid>(type: "uniqueidentifier", maxLength: 255, nullable: false),
                     DestinationAddress_AddressLine1 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DestinationAddress_AddressLine2 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     DestinationAddress_City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DestinationAddress_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DestinationAddress_Zip = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    DestinationAddress_Coordinates_Latitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DestinationAddress_Coordinates_Longitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     IncidentAddress_AddressLine1 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     IncidentAddress_AddressLine2 = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     IncidentAddress_City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IncidentAddress_State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IncidentAddress_Zip = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    IncidentAddress_Coordinates_Latitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IncidentAddress_Coordinates_Longitude = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     OrderStatus_Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -94,9 +99,9 @@ namespace Orders.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Operators_OperatorId",
-                        column: x => x.OperatorId,
-                        principalTable: "Operators",
+                        name: "FK_Orders_Policies_PolicyId",
+                        column: x => x.PolicyId,
+                        principalTable: "Policies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -109,7 +114,7 @@ namespace Orders.Infrastructure.Migrations
                     OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Amount = table.Column<double>(type: "float", maxLength: 20, nullable: false),
-                    IsApproved = table.Column<bool>(type: "bit", maxLength: 5, nullable: false),
+                    StatusC_StatusCO = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -133,9 +138,9 @@ namespace Orders.Infrastructure.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_OperatorId",
+                name: "IX_Orders_PolicyId",
                 table: "Orders",
-                column: "OperatorId");
+                column: "PolicyId");
         }
 
         /// <inheritdoc />
@@ -145,13 +150,13 @@ namespace Orders.Infrastructure.Migrations
                 name: "CostDetails");
 
             migrationBuilder.DropTable(
-                name: "Policies");
-
-            migrationBuilder.DropTable(
                 name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Operators");
+
+            migrationBuilder.DropTable(
+                name: "Policies");
         }
     }
 }

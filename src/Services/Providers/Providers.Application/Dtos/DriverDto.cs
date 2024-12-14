@@ -11,5 +11,6 @@ public record DriverDto(
     string? Email,
     string? Password,
     string? Status,
+    LocationDto? Location,
     bool? IsActive
     );

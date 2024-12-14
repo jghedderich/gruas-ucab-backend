@@ -47,10 +47,6 @@ namespace Orders.Infrastructure.Migrations
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsApproved")
-                        .HasMaxLength(5)
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
 
@@ -59,6 +55,15 @@ namespace Orders.Infrastructure.Migrations
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.ComplexProperty<Dictionary<string, object>>("StatusC", "Orders.Domain.Models.CostDetail.StatusC#CostDetailStatus", b1 =>
+                        {
+                            b1.IsRequired();
+
+                            b1.Property<string>("StatusCO")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+                        });
 
                     b.HasKey("Id");
 
@@ -165,6 +170,10 @@ namespace Orders.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("DriverId")
+                        .HasMaxLength(255)
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<bool?>("IsActive")
                         .HasColumnType("bit");
 
@@ -175,6 +184,7 @@ namespace Orders.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("OperatorId")
+                        .HasMaxLength(255)
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("PolicyId")
@@ -208,6 +218,21 @@ namespace Orders.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(4)
                                 .HasColumnType("nvarchar(4)");
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Coordinates", "Orders.Domain.Models.Order.DestinationAddress#Address.Coordinates#Coordinates", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Latitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+
+                                    b2.Property<string>("Longitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+                                });
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("IncidentAddress", "Orders.Domain.Models.Order.IncidentAddress#Address", b1 =>
@@ -238,6 +263,21 @@ namespace Orders.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(4)
                                 .HasColumnType("nvarchar(4)");
+
+                            b1.ComplexProperty<Dictionary<string, object>>("Coordinates", "Orders.Domain.Models.Order.IncidentAddress#Address.Coordinates#Coordinates", b2 =>
+                                {
+                                    b2.IsRequired();
+
+                                    b2.Property<string>("Latitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+
+                                    b2.Property<string>("Longitude")
+                                        .IsRequired()
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+                                });
                         });
 
                     b.ComplexProperty<Dictionary<string, object>>("OrderStatus", "Orders.Domain.Models.Order.OrderStatus#OrderStatus", b1 =>
@@ -251,7 +291,7 @@ namespace Orders.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OperatorId");
+                    b.HasIndex("PolicyId");
 
                     b.ToTable("Orders");
                 });
@@ -303,11 +343,11 @@ namespace Orders.Infrastructure.Migrations
                         {
                             b1.IsRequired();
 
-                            b1.Property<int?>("AnnualPrice")
+                            b1.Property<int>("AnnualPrice")
                                 .HasMaxLength(5)
                                 .HasColumnType("int");
 
-                            b1.Property<int?>("MonthlyPrice")
+                            b1.Property<int>("MonthlyPrice")
                                 .HasMaxLength(5)
                                 .HasColumnType("int");
                         });
@@ -328,9 +368,10 @@ namespace Orders.Infrastructure.Migrations
 
             modelBuilder.Entity("Orders.Domain.Models.Order", b =>
                 {
-                    b.HasOne("Orders.Domain.Models.Operator", null)
+
+                    b.HasOne("Orders.Domain.Models.Policy", null)
                         .WithMany("Orders")
-                        .HasForeignKey("OperatorId")
+                        .HasForeignKey("PolicyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -479,14 +520,15 @@ namespace Orders.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Orders.Domain.Models.Operator", b =>
-                {
-                    b.Navigation("Orders");
-                });
 
             modelBuilder.Entity("Orders.Domain.Models.Order", b =>
                 {
                     b.Navigation("CostDetails");
+                });
+
+            modelBuilder.Entity("Orders.Domain.Models.Policy", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
