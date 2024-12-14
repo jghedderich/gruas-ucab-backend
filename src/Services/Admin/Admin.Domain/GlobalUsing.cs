@@ -1,5 +1,5 @@
 ﻿global using BuildingBlocks.Abstractions;
-global using Providers.Domain.Events;
-global using Providers.Domain.Models;
+global using Admin.Domain.Events;
+global using Admin.Domain.Models;
 global using BuildingBlocks.Exceptions;
-global using Providers.Domain.ValueObjects;
+global using Admin.Domain.ValueObjects;

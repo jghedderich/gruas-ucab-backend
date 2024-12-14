@@ -1,0 +1,11 @@
+﻿global using FluentValidation;
+global using MediatR;
+global using Admin.Domain.Events;
+global using Admin.Application.Exceptions;
+global using BuildingBlocks.CQRS;
+global using Microsoft.EntityFrameworkCore;
+global using Admin.Domain.Models;
+global using Admin.Application.Data;
+global using Admin.Domain.ValueObjects;
+global using Admin.Application.Dtos;
+global using Microsoft.Extensions.Logging;
