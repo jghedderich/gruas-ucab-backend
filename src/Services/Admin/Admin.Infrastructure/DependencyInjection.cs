@@ -1,6 +1,8 @@
 ﻿using Admin.Application.Data;
 using Admin.Infrastructure.Data;
 using Admin.Infrastructure.Data.Interceptors;
+using BuildingBlocks.Caching;
+using BuildingBlocks.Emails;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,15 @@ public static class DependencyInjection
 
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+        services.AddTransient<IEmailSender, EmailSender>();
+
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = configuration.GetConnectionString("Redis");
+            options.InstanceName = "Codes_";
+        });
+
+        services.AddScoped<IRedisCacheService, RedisCacheService>();
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
