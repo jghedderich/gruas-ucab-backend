@@ -10,7 +10,8 @@ public static class DepartmentExtensions
         return departments.Select(d => new DepartmentDto(
             Id: d.Id,
             DepartmentName: d.Name.Value,
-            Description: d.Description 
+            Description: d.Description,
+            IsActive: d.IsActive
         ));
     }
 
@@ -24,7 +25,8 @@ public static class DepartmentExtensions
         return new DepartmentDto(
             Id: department.Id,
             DepartmentName: department.Name.Value,
-            Description: department.Description 
+            Description: department.Description ,
+            IsActive: department.IsActive
         );
     }
 }

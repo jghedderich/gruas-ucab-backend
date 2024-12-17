@@ -2,5 +2,6 @@
 public record DepartmentDto(
     Guid Id,
     string DepartmentName,
-    string Description);
+    string Description,
+    bool? IsActive);
 
