@@ -1,6 +1,7 @@
 ﻿using Admin.Application.Data;
 using Admin.Infrastructure.Data;
 using Admin.Infrastructure.Data.Interceptors;
+using Admin.Infrastructure.Settings;
 using BuildingBlocks.Caching;
 using BuildingBlocks.Emails;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,15 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IRedisCacheService, RedisCacheService>();
+
+        services.Configure<FirebaseMessagingSettings>(options =>
+        {
+            options.ChannelId = "default_channel";
+            options.MessageSound = "default";
+        });
+        services.AddScoped<IFirebaseMessagingService, FirebaseMessagingService>();
+        services.AddScoped<IFirebaseAppClient, FirebaseAppClient>();
+        services.AddScoped<IFirebaseMessagingClient, FirebaseMessagingClient>();
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
