@@ -6,5 +6,6 @@ public record PolicyDto(
         string Name,
         int AmountCovered,
         PriceDto Price,
-        FeeDto Fees
+        FeeDto Fees,
+        bool? IsActive
     );

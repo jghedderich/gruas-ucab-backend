@@ -9,7 +9,8 @@ public static class PolicyExtensions
                 Name: p.Name,
                 AmountCovered: p.AmountCovered,
                 Price: new PriceDto(p.Price.AnnualPrice,p.Price.MonthlyPrice),
-                Fees: new FeeDto(p.Fees.BaseFee,p.Fees.PerKm)
+                Fees: new FeeDto(p.Fees.BaseFee,p.Fees.PerKm),
+                IsActive: p.IsActive
             ));
     }
 
@@ -25,7 +26,8 @@ public static class PolicyExtensions
                 Name: policy.Name,
                 AmountCovered: policy.AmountCovered,
                 Price: new PriceDto(policy.Price.AnnualPrice,policy.Price.MonthlyPrice),
-                Fees: new FeeDto(policy.Fees.BaseFee,policy.Fees.PerKm)
+                Fees: new FeeDto(policy.Fees.BaseFee,policy.Fees.PerKm),
+                IsActive: policy.IsActive
             );
     }
 }
