@@ -1,7 +1,9 @@
 ﻿
+using BuildingBlocks.Hashing;
+
 namespace Providers.Application.Providers.Commands.UpdateProviderPassword;
 
-public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext)
+public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<UpdateProviderPasswordCommand, UpdateProviderPasswordResult>
 {
     public async Task<UpdateProviderPasswordResult> Handle(UpdateProviderPasswordCommand command, CancellationToken cancellationToken)
@@ -10,7 +12,8 @@ public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext)
         var provider = await dbContext.Providers
             .FindAsync([providerId], cancellationToken: cancellationToken) 
             ?? throw new ProviderNotFoundException(command.Provider.Id);
-        
+
+              
         UpdateProviderPassword(provider, command.Provider);
 
         dbContext.Providers.Update(provider);
@@ -19,8 +22,8 @@ public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext)
         return new UpdateProviderPasswordResult(true);
     }
 
-    public static void UpdateProviderPassword(Provider provider, UpdatePasswordDto dto)
+    public void UpdateProviderPassword(Provider provider, UpdatePasswordDto dto)
     {
-        provider.UpdatePassword(password: Password.Of(dto.NewPassword));
+        provider.UpdatePassword(password: Password.Of(passwordHasher.Hash(dto.NewPassword)));
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using BuildingBlocks.Hashing;
 using Providers.Domain.Models;
 using Providers.Domain.ValueObjects;
 
@@ -10,13 +11,15 @@ internal class InitialData
 
     static InitialData()
     {
+        var passwordHasher = new PasswordHasher();
+
         _providers =
         [
             Provider.Create(
                 Guid.NewGuid(),
                 ProviderName.Of("John", "Truckerson"),
                 Email.Of("johntruck@gmail.com"),
-                Password.Of("123456"),
+                Password.Of(passwordHasher.Hash("123456")),
                 Phone.Of("04123349277"),
                 Dni.Of(DniType.V, "29625837"),
                 Company.Of("Super Trucks", "Tow truck company", "V-00006797", "Caracas", "Miranda")
@@ -25,7 +28,7 @@ internal class InitialData
                 Guid.NewGuid(),
                 ProviderName.Of("Lisa", "Towferson"),
                 Email.Of("lisatow@gmail.com"),
-                Password.Of("123456"),
+                Password.Of(passwordHasher.Hash("123456")),
                 Phone.Of("04123349278"),
                 Dni.Of(DniType.V, "29625838"),
                 Company.Of("Bomba Trucks", "Super tow company", "V-00006778", "Maracaibo", "Zulia")
@@ -67,13 +70,15 @@ internal class InitialData
     {
         var vehicles = provider.Vehicles.ToList();
 
+        var passwordHasher = new PasswordHasher();
+
         provider.AddDriver(
             Guid.NewGuid(),
             DriverName.Of(firstName1, "Rodriguez"),
             provider.Id,
             vehicles[0].Id,
             Email.Of($"{firstName1.ToLower()}.rodriguez@example.com"),
-            Password.Of("123456"),
+            Password.Of(passwordHasher.Hash("123456")),
             Phone.Of("04123349280"),
             Dni.Of(DniType.V, "29625840"),
             Status.Available
@@ -85,7 +90,7 @@ internal class InitialData
             provider.Id,
             vehicles[1].Id,
             Email.Of($"{firstName2.ToLower()}.gonzalez@example.com"),
-            Password.Of("123456"),
+            Password.Of(passwordHasher.Hash("123456")),
             Phone.Of("04123349281"),
             Dni.Of(DniType.V, "29625841"),
             Status.Available

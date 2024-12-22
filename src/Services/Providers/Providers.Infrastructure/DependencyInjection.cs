@@ -1,5 +1,6 @@
 ﻿using BuildingBlocks.Caching;
 using BuildingBlocks.Emails;
+using BuildingBlocks.Hashing;
 using Providers.Application.Data;
 using Providers.Infrastructure.Data.Interceptors;
 
@@ -18,6 +19,7 @@ public static class DependencyInjection
 
         services.AddTransient<IEmailSender, EmailSender>();
 
+        services.AddTransient<IPasswordHasher, PasswordHasher>();
 
         services.AddStackExchangeRedisCache(options =>
         {
