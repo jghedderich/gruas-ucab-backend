@@ -1,8 +1,9 @@
-﻿using Providers.Application.Dtos;
+﻿using BuildingBlocks.Hashing;
+using Providers.Application.Dtos;
 
 namespace Providers.Application.Providers.Commands.CreateProvider;
 
-public class CreateProviderHandler(IApplicationDbContext dbContext)
+public class CreateProviderHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<CreateProviderCommand, CreateProviderResult>
 {
     public async Task<CreateProviderResult> Handle(CreateProviderCommand command, CancellationToken cancellationToken)
@@ -15,7 +16,7 @@ public class CreateProviderHandler(IApplicationDbContext dbContext)
         return new CreateProviderResult(provider.Id);
     }
 
-    private static Provider CreateNewProvider(ProviderDto providerDto)
+    private Provider CreateNewProvider(ProviderDto providerDto)
     {
         var company = Company.Of(
             providerDto.Company.Name, 
@@ -31,8 +32,8 @@ public class CreateProviderHandler(IApplicationDbContext dbContext)
         var newProvider = Provider.Create(
             id: Guid.NewGuid(),
             providerName: ProviderName.Of(providerDto.Name.FirstName, providerDto.Name.LastName),
-            email: Email.Of(providerDto.Email),
-            password: Password.Of(providerDto.Password),
+            email: Email.Of(providerDto.Email!),
+            password: Password.Of(passwordHasher.Hash(providerDto.Password!)),
             phone: Phone.Of(providerDto.Phone),
             company: company,
             dni: dni

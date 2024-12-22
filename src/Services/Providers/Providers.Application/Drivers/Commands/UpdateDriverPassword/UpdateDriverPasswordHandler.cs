@@ -1,6 +1,8 @@
-﻿namespace Providers.Application.Drivers.Commands.UpdateDriverPassword;
+﻿using BuildingBlocks.Hashing;
 
-public class UpdateDriverPasswordHandlerI(IApplicationDbContext dbContext)
+namespace Providers.Application.Drivers.Commands.UpdateDriverPassword;
+
+public class UpdateDriverPasswordHandlerI(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<UpdateDriverStatusCommand, UpdateDriverPasswordResult>
 {
     public async Task<UpdateDriverPasswordResult> Handle(UpdateDriverStatusCommand command, CancellationToken cancellationToken)
@@ -22,8 +24,8 @@ public class UpdateDriverPasswordHandlerI(IApplicationDbContext dbContext)
         return new UpdateDriverPasswordResult(true);
     }
 
-    public static void UpdateDriverPassword(Driver driver, UpdatePasswordDto dto)
+    public void UpdateDriverPassword(Driver driver, UpdatePasswordDto dto)
     {
-        driver.UpdatePassword(Password.Of(dto.NewPassword));
+        driver.UpdatePassword(Password.Of(passwordHasher.Hash(dto.NewPassword)));
     }
 }
