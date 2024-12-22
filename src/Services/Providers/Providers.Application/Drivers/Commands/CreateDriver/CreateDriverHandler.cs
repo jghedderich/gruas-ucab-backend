@@ -1,6 +1,9 @@
-﻿namespace Providers.Application.Drivers.Commands.CreateDriver;
+﻿using BuildingBlocks.Hashing;
 
-public class CreateDriverHandler(IApplicationDbContext dbContext) : ICommandHandler<CreateDriverCommand, CreateDriverResult>
+namespace Providers.Application.Drivers.Commands.CreateDriver;
+
+public class CreateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher) 
+    : ICommandHandler<CreateDriverCommand, CreateDriverResult>
 {
     public async Task<CreateDriverResult> Handle(CreateDriverCommand command, CancellationToken cancellationToken)
     {
@@ -12,7 +15,7 @@ public class CreateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
         return new CreateDriverResult(driver.Id);
     }
 
-    private static Driver CreateNewDriver(DriverDto driverDto)
+    private Driver CreateNewDriver(DriverDto driverDto)
     {
         var dniType = driverDto.Dni.ToDniType();
 
@@ -26,9 +29,9 @@ public class CreateDriverHandler(IApplicationDbContext dbContext) : ICommandHand
                 driverName: DriverName.Of(driverDto.Name.FirstName, driverDto.Name.LastName),
                 providerId: driverDto.ProviderId,
                 vehicleId: driverDto.VehicleId,
-                email: Email.Of(driverDto.Email),
-                password: Password.Of(driverDto.Password),
-                phone: Phone.Of(driverDto.Phone),
+                email: Email.Of(driverDto.Email!),
+                password: Password.Of(passwordHasher.Hash(driverDto.Password!)),
+                phone: Phone.Of(driverDto.Phone!),
                 dni: dni,
                 status: status
         );
