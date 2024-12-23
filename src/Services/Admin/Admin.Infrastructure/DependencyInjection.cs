@@ -3,6 +3,7 @@ using Admin.Infrastructure.Data;
 using Admin.Infrastructure.Data.Interceptors;
 using Admin.Infrastructure.Settings;
 using BuildingBlocks.Caching;
+using BuildingBlocks.Hashing;
 using BuildingBlocks.Emails;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,8 @@ public static class DependencyInjection
             options.Configuration = configuration.GetConnectionString("Redis");
             options.InstanceName = "Codes_";
         });
+
+        services.AddTransient<IPasswordHasher, PasswordHasher>();
 
         services.AddScoped<IRedisCacheService, RedisCacheService>();
 
