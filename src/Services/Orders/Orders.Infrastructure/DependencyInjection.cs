@@ -2,6 +2,7 @@
 using Orders.Infrastructure.Data;
 using BuildingBlocks.Emails;
 using BuildingBlocks.Caching;
+using BuildingBlocks.Hashing;
 
 namespace Orders.Infrastructure;
 
@@ -23,6 +24,8 @@ public static class DependencyInjection
             options.Configuration = configuration.GetConnectionString("Redis");
             options.InstanceName = "Codes_";
         });
+
+        services.AddTransient<IPasswordHasher, PasswordHasher>();
 
         services.AddScoped<IRedisCacheService, RedisCacheService>();
 
