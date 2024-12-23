@@ -1,7 +1,8 @@
-﻿
+﻿using BuildingBlocks.Hashing;
+
 namespace Orders.Application.Operators.Commands.CreateOperator;
 
-public class CreateOperatorHandler(IApplicationDbContext dbContext) : ICommandHandler<CreateOperatorCommand, CreateOperatorResult>
+public class CreateOperatorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher) : ICommandHandler<CreateOperatorCommand, CreateOperatorResult>
 {
     public async Task<CreateOperatorResult> Handle(CreateOperatorCommand command, CancellationToken cancellationToken)
     {
@@ -13,7 +14,7 @@ public class CreateOperatorHandler(IApplicationDbContext dbContext) : ICommandHa
         return new CreateOperatorResult(operatorN.Id);
     }
 
-    private static Operator CreateNewOperator(OperatorDto operatorDto)
+    private Operator CreateNewOperator(OperatorDto operatorDto)
     {
         var dniType = operatorDto.Dni.ToDniType();
 
@@ -22,10 +23,10 @@ public class CreateOperatorHandler(IApplicationDbContext dbContext) : ICommandHa
         var newOperator = Operator.Create(
                 id: Guid.NewGuid(),
                 operatorName: Name.Of(operatorDto.Name.FirstName,operatorDto.Name.LastName),
-                email: Email.Of(operatorDto.Email),
-                phone: Phone.Of(operatorDto.Phone),
+                email: Email.Of(operatorDto.Email!),
+                phone: Phone.Of(operatorDto.Phone!),
                 dni: dni,
-                password: Password.Of(operatorDto.Password)
+                password: Password.Of(passwordHasher.Hash(operatorDto.Password!))
             );
 
         return newOperator;

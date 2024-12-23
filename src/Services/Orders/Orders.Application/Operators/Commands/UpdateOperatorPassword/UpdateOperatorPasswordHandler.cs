@@ -1,8 +1,9 @@
 ﻿using Orders.Application.Exceptions;
+using BuildingBlocks.Hashing;
 
 namespace Orders.Application.Operators.Commands.UpdateOperatorPassword;
 
-public class UpdateOperatorPasswordHandlerI(IApplicationDbContext dbContext)
+public class UpdateOperatorPasswordHandlerI(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<UpdateOperatorPasswordCommand, UpdateOperatorPasswordResult>
 {
     public async Task<UpdateOperatorPasswordResult> Handle(UpdateOperatorPasswordCommand command, CancellationToken cancellationToken)
@@ -16,11 +17,6 @@ public class UpdateOperatorPasswordHandlerI(IApplicationDbContext dbContext)
             throw new OperatorNotFoundException(command.Operator.Id);
         }
 
-        if (operatorN.Password.Value != command.Operator.Password)
-        {
-            throw new WrongPasswordException(command.Operator.Id);
-        }
-
         UpdateOperatorPassword(operatorN, command.Operator);
 
         dbContext.Operators.Update(operatorN);
@@ -29,8 +25,8 @@ public class UpdateOperatorPasswordHandlerI(IApplicationDbContext dbContext)
         return new UpdateOperatorPasswordResult(true);
     }
 
-    public static void UpdateOperatorPassword(Operator operatorN, UpdatePasswordDto dto)
+    public void UpdateOperatorPassword(Operator operatorN, UpdatePasswordDto dto)
     {
-        operatorN.UpdatePassword(Password.Of(dto.NewPassword));
+        operatorN.UpdatePassword(Password.Of(passwordHasher.Hash(dto.NewPassword)));
     }
 }
