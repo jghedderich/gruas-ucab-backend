@@ -1,5 +1,6 @@
 ﻿using Admin.Domain.Models;
 using Admin.Domain.ValueObjects;
+using BuildingBlocks.Hashing;
 
 namespace Admin.Infrastructure.Data.Extensions
 {
@@ -11,16 +12,18 @@ namespace Admin.Infrastructure.Data.Extensions
 
         static InitialData()
         {
+            var passwordHasher = new PasswordHasher();
+
             _administrators = new List<Administrator>
             {
                 Administrator.Create(Guid.NewGuid(),
                     "Andrea Josefina",
                     Email.Create("andreaccdreis@gmail.com"),
-                    Password.Create("Chi7#ai9**")),
+                    Password.Create(passwordHasher.Hash("123456"))),
                 Administrator.Create(Guid.NewGuid(),
                     "Andrea Valentina",
                     Email.Create("accedeno.21@est.ucab.edu.ve"),
-                    Password.Create("Chi7#ai9**")),
+                    Password.Create(passwordHasher.Hash("123456"))),
             };
 
             _departments = new List<Department>
