@@ -1,11 +1,8 @@
-﻿using Admin.Application.Dtos;
-using BuildingBlocks.CQRS;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using BuildingBlocks.Hashing;
 
 namespace Admin.Application.Administrators.Commands.CreateAdministrator;
 
-public class CreateAdministratorHandler(IApplicationDbContext dbContext)
+public class CreateAdministratorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<CreateAdministratorCommand, CreateAdministratorResult>
 {
     public async Task<CreateAdministratorResult> Handle(CreateAdministratorCommand command, CancellationToken cancellationToken)
@@ -18,13 +15,13 @@ public class CreateAdministratorHandler(IApplicationDbContext dbContext)
         return new CreateAdministratorResult(administrator.Id);
     }
 
-    private static Administrator CreateNewAdministrator(AdministratorDto administratorDto)
+    private Administrator CreateNewAdministrator(AdministratorDto administratorDto)
     {
         var newAdministrator = Administrator.Create(
             id: Guid.NewGuid(),
             name: administratorDto.Name, 
             email: Email.Create(administratorDto.Email),
-            password: Password.Create(administratorDto.Password) 
+            password: Password.Create(passwordHasher.Hash(administratorDto.Password)) 
         );
 
         return newAdministrator;

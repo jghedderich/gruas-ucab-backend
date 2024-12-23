@@ -1,9 +1,8 @@
-﻿using Admin.Application.Dtos;
-using Microsoft.EntityFrameworkCore;
+﻿using BuildingBlocks.Hashing;
 
 namespace Admin.Application.Administrators.Commands.UpdateAdministrator;
 
-public class UpdateAdministratorHandler(IApplicationDbContext dbContext)
+public class UpdateAdministratorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<UpdateAdministratorCommand, UpdateAdministratorResult>
 {
     public async Task<UpdateAdministratorResult> Handle(UpdateAdministratorCommand command, CancellationToken cancellationToken)
@@ -30,7 +29,7 @@ public class UpdateAdministratorHandler(IApplicationDbContext dbContext)
         administrator.Update(
             name: administratorDto.Name,
             email: Email.Create(administratorDto.Email),
-            password: Password.Create(administratorDto.Password));
+            password: Password.Create(passwordHasher.Hash(administratorDto.Password)));
     }
   
        
