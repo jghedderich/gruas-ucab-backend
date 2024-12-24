@@ -39,5 +39,10 @@ public class Administrator: Aggregate<Guid>
 
         AddDomainEvent(new AdministratorUpdatedEvent(this));
     }
+
+    public void UpdatePassword(Password password)
+    {
+        Password = password;
+    }
 }
 

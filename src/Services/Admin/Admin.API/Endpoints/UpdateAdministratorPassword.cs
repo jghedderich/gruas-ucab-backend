@@ -1,4 +1,5 @@
-﻿using Admin.Application.Administrators.Commands.UpdateAdministratorPassword;
+﻿
+using Admin.Application.Administrators.Commands.UpdateAdministratorPassword;
 
 namespace Admin.API.Endpoints;
 

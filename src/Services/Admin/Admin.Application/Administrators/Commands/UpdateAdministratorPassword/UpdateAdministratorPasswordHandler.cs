@@ -12,7 +12,11 @@ public class UpdateAdministratorPasswordHandlerI(IApplicationDbContext dbContext
             .FindAsync([providerId], cancellationToken: cancellationToken) 
             ?? throw new AdministratorNotFoundException(command.Administrator.Id);
 
-              
+        if (administrator == null)
+        {
+            throw new AdministratorNotFoundException(command.Administrator.Id);
+        }
+
         UpdateAdministratorPassword(provider, command.Administrator);
 
         dbContext.Administrators.Update(provider);
