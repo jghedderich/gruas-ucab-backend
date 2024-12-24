@@ -27,14 +27,17 @@ public class Administrator: Aggregate<Guid>
     }
     public void Update(
         AdministratorName name, 
-        Email email, 
-        Password password)
+        Email email)
     {
         Name = name;
         Email = email;
-        Password = password;
 
         AddDomainEvent(new AdministratorUpdatedEvent(this));
+    }
+
+    public void UpdatePassword(Password password)
+    {
+        Password = password;
     }
 }
 
