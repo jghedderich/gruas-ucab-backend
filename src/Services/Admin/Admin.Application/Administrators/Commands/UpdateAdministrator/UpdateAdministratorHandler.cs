@@ -27,7 +27,7 @@ public class UpdateAdministratorHandler(IApplicationDbContext dbContext, IPasswo
     public void UpdateAdministratorWithNewValues(Administrator administrator, AdministratorDto administratorDto)
     {
         administrator.Update(
-            name: administratorDto.Name,
+            name: AdministratorName.Of(administratorDto.Name.FirstName, administratorDto.Name.LastName),
             email: Email.Create(administratorDto.Email),
             password: Password.Create(passwordHasher.Hash(administratorDto.Password)));
     }
