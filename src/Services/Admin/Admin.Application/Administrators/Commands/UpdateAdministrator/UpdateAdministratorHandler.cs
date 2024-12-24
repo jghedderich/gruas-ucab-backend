@@ -2,7 +2,7 @@
 
 namespace Admin.Application.Administrators.Commands.UpdateAdministrator;
 
-public class UpdateAdministratorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
+public class UpdateAdministratorHandler(IApplicationDbContext dbContext)
     : ICommandHandler<UpdateAdministratorCommand, UpdateAdministratorResult>
 {
     public async Task<UpdateAdministratorResult> Handle(UpdateAdministratorCommand command, CancellationToken cancellationToken)
@@ -28,8 +28,7 @@ public class UpdateAdministratorHandler(IApplicationDbContext dbContext, IPasswo
     {
         administrator.Update(
             name: AdministratorName.Of(administratorDto.Name.FirstName, administratorDto.Name.LastName),
-            email: Email.Create(administratorDto.Email),
-            password: Password.Create(passwordHasher.Hash(administratorDto.Password)));
+            email: Email.Create(administratorDto.Email));
     }
   
        
