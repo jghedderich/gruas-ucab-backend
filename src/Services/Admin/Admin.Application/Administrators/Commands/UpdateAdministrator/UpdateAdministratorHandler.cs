@@ -1,5 +1,4 @@
-﻿using BuildingBlocks.Hashing;
-
+﻿
 namespace Admin.Application.Administrators.Commands.UpdateAdministrator;
 
 public class UpdateAdministratorHandler(IApplicationDbContext dbContext)
@@ -24,11 +23,12 @@ public class UpdateAdministratorHandler(IApplicationDbContext dbContext)
         return new UpdateAdministratorResult(true);
     }
 
-    public void UpdateAdministratorWithNewValues(Administrator administrator, AdministratorDto administratorDto)
+    public static void UpdateAdministratorWithNewValues(Administrator administrator, AdministratorDto administratorDto)
     {
         administrator.Update(
             name: AdministratorName.Of(administratorDto.Name.FirstName, administratorDto.Name.LastName),
-            email: Email.Create(administratorDto.Email));
+            email: Email.Create(administratorDto.Email)
+           );
     }
   
        

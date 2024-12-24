@@ -1,10 +1,4 @@
-﻿using Admin.Application.Exceptions;
-using BuildingBlocks.Hashing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BuildingBlocks.Hashing;
 
 namespace Admin.Application.Administrators.Commands.UpdateAdministratorPassword;
 
@@ -13,25 +7,26 @@ public class UpdateAdministratorPasswordHandlerI(IApplicationDbContext dbContext
 {
     public async Task<UpdateAdministratorPasswordResult> Handle(UpdateAdministratorPasswordCommand command, CancellationToken cancellationToken)
     {
-        var administratorId = command.Administrator.Id;
-        var administrator = await dbContext.Administrators
-            .FindAsync(new object[] { administratorId }, cancellationToken: cancellationToken);
+        var providerId = command.Administrator.Id;
+        var provider = await dbContext.Administrators
+            .FindAsync([providerId], cancellationToken: cancellationToken) 
+            ?? throw new AdministratorNotFoundException(command.Administrator.Id);
 
         if (administrator == null)
         {
             throw new AdministratorNotFoundException(command.Administrator.Id);
         }
 
-        UpdateAdministratorPassword(administrator, command.Administrator);
+        UpdateAdministratorPassword(provider, command.Administrator);
 
-        dbContext.Administrators.Update(administrator);
+        dbContext.Administrators.Update(provider);
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return new UpdateAdministratorPasswordResult(true);
     }
 
-    public void UpdateAdministratorPassword(Administrator administrator, UpdatePasswordDto dto)
+    public void UpdateAdministratorPassword(Administrator provider, UpdatePasswordDto dto)
     {
-        administrator.UpdatePassword(Password.Create(passwordHasher.Hash(dto.NewPassword)));
+        provider.UpdatePassword(password: Password.Create(passwordHasher.Hash(dto.NewPassword)));
     }
 }
