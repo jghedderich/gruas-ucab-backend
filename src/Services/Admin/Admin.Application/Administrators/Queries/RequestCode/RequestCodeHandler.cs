@@ -12,7 +12,7 @@ public class RequestCodeHandler(IApplicationDbContext dbContext, IEmailSender em
     {
         var code = new Random().Next(0, (int)Math.Pow(10, 6)).ToString().PadLeft(6, '0');
 
-        if (query.Type == "admins")
+        if (query.Type == "administrators")
         {
             var admin = await dbContext.Administrators
                 .AsNoTracking()

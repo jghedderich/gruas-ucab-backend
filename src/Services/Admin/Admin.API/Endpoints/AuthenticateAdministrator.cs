@@ -5,7 +5,7 @@ using Admin.Domain.ValueObjects;
 namespace Admin.API.Endpoints;
 
 public record AuthenticateAdministratorRequest(string Email, string Password);
-public record AuthenticateAdministratorResponse(AdministratorDto Admin);
+public record AuthenticateAdministratorResponse(AdministratorDto Administrator);
 
 public class AuthenticateAdministrator : ICarterModule
 {
