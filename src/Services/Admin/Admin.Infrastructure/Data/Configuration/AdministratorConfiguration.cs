@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Admin.Domain.Models;
-using Admin.Domain.ValueObjects;
 
 namespace Admin.Infrastructure.Data.Configuration;
 
@@ -11,9 +9,11 @@ public class AdministratorConfiguration : IEntityTypeConfiguration<Administrator
     {
         builder.HasKey(a => a.Id);
 
-        builder.Property(a => a.Name)
-            .HasMaxLength(100)
-            .IsRequired();
+        builder.ComplexProperty(a => a.Name, nameBuilder =>
+        {
+            nameBuilder.Property(n => n.FirstName).HasMaxLength(50).IsRequired();
+            nameBuilder.Property(n => n.LastName).HasMaxLength(50).IsRequired();
+        });
 
         builder.ComplexProperty(a => a.Email, emailBuilder =>
         {

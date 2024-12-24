@@ -2,9 +2,8 @@
 
 public record AdministratorDto(
     Guid Id,
-    string Name,
+    NameDto Name,
     string Email,
     string Password
-    
 );
 
