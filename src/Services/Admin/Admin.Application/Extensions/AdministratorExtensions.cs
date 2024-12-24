@@ -9,7 +9,7 @@ public static class AdministratorExtensions
     {
         return administrators.Select(admin => new AdministratorDto(
             Id: admin.Id,
-            Name: admin.Name,
+            Name: new NameDto(admin.Name.FirstName, admin.Name.LastName),
             Email: admin.Email.Value,
             Password: admin.Password.Value
         ));
@@ -24,7 +24,7 @@ public static class AdministratorExtensions
     {
         return new AdministratorDto(
             Id: administrator.Id,
-            Name: administrator.Name,
+            Name: new NameDto(administrator.Name.FirstName, administrator.Name.LastName),
             Email: administrator.Email.Value,
             Password: administrator.Password.Value
         );

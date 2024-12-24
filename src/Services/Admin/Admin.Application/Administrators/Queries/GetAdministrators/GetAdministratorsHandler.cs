@@ -14,7 +14,7 @@ public class GetAdministratorsHandler(IApplicationDbContext dbContext)
         var totalCount = await dbContext.Administrators.LongCountAsync(cancellationToken);
 
         var administrators = await dbContext.Administrators
-            .OrderBy(a => a.Name)
+            .OrderBy(a => a.Name.FirstName)
             .Skip(pageIndex * pageSize)
             .Take(pageSize)
             .ToListAsync(cancellationToken);

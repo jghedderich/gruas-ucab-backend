@@ -1,15 +1,8 @@
-﻿using Admin.Domain.Events;
-using Admin.Domain.ValueObjects;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-
-
-
-namespace Admin.Domain.Models;
+﻿namespace Admin.Domain.Models;
 
 public class Administrator: Aggregate<Guid>
 {
-    public string Name { get; private set; } = default!;
+    public AdministratorName Name { get; private set; } = default!;
     public Email Email { get; private set; } = default!;
     public Password Password { get; private set; } = default!;
 
@@ -17,7 +10,7 @@ public class Administrator: Aggregate<Guid>
 
     public static Administrator Create(
         Guid id,
-        string name,
+        AdministratorName name,
         Email email,
         Password password)
     {
@@ -33,7 +26,7 @@ public class Administrator: Aggregate<Guid>
         return admin;
     }
     public void Update(
-        string name, 
+        AdministratorName name, 
         Email email, 
         Password password)
     {

@@ -14,29 +14,29 @@ namespace Admin.Infrastructure.Data.Extensions
         {
             var passwordHasher = new PasswordHasher();
 
-            _administrators = new List<Administrator>
-            {
+            _administrators =
+            [
                 Administrator.Create(Guid.NewGuid(),
-                    "Andrea Josefina",
+                    AdministratorName.Of("Andrea", "Reis"),
                     Email.Create("andreaccdreis@gmail.com"),
                     Password.Create(passwordHasher.Hash("123456"))),
                 Administrator.Create(Guid.NewGuid(),
-                    "Andrea Valentina",
+                    AdministratorName.Of("Andrea", "Cedeno"),
                     Email.Create("accedeno.21@est.ucab.edu.ve"),
                     Password.Create(passwordHasher.Hash("123456"))),
-            };
+            ];
 
-            _departments = new List<Department>
-            {
+            _departments =
+            [
                 Department.Create(Guid.NewGuid(), DepartmentName.Create("RH"), "Este será el dpto de Recursos Humanos"),
                 Department.Create(Guid.NewGuid(), DepartmentName.Create("TI"), "Y este el dpto de Tecnología e información"),
-            };
+            ];
 
-            _rates = new List<Rate>
-            {
+            _rates =
+            [
                 Rate.Create(Guid.NewGuid(), RateName.Create("Standard"), 100.00m, 10.00m, 50.00m, RateDescription.Create("Standard rate for all services")),
                 Rate.Create(Guid.NewGuid(), RateName.Create("Premium"), 200.00m, 15.00m, 75.00m, RateDescription.Create("Premium rate for priority services")),
-            };
+            ];
 
             //AddUsersToDepartment(_departments[0], "user1@example.com", "User One");
             //AddUsersToDepartment(_departments[1], "user2@example.com", "User Two");

@@ -19,7 +19,7 @@ public class CreateAdministratorHandler(IApplicationDbContext dbContext, IPasswo
     {
         var newAdministrator = Administrator.Create(
             id: Guid.NewGuid(),
-            name: administratorDto.Name, 
+            name: AdministratorName.Of(administratorDto.Name.FirstName, administratorDto.Name.LastName),
             email: Email.Create(administratorDto.Email),
             password: Password.Create(passwordHasher.Hash(administratorDto.Password)) 
         );
