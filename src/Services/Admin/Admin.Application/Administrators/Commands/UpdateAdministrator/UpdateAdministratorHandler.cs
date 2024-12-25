@@ -26,8 +26,7 @@ public class UpdateAdministratorHandler(IApplicationDbContext dbContext)
     public static void UpdateAdministratorWithNewValues(Administrator administrator, AdministratorDto administratorDto)
     {
         administrator.Update(
-            name: AdministratorName.Of(administratorDto.Name.FirstName, administratorDto.Name.LastName),
-            email: Email.Create(administratorDto.Email)
+            name: AdministratorName.Of(administratorDto.Name.FirstName, administratorDto.Name.LastName)
            );
     }
   

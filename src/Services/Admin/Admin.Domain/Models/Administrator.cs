@@ -25,10 +25,9 @@ public class Administrator: Aggregate<Guid>
         admin.AddDomainEvent(new AdministratorCreatedEvent(admin));
         return admin;
     }
-    public void Update(AdministratorName name, Email email)
+    public void Update(AdministratorName name)
     {
         Name = name;
-        Email = email;
 
         AddDomainEvent(new AdministratorUpdatedEvent(this));
     }
@@ -38,11 +37,6 @@ public class Administrator: Aggregate<Guid>
         Password = password;
 
         AddDomainEvent(new AdministratorUpdatedEvent(this));
-    }
-
-    public void UpdatePassword(Password password)
-    {
-        Password = password;
     }
 }
 

@@ -13,6 +13,5 @@ public class UpdateAdministratorCommandValidator : AbstractValidator<UpdateAdmin
     {
         RuleFor(x => x.Administrator.Id).NotEmpty().WithMessage("Id es requerido");
         RuleFor(x => x.Administrator.Name).NotEmpty().WithMessage("Name es requerido");
-        RuleFor(x => x.Administrator.Email).NotEmpty().WithMessage("Email es requerido");
     }
 }

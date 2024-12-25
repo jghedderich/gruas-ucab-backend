@@ -7,19 +7,19 @@ public class UpdateAdministratorPasswordHandlerI(IApplicationDbContext dbContext
 {
     public async Task<UpdateAdministratorPasswordResult> Handle(UpdateAdministratorPasswordCommand command, CancellationToken cancellationToken)
     {
-        var providerId = command.Administrator.Id;
-        var provider = await dbContext.Administrators
-            .FindAsync([providerId], cancellationToken: cancellationToken) 
+        var adminId = command.Administrator.Id;
+        var admin = await dbContext.Administrators
+            .FindAsync([adminId], cancellationToken: cancellationToken) 
             ?? throw new AdministratorNotFoundException(command.Administrator.Id);
 
-        if (administrator == null)
+        if (admin == null)
         {
             throw new AdministratorNotFoundException(command.Administrator.Id);
         }
 
-        UpdateAdministratorPassword(provider, command.Administrator);
+        UpdateAdministratorPassword(admin, command.Administrator);
 
-        dbContext.Administrators.Update(provider);
+        dbContext.Administrators.Update(admin);
         await dbContext.SaveChangesAsync(cancellationToken);
 
         return new UpdateAdministratorPasswordResult(true);
