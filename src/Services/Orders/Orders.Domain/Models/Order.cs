@@ -57,7 +57,7 @@ public class Order : Aggregate<Guid>
     {
         OrderStatus = newStatus;
 
-        AddDomainEvent(new OrderUpdatedEvent(this));
+        AddDomainEvent(new OrderStatusUpdatedEvent(Id, newStatus));
     }
  
     public void AddCostDetail(Guid costDetailId, string description, double amount, CostDetailStatus statusC)

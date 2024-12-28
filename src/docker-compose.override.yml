@@ -72,7 +72,6 @@ services:
       - MessageBroker__Host=amqp://gruas-mq:5672
       - MessageBroker__UserName=guest
       - MessageBroker__Password=guest
-      - FeatureManagement__OrderFullfilment=false
     depends_on:
       - admindb
       - messagebroker

@@ -1,3 +1,3 @@
 ﻿namespace Orders.Domain.Events;
 
-public record OrderStatusUpdatedEvent(Order Order) : IDomainEvent;
+public record OrderStatusUpdatedEvent(Guid Id, OrderStatus OrderStatus) : IDomainEvent;
