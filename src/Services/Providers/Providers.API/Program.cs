@@ -2,6 +2,7 @@ using Providers.Infrastructure;
 using Providers.Application;
 using Providers.Infrastructure.Data.Extensions;
 using Providers.API;
+using BuildingBlocks.Messaging.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
     .AddApiServices(builder.Configuration);
+
+// Async Communication Services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 var app = builder.Build();
 
