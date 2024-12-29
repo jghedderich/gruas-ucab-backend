@@ -2,6 +2,7 @@
 using BuildingBlocks.Messaging.MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Orders.Application.Maps;
 using System.Reflection;
 
 namespace Orders.Application;
@@ -18,6 +19,8 @@ public static class DependencyInjection
         });
 
         services.AddMessageBroker(configuration, Assembly.GetExecutingAssembly());
+
+        services.AddHttpClient<GoogleMapsService>();
 
         return services;
     }

@@ -52,9 +52,9 @@ public class Operator : Aggregate<Guid>
         Password = password;
     }
 
-    public void AddOrder(Guid orderId, Guid policyId, Client client, OrderStatus orderStatus, Address incidentAddress, Address destinationAddress, Guid driverId)
+    public void AddOrder(Guid orderId, Guid policyId, Client client, OrderStatus orderStatus, Address incidentAddress, Address destinationAddress, Bill bill, Guid driverId)
     {
-        var order = Order.Create(orderId, Id, policyId, client, orderStatus, incidentAddress, destinationAddress, driverId);
+        var order = Order.Create(orderId, Id, policyId, client, orderStatus, incidentAddress, destinationAddress, bill, driverId);
         _orders.Add(order);
     }
 

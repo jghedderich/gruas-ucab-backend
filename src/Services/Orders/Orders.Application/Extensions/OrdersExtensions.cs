@@ -25,6 +25,7 @@ public static class OrderExtensions
                     o.DestinationAddress.Coordinates.Longitude
                 )),
                 CostDetails: o.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.StatusC.StatusCO.ToString())).ToList(),
+                new BillDto(o.Bill.BaseFee, o.Bill.CostPerKm, o.Bill.Subtotal, o.Bill.Total, o.Bill.Coverage),
                 IsActive: o.IsActive
             ));
     }
@@ -54,6 +55,7 @@ public static class OrderExtensions
                     order.DestinationAddress.Coordinates.Longitude
                 )),
                 CostDetails: order.CostDetails.Select(c => new CostDetailDto(c.Id, c.OrderId, c.Description, c.Amount, c.StatusC.StatusCO.ToString())).ToList(),
+                new BillDto(order.Bill.BaseFee, order.Bill.CostPerKm, order.Bill.Subtotal, order.Bill.Total, order.Bill.Coverage),
                 IsActive: order.IsActive
             );
     }

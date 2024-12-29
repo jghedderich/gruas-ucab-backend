@@ -1,13 +1,21 @@
 ﻿
 
+
+using Orders.Application.Exceptions;
+using Orders.Application.Maps;
+
 namespace Orders.Application.Orders.Commands.CreateOrder;
 
-public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
+public class CreateOrderHandler(IApplicationDbContext dbContext, GoogleMapsService mapService) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
 {
     public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
     {
+        Policy policy = await dbContext.Policies
+                .AsNoTracking()
+                .FirstOrDefaultAsync(o => o.Id.Equals(command.Order.PolicyId), cancellationToken)
+                ?? throw new PolicyNotFoundException(command.Order.PolicyId);
 
-        var order = CreateNewOrder(command.Order);
+        var order = await CreateNewOrder(command.Order, policy);
 
         dbContext.Orders.Add(order);
         await dbContext.SaveChangesAsync(cancellationToken);
@@ -15,7 +23,7 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
         return new CreateOrderResult(order.Id);
     }
 
-    private static Order CreateNewOrder(OrderDto orderDto)
+    private async Task<Order> CreateNewOrder(OrderDto orderDto, Policy policy)
     {
         var dniType = orderDto.Client.Dni.ToDniType();
 
@@ -25,6 +33,14 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
 
         var status = Enum.Parse<Status>("ToBeAccepted", true);
 
+        // Await the distance calculation
+        var distance = await mapService.GetDistanceAsync(orderDto.IncidentAddress.Coordinates, orderDto.DestinationAddress.Coordinates);
+
+        // Convert the distance from double to decimal
+        decimal distanceDecimal = Convert.ToDecimal(distance);
+
+        // Calculate the bill using the converted distance
+        var bill = Bill.Of(policy.Fees.BaseFee, policy.Fees.PerKm * distanceDecimal, policy.AmountCovered);
 
         var newOrder = Order.Create(
                 id: Guid.NewGuid(),
@@ -35,7 +51,8 @@ public class CreateOrderHandler(IApplicationDbContext dbContext) : ICommandHandl
                 orderStatus: OrderStatus.Of(status),
                 incidentAddress: Address.Of(orderDto.IncidentAddress.AddressLine1,orderDto.IncidentAddress.AddressLine2,orderDto.IncidentAddress.City,orderDto.IncidentAddress.State,orderDto.IncidentAddress.Zip, Coordinates.Of(orderDto.IncidentAddress.Coordinates.Latitude,orderDto.IncidentAddress.Coordinates.Longitude)),
                 destinationAddress: Address.Of(orderDto.DestinationAddress.AddressLine1, orderDto.DestinationAddress.AddressLine2, orderDto.DestinationAddress.City, orderDto.DestinationAddress.State, orderDto.DestinationAddress.Zip, Coordinates.Of(orderDto.DestinationAddress.Coordinates.Latitude, orderDto.DestinationAddress.Coordinates.Longitude)),
-                driverId: orderDto.DriverId
+                driverId: orderDto.DriverId,
+                bill: bill
             );
 
         return newOrder;

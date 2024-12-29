@@ -12,5 +12,6 @@ public record OrderDto(
         AddressDto IncidentAddress,
         AddressDto DestinationAddress,
         List<CostDetailDto>? CostDetails,
+        BillDto? Bill,
         bool? IsActive
     );

@@ -5,6 +5,6 @@ public record CostDetailDto(
         Guid Id,
         Guid OrderId,
         string Description,
-        double Amount,
+        decimal Amount,
         string StatusC
     );
