@@ -5,14 +5,14 @@ public class CostDetail : Aggregate<Guid>
 {
     public Guid OrderId { get; private set; } = default!;
     public string Description { get; private set; } = default!;
-    public double Amount { get; private set; } = default!;
+    public decimal Amount { get; private set; } = default!;
     public CostDetailStatus StatusC { get; private set; } = default!;
 
     public static CostDetail Create(
             Guid id,
             Guid orderId,
             string description,
-            double amount,
+            decimal amount,
             CostDetailStatus statusC
         )
     {
@@ -28,7 +28,7 @@ public class CostDetail : Aggregate<Guid>
         return costDetail;
     }
 
-    public void Update(string description, double amount)
+    public void Update(string description, decimal amount)
     {
         Description = description;
         Amount = amount;

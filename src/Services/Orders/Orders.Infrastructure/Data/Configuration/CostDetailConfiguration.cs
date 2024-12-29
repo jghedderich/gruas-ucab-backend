@@ -12,7 +12,7 @@ public class CostDetailConfiguration : IEntityTypeConfiguration<CostDetail>
 
         builder.Property(c => c.Description).IsRequired().HasMaxLength(300);
 
-        builder.Property(c => c.Amount).IsRequired().HasMaxLength(20);
+        builder.Property(c => c.Amount).HasColumnType("decimal(18,2)").IsRequired();
 
         builder.ComplexProperty(o => o.StatusC, costDetailStatusBuilder =>
         {

@@ -1,5 +1,4 @@
 ﻿using Orders.Domain.Events;
-using System.Data;
 
 namespace Orders.Domain.Models;
 
@@ -13,6 +12,7 @@ public class Order : Aggregate<Guid>
     public OrderStatus OrderStatus { get; private set; } = default!;
     public Address IncidentAddress { get; private set; } = default!; // DIRECCION DEL ACCIDENTE-INCIDENTE
     public Address DestinationAddress { get; private set; } = default!; // DIRECCION DESTINO
+    public Bill Bill { get; private set; } = default!;
     public Guid DriverId { get; private set; } = default!;
 
 
@@ -24,6 +24,7 @@ public class Order : Aggregate<Guid>
             OrderStatus orderStatus,
             Address incidentAddress,
             Address destinationAddress,
+            Bill bill,
             Guid driverId
         )
     {
@@ -36,6 +37,7 @@ public class Order : Aggregate<Guid>
             OrderStatus = orderStatus,
             IncidentAddress = incidentAddress,
             DestinationAddress = destinationAddress,
+            Bill = bill,
             DriverId = driverId
         };
 
@@ -60,10 +62,16 @@ public class Order : Aggregate<Guid>
         AddDomainEvent(new OrderStatusUpdatedEvent(Id, newStatus));
     }
  
-    public void AddCostDetail(Guid costDetailId, string description, double amount, CostDetailStatus statusC)
+    public void AddCostDetail(Guid costDetailId, string description, decimal amount, CostDetailStatus statusC)
     {
         var costDetail = CostDetail.Create(costDetailId, Id, description, amount, statusC);
         _costDetail.Add(costDetail);
+        
+        foreach (var cost in _costDetail)
+        {
+            Bill.Subtotal += cost.Amount;
+        }
+
     }
 
     public void RemoveCostDetail(Guid costDetailId)
