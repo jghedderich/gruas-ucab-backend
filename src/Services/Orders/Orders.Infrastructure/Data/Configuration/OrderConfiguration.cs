@@ -89,6 +89,15 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
             });
         });
 
+        builder.ComplexProperty(o => o.Bill, billBuilder =>
+        {
+            billBuilder.Property(b => b.BaseFee).HasColumnType("decimal(18,2)").IsRequired();
+            billBuilder.Property(b => b.CostPerKm).HasColumnType("decimal(18,2)").IsRequired();
+            billBuilder.Property(b => b.Subtotal).HasColumnType("decimal(18,2)").IsRequired();
+            billBuilder.Property(b => b.Coverage).HasColumnType("decimal(18,2)").IsRequired();
+            billBuilder.Property(b => b.Total).HasColumnType("decimal(18,2)").IsRequired();
+        });
+
         builder.Property(c => c.DriverId).IsRequired().HasMaxLength(255);
     }
 }
