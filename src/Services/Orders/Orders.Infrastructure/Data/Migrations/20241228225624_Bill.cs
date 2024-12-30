@@ -54,19 +54,6 @@ namespace Orders.Infrastructure.Data.Migrations
                 oldClrType: typeof(double),
                 oldType: "float",
                 oldMaxLength: 20);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_OperatorId",
-                table: "Orders",
-                column: "OperatorId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Orders_Operators_OperatorId",
-                table: "Orders",
-                column: "OperatorId",
-                principalTable: "Operators",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
