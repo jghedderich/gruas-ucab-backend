@@ -26,5 +26,6 @@ public enum Status
     Accepted,
     InProcess,
     Completed,
+    Located,
     Canceled
 }

@@ -310,7 +310,6 @@ namespace Orders.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OperatorId");
 
                     b.HasIndex("PolicyId");
 
@@ -389,11 +388,6 @@ namespace Orders.Infrastructure.Migrations
 
             modelBuilder.Entity("Orders.Domain.Models.Order", b =>
                 {
-                    b.HasOne("Orders.Domain.Models.Operator", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("OperatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.HasOne("Orders.Domain.Models.Policy", null)
                         .WithMany("Orders")
@@ -546,10 +540,6 @@ namespace Orders.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Orders.Domain.Models.Operator", b =>
-                {
-                    b.Navigation("Orders");
-                });
 
             modelBuilder.Entity("Orders.Domain.Models.Order", b =>
                 {
