@@ -34,9 +34,7 @@ public class CreateOrderHandler(IApplicationDbContext dbContext, GoogleMapsServi
         var status = Enum.Parse<Status>("ToBeAccepted", true);
 
         // Await the distance calculation
-        Console.WriteLine("Calculating distance...");
         var distance = await mapService.GetDistanceAsync(orderDto.IncidentAddress.Coordinates, orderDto.DestinationAddress.Coordinates);
-        Console.WriteLine(distance);
         // Convert the distance from double to decimal
         decimal distanceDecimal = Convert.ToDecimal(distance);
 
