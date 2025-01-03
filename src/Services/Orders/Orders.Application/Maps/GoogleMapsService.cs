@@ -20,7 +20,6 @@ namespace Orders.Application.Maps
             response.EnsureSuccessStatusCode();
 
             var json = JObject.Parse(await response.Content.ReadAsStringAsync());
-            Console.WriteLine(json);
             // Accessing the distance from the directions API response
             var distance = json["routes"]?[0]?["legs"]?[0]?["distance"]?["value"]?.ToObject<double>();
 
