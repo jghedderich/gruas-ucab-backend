@@ -3,37 +3,32 @@ using FirebaseAdmin.Messaging;
 
 namespace Admin.API.Endpoints;
 
-public record SendNotificationRequest(string DeviceToken, string Title, string Body);
+public record SendNotificationRequest(string DeviceToken, string Title, string Body, string Time);
 public record SendNotificationResponse(bool IsSuccess, string? ErrorMessage);
 
 public class SendNotification : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-
-        // Create a message
-       // var message = new Message()
-       // {
-         //   Token = "773576465708-60rikb1viqdgfgcipvka4tluct1po87s.apps.googleusercontent.com", // Replace with the device token you get from the Firebase Console
-          //  Notification = new Notification()
-           // {
-            //    Title = "Test Notification",
-            //    Body = "This is a test notification."
-           // }
-     //   };
-
-        // Send the message
-        // string response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
-        // Console.WriteLine("Successfully sent message: " + response);
-
         app.MapPost("/notifications/send", async (SendNotificationRequest request, IFirebaseMessagingService messagingService) =>
         {
 
             try
             {
-                await messagingService.SendPushNotificationAsync(request.DeviceToken, request.Title, request.Body);
-                var response = new SendNotificationResponse(true, null);
-                return Results.Ok(response);
+                var message = new Message()
+                {
+                    Token = request.DeviceToken, // Replace with the device token you get from the Firebase Console
+                    Notification = new Notification()
+                    {
+                        Title = request.Title,
+                        Body = request.Body
+                    }
+                };
+                // Send the message
+                string response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
+                Console.WriteLine("Successfully sent message: " + response);
+                var response1 = new SendNotificationResponse(true, null);
+                return Results.Ok(response1);
             }
             catch (Exception ex)
             {
