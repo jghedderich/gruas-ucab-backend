@@ -38,7 +38,9 @@ public static class ProviderExtensions
                             d.Location.Coordinates.Longitude
                         )
                     ) : null,
-                    d.IsActive)).ToList(),
+                    d.IsActive,
+                    d.Token
+                    )).ToList(),
 
             IsActive: p.IsActive
         ));
@@ -84,7 +86,8 @@ public static class ProviderExtensions
                                 d.Location.Coordinates.Longitude
                             )
                         ) : null,
-                        d.IsActive)).ToList(),
+                        d.IsActive, 
+                        d.Token)).ToList(),
                 IsActive: provider.IsActive
         );
     }

@@ -1,10 +1,11 @@
 ﻿
 using BuildingBlocks.Exceptions;
 using BuildingBlocks.Hashing;
+using Drivers.Application.Drivers.Queries.AuthenticateDriver;
 using Providers.Application.Extensions;
 using System.Security.Authentication;
 
-namespace Drivers.Application.Drivers.Queries.AuthenticateDriver;
+namespace Providers.Application.Drivers.Queries.AuthenticateDriver;
 
 public class AuthenticateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : IQueryHandler<AuthenticateDriverQuery, AuthenticateDriverResult>
@@ -18,11 +19,22 @@ public class AuthenticateDriverHandler(IApplicationDbContext dbContext, IPasswor
 
         bool verified = passwordHasher.Verify(query.Password.Value, driver.Password.Value);
 
-        if (!verified) {
+        if (!verified)
+        {
             throw new InvalidCredentialException();
         }
 
+        driver.UpdateToken(query.Token);
+
+        dbContext.Drivers.Update(driver);
+        await dbContext.SaveChangesAsync(cancellationToken);
+
         var driverDto = driver.ToDriverDto();
         return new AuthenticateDriverResult(driverDto);
+    }
+
+    public static void UpdateDriverToken(Driver driver, string token)
+    {
+        driver.UpdateToken(token);
     }
 }
