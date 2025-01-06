@@ -3,7 +3,7 @@ using Providers.Domain.ValueObjects;
 
 namespace Drivers.API.Endpoints.Drivers;
 
-public record AuthenticateDriverRequest(string Email, string Password);
+public record AuthenticateDriverRequest(string Email, string Password, string Token);
 public record AuthenticateDriverResponse(DriverDto Driver);
 
 public class AuthenticateDriver : ICarterModule
@@ -12,7 +12,7 @@ public class AuthenticateDriver : ICarterModule
     {
         app.MapPost("/drivers/authenticate", async (AuthenticateDriverRequest request, ISender sender) =>
         {
-            var result = await sender.Send(new AuthenticateDriverQuery(Email.Of(request.Email), Password.Of(request.Password)));
+            var result = await sender.Send(new AuthenticateDriverQuery(Email.Of(request.Email), Password.Of(request.Password), request.Token));
 
             if (result == null)
             {

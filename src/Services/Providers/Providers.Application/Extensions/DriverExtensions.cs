@@ -16,7 +16,8 @@ public static class DriverExtensions
                 Email: p.Email,
                 Location: p.Location,
                 Password: p.Password,
-                IsActive: p.IsActive
+                IsActive: p.IsActive,
+                Token: p.Token
             ));
     }
 
@@ -48,7 +49,8 @@ public static class DriverExtensions
                     driver.Location.Coordinates.Longitude
                 )
             ) : null,
-            IsActive: driver.IsActive
+            IsActive: driver.IsActive,
+            Token: driver.Token
         );
     }
 }
