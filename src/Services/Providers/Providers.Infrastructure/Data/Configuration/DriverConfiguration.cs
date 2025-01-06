@@ -58,6 +58,6 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
             });
         });
 
-        builder.Property(d => d.Token).HasMaxLength(50);
+        builder.Property(d => d.Token).HasMaxLength(250);
     }
 }

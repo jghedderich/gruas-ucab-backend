@@ -13,8 +13,8 @@ namespace Providers.Infrastructure.Data.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "Token",
                 table: "Drivers",
-                type: "nvarchar(50)",
-                maxLength: 50,
+                type: "nvarchar(250)",
+                maxLength: 250,
                 nullable: false,
                 defaultValue: "");
         }

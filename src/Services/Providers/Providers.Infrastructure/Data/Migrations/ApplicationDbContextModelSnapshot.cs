@@ -53,7 +53,7 @@ namespace Providers.Infrastructure.Data.Migrations
 
                     b.Property<string>("Token")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<Guid>("VehicleId")
                         .HasColumnType("uniqueidentifier");
