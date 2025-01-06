@@ -13,11 +13,11 @@ namespace Providers.Infrastructure.Data.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Token",
                 table: "Drivers",
-                type: "nvarchar(50)",
-                maxLength: 50,
+                type: "nvarchar(250)",
+                maxLength: 250,
                 nullable: true,
                 oldClrType: typeof(string),
-                oldType: "nvarchar(50)",
+                oldType: "nvarchar(250)",
                 oldMaxLength: 50);
         }
 
@@ -27,12 +27,12 @@ namespace Providers.Infrastructure.Data.Migrations
             migrationBuilder.AlterColumn<string>(
                 name: "Token",
                 table: "Drivers",
-                type: "nvarchar(50)",
-                maxLength: 50,
+                type: "nvarchar(250)",
+                maxLength: 250,
                 nullable: false,
                 defaultValue: "",
                 oldClrType: typeof(string),
-                oldType: "nvarchar(50)",
+                oldType: "nvarchar(250)",
                 oldMaxLength: 50,
                 oldNullable: true);
         }
