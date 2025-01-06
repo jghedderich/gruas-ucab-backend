@@ -12,5 +12,6 @@ public record DriverDto(
     string? Password,
     string? Status,
     LocationDto? Location,
-    bool? IsActive
+    bool? IsActive,
+    string? Token
     );

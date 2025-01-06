@@ -10,6 +10,7 @@ public class Driver : Aggregate<Guid>
     public Phone Phone { get; private set; } = default!;
     public Dni Dni { get; private set; } = default!;
     public Status Status { get; private set; } = default!;
+    public string? Token { get; private set; } = default!;
     public Location? Location { get; private set; } 
 
     public static Driver Create(
@@ -22,6 +23,7 @@ public class Driver : Aggregate<Guid>
         Phone phone,
         Dni dni,
         Status status,
+        string? token = null,
         Location? location = null
      )
     {
@@ -36,6 +38,7 @@ public class Driver : Aggregate<Guid>
             Phone = phone,
             Dni = dni,
             Status = status,
+            Token = token,
             Location = location
         };
 
@@ -71,6 +74,11 @@ public class Driver : Aggregate<Guid>
     {
         Location = location;
         AddDomainEvent(new DriverLocationUpdatedEvent(Id, location));
+    }
+
+    public void UpdateToken(string token)
+    {
+        Token = token;
     }
 }
 

@@ -57,5 +57,7 @@ public class DriverConfiguration : IEntityTypeConfiguration<Driver>
                 coordinatesBuilder.Property(c => c.Longitude).HasMaxLength(50).IsRequired(true);
             });
         });
+
+        builder.Property(d => d.Token).HasMaxLength(50);
     }
 }
