@@ -1,13 +1,10 @@
 ﻿using Admin.Application.Data;
-using Admin.Infrastructure.Data;
 using Admin.Infrastructure.Data.Interceptors;
 using Admin.Infrastructure.Settings;
 using BuildingBlocks.Caching;
 using BuildingBlocks.Hashing;
 using BuildingBlocks.Emails;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using BuildingBlocks.Jwt;
 
 namespace Admin.Infrastructure;
 
@@ -31,6 +28,8 @@ public static class DependencyInjection
         services.AddTransient<IPasswordHasher, PasswordHasher>();
 
         services.AddScoped<IRedisCacheService, RedisCacheService>();
+
+        services.AddSingleton<TokenProvider>();
 
         services.Configure<FirebaseMessagingSettings>(options =>
         {

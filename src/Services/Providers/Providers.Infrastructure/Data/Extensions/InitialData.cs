@@ -22,7 +22,7 @@ internal class InitialData
                 Password.Of(passwordHasher.Hash("123456")),
                 Phone.Of("04123349277"),
                 Dni.Of(DniType.V, "29625837"),
-                Company.Of("Super Trucks", "Tow truck company", "V-00006797", "Caracas", "Miranda")
+                Company.Of("Gruas UCAB", "La empresa de gruas de la UCAB", "V-00006797", "Caracas", "Miranda")
             ),
             Provider.Create(
                 Guid.NewGuid(),
@@ -81,7 +81,8 @@ internal class InitialData
             Password.Of(passwordHasher.Hash("123456")),
             Phone.Of("04123349280"),
             Dni.Of(DniType.V, "29625840"),
-            Status.Available
+            Status.Available,
+            Location.Of(address1: "La Castellana", address2: "Calle el Tartago", coordinates: Coordinates.Of("10.507365", "-66.859987"), city: "Caracas", state: "Miranda", zip: "1060")
         );
 
         provider.AddDriver(
@@ -93,7 +94,8 @@ internal class InitialData
             Password.Of(passwordHasher.Hash("123456")),
             Phone.Of("04123349281"),
             Dni.Of(DniType.V, "29625841"),
-            Status.Available
+            Status.Available,
+            Location.Of(address1: "Avenida los Mangos", address2: "", coordinates: Coordinates.Of("10.50177", "-66.8728"), city: "Caracas", state: "Miranda", zip: "1060")
         );
     }
 }

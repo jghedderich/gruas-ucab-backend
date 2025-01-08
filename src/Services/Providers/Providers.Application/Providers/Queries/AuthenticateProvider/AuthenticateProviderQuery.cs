@@ -3,4 +3,4 @@
 public record AuthenticateProviderQuery(Email Email, Password Password)
     : IQuery<AuthenticateProviderResult>;
 
-public record AuthenticateProviderResult(ProviderDto Provider);
+public record AuthenticateProviderResult(ProviderDto Provider, string Token);

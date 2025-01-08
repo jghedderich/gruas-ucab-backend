@@ -3,6 +3,7 @@ using Orders.Infrastructure.Data;
 using BuildingBlocks.Emails;
 using BuildingBlocks.Caching;
 using BuildingBlocks.Hashing;
+using BuildingBlocks.Jwt;
 
 namespace Orders.Infrastructure;
 
@@ -28,6 +29,8 @@ public static class DependencyInjection
         services.AddTransient<IPasswordHasher, PasswordHasher>();
 
         services.AddScoped<IRedisCacheService, RedisCacheService>();
+
+        services.AddSingleton<TokenProvider>();
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {

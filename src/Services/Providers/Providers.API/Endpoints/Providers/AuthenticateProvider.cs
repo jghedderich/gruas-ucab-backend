@@ -4,7 +4,7 @@ using Providers.Domain.ValueObjects;
 namespace Providers.API.Endpoints.Providers;
 
 public record AuthenticateProviderRequest(string Email, string Password);
-public record AuthenticateProviderResponse(ProviderDto Provider);
+public record AuthenticateProviderResponse(ProviderDto Provider, string Token);
 
 public class AuthenticateProvider : ICarterModule
 {

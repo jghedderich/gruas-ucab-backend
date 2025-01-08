@@ -4,7 +4,7 @@ using Providers.Domain.ValueObjects;
 namespace Drivers.API.Endpoints.Drivers;
 
 public record AuthenticateDriverRequest(string Email, string Password, string Token);
-public record AuthenticateDriverResponse(DriverDto Driver);
+public record AuthenticateDriverResponse(DriverDto Driver, string Token);
 
 public class AuthenticateDriver : ICarterModule
 {
