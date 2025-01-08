@@ -1,4 +1,7 @@
 ﻿
+using MassTransit.Caching.Internals;
+using Providers.Application.Providers.Queries.AuthenticateProvider;
+
 namespace Providers.Application.Extensions;
 
 public static class ProviderExtensions
@@ -86,8 +89,9 @@ public static class ProviderExtensions
                                 d.Location.Coordinates.Longitude
                             )
                         ) : null,
-                        d.IsActive, 
-                        d.Token)).ToList(),
+                        d.IsActive,
+                        d.Token
+                        )).ToList(),
                 IsActive: provider.IsActive
         );
     }

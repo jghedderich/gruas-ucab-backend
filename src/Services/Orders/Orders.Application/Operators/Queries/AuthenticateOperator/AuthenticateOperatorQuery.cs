@@ -3,4 +3,4 @@
 public record AuthenticateOperatorQuery(Email Email, Password Password)
     : IQuery<AuthenticateOperatorResult>;
 
-public record AuthenticateOperatorResult(OperatorDto Operator);
+public record AuthenticateOperatorResult(OperatorDto Operator, string Token);

@@ -1,11 +1,12 @@
 ﻿using Admin.Application.Extensions;
 using BuildingBlocks.Exceptions;
 using BuildingBlocks.Hashing;
+using BuildingBlocks.Jwt;
 using System.Security.Authentication;
 
 namespace Admin.Application.Administrators.Queries.AuthenticateAdmin;
 
-public class AuthenticateAdminHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
+public class AuthenticateAdminHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, TokenProvider tokenProvider)
     : IQueryHandler<AuthenticateAdminQuery, AuthenticateAdminResult>
 {
     public async Task<AuthenticateAdminResult> Handle(AuthenticateAdminQuery query, CancellationToken cancellationToken)
@@ -22,6 +23,7 @@ public class AuthenticateAdminHandler(IApplicationDbContext dbContext, IPassword
         }
 
         var adminDto = admin.ToAdministratorDto();
-        return new AuthenticateAdminResult(adminDto);
+        var token = tokenProvider.Create(admin.Id, "administrator");
+        return new AuthenticateAdminResult(adminDto, token);
     }
 }

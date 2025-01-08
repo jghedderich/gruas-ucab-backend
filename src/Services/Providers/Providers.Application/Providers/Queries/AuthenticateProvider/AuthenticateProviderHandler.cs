@@ -1,11 +1,12 @@
 ﻿using BuildingBlocks.Exceptions;
 using BuildingBlocks.Hashing;
+using BuildingBlocks.Jwt;
 using Providers.Application.Extensions;
 using System.Security.Authentication;
 
 namespace Providers.Application.Providers.Queries.AuthenticateProvider;
 
-public class AuthenticateProviderHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
+public class AuthenticateProviderHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, TokenProvider tokenProvider)
     : IQueryHandler<AuthenticateProviderQuery, AuthenticateProviderResult>
 {
     public async Task<AuthenticateProviderResult> Handle(AuthenticateProviderQuery query, CancellationToken cancellationToken)
@@ -22,6 +23,9 @@ public class AuthenticateProviderHandler(IApplicationDbContext dbContext, IPassw
         }
         
         var providerDto = provider.ToProviderDto();
-        return new AuthenticateProviderResult(providerDto);
+
+        var token = tokenProvider.Create(provider.Id, "provider");
+        return new AuthenticateProviderResult(providerDto, token);
     }
 }
+

@@ -22,14 +22,6 @@ internal class InitialData
                     Dni.Of(DniType.V, "27941859"),
                     Password.Of(passwordHasher.Hash("123456"))
                 ),
-            Operator.Create(
-                    Guid.NewGuid(),
-                    Name.Of("Juan", "Soto"),
-                    Email.Of("juansoto@gmail.com"),
-                    Phone.Of("04143333751"),
-                    Dni.Of(DniType.V, "29483872"),
-                    Password.Of(passwordHasher.Hash("123456"))
-                ),
             ];
 
         _policies = [

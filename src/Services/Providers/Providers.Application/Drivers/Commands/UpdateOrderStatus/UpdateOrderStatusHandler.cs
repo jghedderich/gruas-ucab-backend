@@ -37,6 +37,14 @@ public class UpdateOrderStatusHandler(IApplicationDbContext dbContext, IPublishE
         var latitude = dto.Location!.Coordinates.Latitude;
         var longitude = dto.Location!.Coordinates.Longitude;
 
+        if (dto.Status == "Completed" || dto.Status == "Canceled")
+        {
+            driver.UpdateStatus(Status.Available);
+        } else
+        {
+            driver.UpdateStatus(Status.Unavailable);
+        }
+
         driver.UpdateLocation(
             Location.Of(
                 dto.Location.Address1, 

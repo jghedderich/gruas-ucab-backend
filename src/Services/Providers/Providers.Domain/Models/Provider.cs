@@ -52,9 +52,9 @@ public class Provider : Aggregate<Guid>
         AddDomainEvent(new ProviderUpdatedEvent(this));
     }
 
-    public void AddDriver(Guid driverId, DriverName driverName, Guid providerId, Guid vehicleId, Email email, Password password, Phone phone, Dni dni, Status status)
+    public void AddDriver(Guid driverId, DriverName driverName, Guid providerId, Guid vehicleId, Email email, Password password, Phone phone, Dni dni, Status status, Location? location)
     {
-        var driver = Driver.Create(driverId, driverName, providerId, vehicleId, email, password, phone, dni, status );
+        var driver = Driver.Create(driverId, driverName, providerId, vehicleId, email, password, phone, dni, status, location: location);
         _drivers.Add(driver);
     }
 

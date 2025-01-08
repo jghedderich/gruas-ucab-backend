@@ -1,8 +1,10 @@
-﻿using BuildingBlocks.Hashing;
+﻿using BuildingBlocks.Emails;
+using BuildingBlocks.Hashing;
+using Providers.Domain.Models;
 
 namespace Providers.Application.Drivers.Commands.CreateDriver;
 
-public class CreateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher) 
+public class CreateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, IEmailSender emailSender) 
     : ICommandHandler<CreateDriverCommand, CreateDriverResult>
 {
     public async Task<CreateDriverResult> Handle(CreateDriverCommand command, CancellationToken cancellationToken)
@@ -11,6 +13,13 @@ public class CreateDriverHandler(IApplicationDbContext dbContext, IPasswordHashe
 
         dbContext.Drivers.Add(driver);
         await dbContext.SaveChangesAsync(cancellationToken);
+
+        await emailSender.SendEmailAsync(
+            driver.Email.Value,
+            "Se ha creado su cuenta de Conductor",
+            $"Su clave temporal: {command.Driver.Password}. " +
+            $"Ingrese a la app móvil de Grúas UCAB con sus credenciales y clave temporal. " +
+            $"Recuerde cambiar la clave a una de su preferencia.");
 
         return new CreateDriverResult(driver.Id);
     }

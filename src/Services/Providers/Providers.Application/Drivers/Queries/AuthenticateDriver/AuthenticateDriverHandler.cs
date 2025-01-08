@@ -1,13 +1,14 @@
 ﻿
 using BuildingBlocks.Exceptions;
 using BuildingBlocks.Hashing;
+using BuildingBlocks.Jwt;
 using Drivers.Application.Drivers.Queries.AuthenticateDriver;
 using Providers.Application.Extensions;
 using System.Security.Authentication;
 
 namespace Providers.Application.Drivers.Queries.AuthenticateDriver;
 
-public class AuthenticateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
+public class AuthenticateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, TokenProvider tokenProvider)
     : IQueryHandler<AuthenticateDriverQuery, AuthenticateDriverResult>
 {
     public async Task<AuthenticateDriverResult> Handle(AuthenticateDriverQuery query, CancellationToken cancellationToken)
@@ -30,7 +31,9 @@ public class AuthenticateDriverHandler(IApplicationDbContext dbContext, IPasswor
         await dbContext.SaveChangesAsync(cancellationToken);
 
         var driverDto = driver.ToDriverDto();
-        return new AuthenticateDriverResult(driverDto);
+
+        var token = tokenProvider.Create(driver.Id, "driver");
+        return new AuthenticateDriverResult(driverDto, token);
     }
 
     public static void UpdateDriverToken(Driver driver, string token)
