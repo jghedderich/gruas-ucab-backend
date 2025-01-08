@@ -21,6 +21,7 @@ public class DeleteDepartment : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Department")
-        .WithDescription("Delete Department");
+        .WithDescription("Delete Department")
+        .RequireAuthorization();
     }
 }

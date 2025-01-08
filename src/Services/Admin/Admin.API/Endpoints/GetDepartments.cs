@@ -21,6 +21,7 @@ public class GetDepartments : ICarterModule
         .Produces<GetDepartmentsResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Get Departments")
-        .WithDescription("Retrieve a paginated list of departments");
+        .WithDescription("Retrieve a paginated list of departments")
+        .RequireAuthorization();
     }
 }

@@ -24,6 +24,7 @@ public class CreateDriver : ICarterModule
         .Produces<CreateDriverResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Driver")
-        .WithDescription("Create Driver");
+        .WithDescription("Create Driver")
+        .RequireAuthorization();
     }
 }

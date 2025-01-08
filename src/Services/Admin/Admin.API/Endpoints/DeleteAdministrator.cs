@@ -21,6 +21,7 @@ public class DeleteAdministrator : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Administrator")
-        .WithDescription("Delete Administrator");
+        .WithDescription("Delete Administrator")
+        .RequireAuthorization();
     }
 }

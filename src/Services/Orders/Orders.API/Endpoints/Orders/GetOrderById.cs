@@ -27,6 +27,7 @@ public class GetOrderById : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Order By Id")
-        .WithDescription("Get Order By Id");
+        .WithDescription("Get Order By Id")
+        .RequireAuthorization();
     }
 }

@@ -22,7 +22,8 @@ public class GetDrivers : ICarterModule
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound)
             .WithSummary("Get Drivers")
-            .WithDescription("Get Drivers");
+            .WithDescription("Get Drivers")
+            .RequireAuthorization();
     }
 }
 

@@ -23,6 +23,7 @@ public class GetPolicies : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Policies")
-        .WithDescription("Get Policies");
+        .WithDescription("Get Policies")
+        .RequireAuthorization();
     }
 }

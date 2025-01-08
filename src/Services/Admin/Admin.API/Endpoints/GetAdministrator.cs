@@ -21,6 +21,7 @@ public class GetAdministrators : ICarterModule
         .Produces<GetAdministratorsResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Get Administrators")
-        .WithDescription("Retrieve a paginated list of administrators");
+        .WithDescription("Retrieve a paginated list of administrators")
+        .RequireAuthorization();
     }
 }

@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,19 +29,11 @@ builder.Services.AddCors(options =>
     });
 });
 
-builder.Services
-    .AddAuthentication(BearerTokenDefaults.AuthenticationScheme)
-    .AddBearerToken();
-
 var app = builder.Build();
 
 app.UseRateLimiter();
 
 app.UseCors(AllowedOrigins);
-
-app.UseAuthentication();
-
-app.UseAuthorization();
 
 app.MapReverseProxy();
 

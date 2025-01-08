@@ -28,6 +28,7 @@ public class GetCostDetailById : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get CostDetail By Id")
-        .WithDescription("Get CostDetail By Id");
+        .WithDescription("Get CostDetail By Id")
+        .RequireAuthorization();
     }
 }

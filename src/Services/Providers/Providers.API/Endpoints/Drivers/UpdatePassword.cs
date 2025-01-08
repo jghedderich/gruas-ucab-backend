@@ -23,6 +23,7 @@ public class UpdateDriverPassword : ICarterModule
         .Produces<UpdateDriverPasswordResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Driver Password")
-        .WithDescription("Update Driver Password");
+        .WithDescription("Update Driver Password")
+        .RequireAuthorization();
     }
 }

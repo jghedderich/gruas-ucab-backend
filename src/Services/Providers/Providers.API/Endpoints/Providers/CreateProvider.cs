@@ -23,7 +23,8 @@ public class CreateProvider : ICarterModule
         .Produces<CreateProviderResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Provider")
-        .WithDescription("Create Provider");
+        .WithDescription("Create Provider")
+        .RequireAuthorization();
     }
 
 }

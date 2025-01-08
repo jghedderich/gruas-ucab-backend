@@ -23,6 +23,7 @@ public class GetVehicles : ICarterModule
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound)
             .WithSummary("Get Vehicles")
-            .WithDescription("Get Vehicles");
+            .WithDescription("Get Vehicles")
+            .RequireAuthorization();
     }
 }

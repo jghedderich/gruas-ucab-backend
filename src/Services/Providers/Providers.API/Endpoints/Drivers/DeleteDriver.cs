@@ -21,6 +21,7 @@ public class DeleteDriver : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Driver")
-        .WithDescription("Delete Driver");
+        .WithDescription("Delete Driver")
+        .RequireAuthorization();
     }
 }

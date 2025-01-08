@@ -25,6 +25,7 @@ public class CreateOperator : ICarterModule
         .Produces<CreateOperatorResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Operator")
-        .WithDescription("Create Operator");
+        .WithDescription("Create Operator")
+        .RequireAuthorization();
     }
 }

@@ -21,6 +21,7 @@ public class DeletePolicy : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Policy")
-        .WithDescription("Delete Policy");
+        .WithDescription("Delete Policy")
+        .RequireAuthorization();
     }
 }

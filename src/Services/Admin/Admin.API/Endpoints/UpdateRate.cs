@@ -24,6 +24,7 @@ public class UpdateRate : ICarterModule
         .Produces<UpdateRateResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Rate")
-        .WithDescription("Update Rate");
+        .WithDescription("Update Rate")
+        .RequireAuthorization();
     }
 }

@@ -24,6 +24,7 @@ public class UpdateDepartment : ICarterModule
         .Produces<UpdateDepartmentResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Department")
-        .WithDescription("Update Department");
+        .WithDescription("Update Department")
+        .RequireAuthorization();
     }
 }

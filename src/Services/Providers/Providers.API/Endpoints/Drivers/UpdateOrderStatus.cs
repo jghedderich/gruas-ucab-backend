@@ -23,6 +23,7 @@ public class UpdateOrderStatus : ICarterModule
         .Produces<UpdateOrderStatusResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Order Status")
-        .WithDescription("Update Order Status");
+        .WithDescription("Update Order Status")
+        .RequireAuthorization();
     }
 }
