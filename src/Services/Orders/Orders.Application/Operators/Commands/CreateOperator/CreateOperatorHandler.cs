@@ -1,17 +1,26 @@
-﻿using BuildingBlocks.Hashing;
+﻿using BuildingBlocks.Emails;
+using BuildingBlocks.Hashing;
 
 namespace Orders.Application.Operators.Commands.CreateOperator;
 
-public class CreateOperatorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher) : ICommandHandler<CreateOperatorCommand, CreateOperatorResult>
+public class CreateOperatorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, IEmailSender emailSender) 
+    : ICommandHandler<CreateOperatorCommand, CreateOperatorResult>
 {
     public async Task<CreateOperatorResult> Handle(CreateOperatorCommand command, CancellationToken cancellationToken)
     {
-        var operatorN = CreateNewOperator(command.Operator);
+        var newOperator = CreateNewOperator(command.Operator);
 
-        dbContext.Operators.Add(operatorN);
+        dbContext.Operators.Add(newOperator);
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new CreateOperatorResult(operatorN.Id);
+        await emailSender.SendEmailAsync(
+            newOperator.Email.Value,
+            "Se ha creado su cuenta de Operador",
+            $"Su clave temporal: {command.Operator.Password}. " +
+            $"Ingrese al portal web de Grúas UCAB con sus credenciales y clave temporal. " +
+            $"Recuerde cambiar la clave a una de su preferencia.");
+
+        return new CreateOperatorResult(newOperator.Id);
     }
 
     private Operator CreateNewOperator(OperatorDto operatorDto)

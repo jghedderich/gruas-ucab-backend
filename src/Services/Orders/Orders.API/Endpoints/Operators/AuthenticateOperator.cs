@@ -5,7 +5,7 @@ using Orders.Domain.ValueObjects;
 namespace Orders.API.Endpoints.Operators;
 
 public record AuthenticateOperatorRequest(string Email, string Password);
-public record AuthenticateOperatorResponse(OperatorDto Operator);
+public record AuthenticateOperatorResponse(OperatorDto Operator, string Token);
 
 public class AuthenticateOperator : ICarterModule
 {

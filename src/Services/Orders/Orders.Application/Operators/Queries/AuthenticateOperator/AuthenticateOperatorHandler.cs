@@ -3,10 +3,11 @@ using Orders.Application.Extensions;
 using BuildingBlocks.Exceptions;
 using BuildingBlocks.Hashing;
 using System.Security.Authentication;
+using BuildingBlocks.Jwt;
 
 namespace Orders.Application.Operators.Queries.AuthenticateOperator;
 
-public class AuthenticateOperatorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
+public class AuthenticateOperatorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, TokenProvider tokenProvider)
     : IQueryHandler<AuthenticateOperatorQuery, AuthenticateOperatorResult>
 {
     public async Task<AuthenticateOperatorResult> Handle(AuthenticateOperatorQuery query, CancellationToken cancellationToken)
@@ -24,7 +25,8 @@ public class AuthenticateOperatorHandler(IApplicationDbContext dbContext, IPassw
         }
 
         var operatorDto = operatorn.ToOperatorDto();
-        return new AuthenticateOperatorResult(operatorDto);
+        var token = tokenProvider.Create(operatorn.Id, "operator");
+        return new AuthenticateOperatorResult(operatorDto, token);
     }
 }
 

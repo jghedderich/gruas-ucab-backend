@@ -1,6 +1,7 @@
 ﻿using BuildingBlocks.Caching;
 using BuildingBlocks.Emails;
 using BuildingBlocks.Hashing;
+using BuildingBlocks.Jwt;
 using Providers.Application.Data;
 using Providers.Infrastructure.Data.Interceptors;
 
@@ -28,6 +29,8 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IRedisCacheService, RedisCacheService>();
+
+        services.AddSingleton<TokenProvider>();
 
         services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
