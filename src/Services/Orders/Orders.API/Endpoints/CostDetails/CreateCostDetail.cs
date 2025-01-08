@@ -27,6 +27,7 @@ public class CreateCostDetail : ICarterModule
         .Produces<CreateCostDetailResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create CostDetail")
-        .WithDescription("Create CostDetail");
+        .WithDescription("Create CostDetail")
+        .RequireAuthorization();
     }
 }

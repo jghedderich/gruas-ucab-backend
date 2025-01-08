@@ -23,6 +23,7 @@ public class GetCostDetails : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get CostDetails")
-        .WithDescription("Get CostDetails");
+        .WithDescription("Get CostDetails")
+        .RequireAuthorization();
     }
 }

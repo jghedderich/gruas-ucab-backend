@@ -23,6 +23,7 @@ public class CreateDepartment : ICarterModule
         .Produces<CreateDepartmentResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Department")
-        .WithDescription("Create Department");
+        .WithDescription("Create Department")
+        .RequireAuthorization();
     }
 }

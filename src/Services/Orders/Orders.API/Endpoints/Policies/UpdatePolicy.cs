@@ -25,6 +25,7 @@ public class UpdatePolicy : ICarterModule
         .Produces<UpdatePolicyResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Policy")
-        .WithDescription("Update Policy");
+        .WithDescription("Update Policy")
+        .RequireAuthorization();
     }
 }

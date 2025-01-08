@@ -27,6 +27,7 @@ public class GetPolicyById : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Policy By Id")
-        .WithDescription("Get Policy By Id");
+        .WithDescription("Get Policy By Id")
+        .RequireAuthorization();
     }
 }

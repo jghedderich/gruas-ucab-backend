@@ -24,6 +24,7 @@ public class UpdateDriver : ICarterModule
         .Produces<UpdateDriverResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Driver")
-        .WithDescription("Update Driver");
+        .WithDescription("Update Driver")
+        .RequireAuthorization();
     }
 }

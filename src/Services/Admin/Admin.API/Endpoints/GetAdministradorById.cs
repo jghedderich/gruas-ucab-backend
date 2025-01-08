@@ -26,7 +26,8 @@ public class GetAdministratorById : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Administrator By Id")
-        .WithDescription("Get Administrator By Id");
+        .WithDescription("Get Administrator By Id")
+        .RequireAuthorization();
     }
 }
 

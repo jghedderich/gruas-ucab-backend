@@ -25,6 +25,7 @@ public class UpdateOperator : ICarterModule
         .Produces<UpdateOperatorResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Operator")
-        .WithDescription("Update Operator");
+        .WithDescription("Update Operator")
+        .RequireAuthorization();
     }
 }

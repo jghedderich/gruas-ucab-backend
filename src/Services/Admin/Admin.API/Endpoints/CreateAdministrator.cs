@@ -23,6 +23,7 @@ public class CreateAdministrator : ICarterModule
         .Produces<CreateAdministratorResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Administrator")
-        .WithDescription("Create Administrator");
+        .WithDescription("Create Administrator")
+        .RequireAuthorization();
     }
 }

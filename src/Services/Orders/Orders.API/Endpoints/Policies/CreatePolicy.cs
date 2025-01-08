@@ -25,6 +25,7 @@ public class CreatePolicy : ICarterModule
         .Produces<CreatePolicyResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Policy")
-        .WithDescription("Create Policy");
+        .WithDescription("Create Policy")
+        .RequireAuthorization();
     }
 }

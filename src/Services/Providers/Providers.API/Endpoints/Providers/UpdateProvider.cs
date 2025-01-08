@@ -23,6 +23,7 @@ public class UpdateProvider : ICarterModule
         .Produces<UpdateProviderResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Provider")
-        .WithDescription("Update Provider");
+        .WithDescription("Update Provider")
+        .RequireAuthorization();
     }
 }

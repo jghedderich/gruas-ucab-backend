@@ -25,6 +25,7 @@ public class UpdateCostDetail : ICarterModule
         .Produces<UpdateCostDetailResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Cost Detail")
-        .WithDescription("Update Cost Detail");
+        .WithDescription("Update Cost Detail")
+        .RequireAuthorization();
     }
 }
