@@ -24,6 +24,7 @@ public class UpdateVehicle : ICarterModule
         .Produces<UpdateProviderResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Vehicle")
-        .WithDescription("Update Vehicle");
+        .WithDescription("Update Vehicle")
+        .RequireAuthorization();
     }
 }

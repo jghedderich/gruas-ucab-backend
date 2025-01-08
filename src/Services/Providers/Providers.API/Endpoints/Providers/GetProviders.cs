@@ -22,6 +22,7 @@ public class GetProviders : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Providers")
-        .WithDescription("Get Providers");
+        .WithDescription("Get Providers")
+        .RequireAuthorization();
     }
 }

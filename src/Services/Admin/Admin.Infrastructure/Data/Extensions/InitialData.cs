@@ -24,6 +24,10 @@ namespace Admin.Infrastructure.Data.Extensions
                     AdministratorName.Of("Andrea", "Cedeno"),
                     Email.Create("accedeno.21@est.ucab.edu.ve"),
                     Password.Create(passwordHasher.Hash("123456"))),
+                Administrator.Create(Guid.NewGuid(),
+                    AdministratorName.Of("Juan", "Hedderich"),
+                    Email.Create("jghedderich@proton.me"),
+                    Password.Create(passwordHasher.Hash("123456"))),
             ];
 
             _departments =

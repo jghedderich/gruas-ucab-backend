@@ -21,6 +21,7 @@ public class DeleteOperator : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Operator")
-        .WithDescription("Delete Operator");
+        .WithDescription("Delete Operator")
+        .RequireAuthorization();
     }
 }

@@ -25,6 +25,7 @@ public class UpdateAdministrator : ICarterModule
         .Produces<UpdateAdministratorResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Administrator")
-        .WithDescription("Update Administrator");
+        .WithDescription("Update Administrator")
+        .RequireAuthorization();
     }
 }

@@ -22,6 +22,7 @@ public class DeleteVehicle : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Vehicle")
-        .WithDescription("Delete Vehicle");
+        .WithDescription("Delete Vehicle")
+        .RequireAuthorization();
     }
 }

@@ -27,6 +27,7 @@ public class GetOperatorById : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Operator By Id")
-        .WithDescription("Get Operator By Id");
+        .WithDescription("Get Operator By Id")
+        .RequireAuthorization();
     }
 }

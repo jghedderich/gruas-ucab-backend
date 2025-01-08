@@ -22,6 +22,7 @@ public class GetRates : ICarterModule
         .Produces<GetRatesResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Get Rates")
-        .WithDescription("Retrieve a paginated list of rates");
+        .WithDescription("Retrieve a paginated list of rates")
+        .RequireAuthorization();
     }
 }

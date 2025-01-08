@@ -26,6 +26,7 @@ public class GetVehicleById : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Vehicles By Id")
-        .WithDescription("Get Vehicles By Id");
+        .WithDescription("Get Vehicles By Id")
+        .RequireAuthorization();
     }
 }

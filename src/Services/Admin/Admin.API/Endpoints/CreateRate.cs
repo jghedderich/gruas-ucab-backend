@@ -23,6 +23,7 @@ public class CreateRate : ICarterModule
         .Produces<CreateRateResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Rate")
-        .WithDescription("Create Rate");
+        .WithDescription("Create Rate")
+        .RequireAuthorization();
     }
 }

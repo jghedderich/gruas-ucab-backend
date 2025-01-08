@@ -21,6 +21,7 @@ public class DeleteRate : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Rate")
-        .WithDescription("Delete Rate");
+        .WithDescription("Delete Rate")
+        .RequireAuthorization();
     }
 }

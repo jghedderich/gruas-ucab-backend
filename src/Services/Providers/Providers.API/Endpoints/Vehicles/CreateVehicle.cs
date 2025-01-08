@@ -25,6 +25,7 @@ public class CreateVehicle : ICarterModule
         .Produces<CreateDriverResponse>(StatusCodes.Status201Created)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Create Vehicle")
-        .WithDescription("Create Vehicle");
+        .WithDescription("Create Vehicle")
+        .RequireAuthorization();
     }
 }

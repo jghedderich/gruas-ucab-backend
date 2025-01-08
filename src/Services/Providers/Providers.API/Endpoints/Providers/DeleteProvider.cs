@@ -21,6 +21,7 @@ public class DeleteProvider : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Delete Provider")
-        .WithDescription("Delete Provider");
+        .WithDescription("Delete Provider")
+        .RequireAuthorization();
     }
 }

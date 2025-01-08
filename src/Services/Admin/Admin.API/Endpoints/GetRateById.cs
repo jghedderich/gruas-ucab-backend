@@ -26,6 +26,7 @@ public class GetRateById : ICarterModule
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .ProducesProblem(StatusCodes.Status404NotFound)
         .WithSummary("Get Rate By Id")
-        .WithDescription("Get Rate By Id");
+        .WithDescription("Get Rate By Id")
+        .RequireAuthorization();
     }
 }
