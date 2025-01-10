@@ -61,7 +61,14 @@ public class Order : Aggregate<Guid>
 
         AddDomainEvent(new OrderStatusUpdatedEvent(Id, newStatus));
     }
- 
+
+    public void UpdateOrderDriver(Guid driverId)
+    {
+        DriverId = driverId;
+
+        AddDomainEvent(new OrderUpdatedEvent(this));
+    }
+
     public void AddCostDetail(Guid costDetailId, string description, decimal amount, CostDetailStatus statusC)
     {
         var costDetail = CostDetail.Create(costDetailId, Id, description, amount, statusC);
