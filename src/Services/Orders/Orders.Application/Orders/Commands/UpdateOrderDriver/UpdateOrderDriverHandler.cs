@@ -23,5 +23,6 @@ public class UpdateOrderDriverHandler(IApplicationDbContext dbContext) : IComman
     public static void UpdateOrderDriver(Order order, Guid driverId)
     {
         order.UpdateOrderDriver(driverId);
+        order.UpdateStatus(OrderStatus.Of(Status.ToBeAccepted));
     }
 }
