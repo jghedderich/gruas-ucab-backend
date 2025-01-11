@@ -1,4 +1,4 @@
-﻿namespace Providers.Application.Providers.EventHandlers;
+﻿namespace Providers.Application.Drivers.EventHandlers.Domain;
 
 public class DriverCreatedEventHandler(ILogger<DriverCreatedEventHandler> logger) : INotificationHandler<DriverCreatedEvent>
 {

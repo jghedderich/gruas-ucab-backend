@@ -1,12 +1,11 @@
-﻿
-
-
+﻿using BuildingBlocks.Messaging.Events;
+using MassTransit;
 using Orders.Application.Exceptions;
 using Orders.Application.Maps;
 
 namespace Orders.Application.Orders.Commands.CreateOrder;
 
-public class CreateOrderHandler(IApplicationDbContext dbContext, GoogleMapsService mapService) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
+public class CreateOrderHandler(IApplicationDbContext dbContext, GoogleMapsService mapService, IPublishEndpoint publishEndpoint) : ICommandHandler<CreateOrderCommand, CreateOrderResult>
 {
     public async Task<CreateOrderResult> Handle(CreateOrderCommand command, CancellationToken cancellationToken)
     {
@@ -19,6 +18,14 @@ public class CreateOrderHandler(IApplicationDbContext dbContext, GoogleMapsServi
 
         dbContext.Orders.Add(order);
         await dbContext.SaveChangesAsync(cancellationToken);
+
+        var eventMessage = new DriverAssignedEvent
+        {
+            OrderId = command.Order.Id,
+            DriverId = command.Order.DriverId
+        };
+
+        await publishEndpoint.Publish(eventMessage, cancellationToken);
 
         return new CreateOrderResult(order.Id);
     }

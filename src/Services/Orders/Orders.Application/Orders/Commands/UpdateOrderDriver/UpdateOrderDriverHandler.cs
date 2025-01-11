@@ -1,9 +1,11 @@
 ﻿
+using BuildingBlocks.Messaging.Events;
+using MassTransit;
 using Orders.Application.Exceptions;
 
 namespace Orders.Application.Orders.Commands.UpdateOrderDriver;
 
-public class UpdateOrderDriverHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateOrderDriverCommand, UpdateOrderDriverResult>
+public class UpdateOrderDriverHandler(IApplicationDbContext dbContext, IPublishEndpoint publishEndpoint) : ICommandHandler<UpdateOrderDriverCommand, UpdateOrderDriverResult>
 {
     public async Task<UpdateOrderDriverResult> Handle(UpdateOrderDriverCommand command, CancellationToken cancellationToken)
     {
@@ -16,6 +18,14 @@ public class UpdateOrderDriverHandler(IApplicationDbContext dbContext) : IComman
 
         dbContext.Orders.Update(order);
         await dbContext.SaveChangesAsync(cancellationToken);
+
+        var eventMessage = new DriverAssignedEvent
+        {
+            OrderId = command.Order.Id,
+            DriverId = command.Order.DriverId
+        };
+
+        await publishEndpoint.Publish(eventMessage, cancellationToken);
 
         return new UpdateOrderDriverResult(true);
     }
