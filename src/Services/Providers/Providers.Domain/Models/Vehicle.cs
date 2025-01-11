@@ -6,6 +6,8 @@ public class Vehicle : Aggregate<Guid>
     public Guid ProviderId { get; private set; } = default!;
     public Brand Brand { get; private set; } = default!;
     public Model Model { get; private set; } = default!;
+    public string LicensePlate { get; private set; } = default!;
+    public string Color { get; private set; } = default!;
     public int Year { get; private set; } = default!;
     public VehicleType Type { get; private set; } = default!;
 
@@ -14,7 +16,9 @@ public class Vehicle : Aggregate<Guid>
         Guid providerId,
         VehicleType type, 
         Brand brand, 
-        Model model, 
+        Model model,
+        string licensePlate,
+        string color,
         int year)
     {
         var vehicle = new Vehicle
@@ -25,6 +29,8 @@ public class Vehicle : Aggregate<Guid>
             Brand = brand,
             Model = model,
             Year = year,
+            LicensePlate = licensePlate,
+            Color = color
         };
 
         vehicle.AddDomainEvent(new VehicleCreatedEvent(vehicle));
@@ -33,12 +39,14 @@ public class Vehicle : Aggregate<Guid>
 
     }
 
-    public void Update(VehicleType type, Brand brand, Model model, int year)
+    public void Update(VehicleType type, Brand brand, Model model, int year, string licensePlate, string color)
     {
         Type = type;
         Brand = brand;
         Model = model;
         Year = year;
+        LicensePlate = licensePlate;
+        Color = color;
 
         AddDomainEvent(new VehicleUpdatedEvent(this));
     }

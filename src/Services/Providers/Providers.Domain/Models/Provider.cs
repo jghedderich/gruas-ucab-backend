@@ -67,11 +67,11 @@ public class Provider : Aggregate<Guid>
         }
     }
 
-    public void AddVehicle(Guid vehicleId, VehicleType type, Brand brand, Model model, int year)
+    public void AddVehicle(Guid vehicleId, VehicleType type, Brand brand, Model model, int year, string color, string licensePlate)
     {
         ArgumentOutOfRangeException.ThrowIfNegativeOrZero(year);
 
-        var vehicle = Vehicle.Create(vehicleId, Id, type, brand, model, year);
+        var vehicle = Vehicle.Create(vehicleId, Id, type, brand, model, licensePlate, color, year);
         _vehicles.Add(vehicle);
     }
 

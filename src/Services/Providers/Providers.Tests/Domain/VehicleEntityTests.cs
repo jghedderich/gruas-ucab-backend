@@ -19,8 +19,10 @@ public class VehicleEntityTests
         Brand brand = Brand.Of("Zusuki");
         Model model = Model.Of("Lancer");
         int year = 2002;
+        string licensePlate = "ABC-123";
+        string color = "#db2414";
 
-        _vehicle = Vehicle.Create(id, providerId, type, brand, model, year);
+        _vehicle = Vehicle.Create(id, providerId, type, brand, model, licensePlate, color, year);
     }
 
     [Fact]
@@ -41,7 +43,7 @@ public class VehicleEntityTests
         int NewYear = 2012;
 
         // act
-        _vehicle.Update(_vehicle.Type, _vehicle.Brand, NewModel, NewYear);
+        _vehicle.Update(_vehicle.Type, _vehicle.Brand, NewModel, NewYear, "CBD-569", "#db2487");
 
         // assert
         _vehicle.Model.Should().Be(NewModel);
