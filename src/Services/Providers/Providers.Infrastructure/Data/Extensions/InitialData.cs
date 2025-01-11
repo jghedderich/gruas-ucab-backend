@@ -5,7 +5,7 @@ using Providers.Domain.ValueObjects;
 
 namespace Providers.Infrastructure.Data.Extensions;
 
-internal class InitialData
+public class InitialData
 {
     private static readonly List<Provider> _providers;
 
@@ -38,8 +38,9 @@ internal class InitialData
         AddVehiclesToProvider(_providers[0], "Volvo", "Scania");
         AddVehiclesToProvider(_providers[1], "Mercedes-Benz", "MAN");
 
-        AddDriversToProvider(_providers[0], "Carlos", "Maria");
-        AddDriversToProvider(_providers[1], "Pedro", "Ana");
+        // Adding specified drivers
+        AddDriverToProvider(_providers[0], "Juan", "Hedderich", "jghedderich@proton.me");
+        AddDriverToProvider(_providers[1], "Juancho", "Palacios", "jgh2748@gmail.com");
     }
 
     public static IEnumerable<Provider> Providers() => _providers;
@@ -66,36 +67,23 @@ internal class InitialData
         );
     }
 
-    private static void AddDriversToProvider(Provider provider, string firstName1, string firstName2)
+    private static void AddDriverToProvider(Provider provider, string firstName, string lastName, string email)
     {
         var vehicles = provider.Vehicles.ToList();
-
         var passwordHasher = new PasswordHasher();
 
         provider.AddDriver(
             Guid.NewGuid(),
-            DriverName.Of(firstName1, "Rodriguez"),
+            DriverName.Of(firstName, lastName),
             provider.Id,
             vehicles[0].Id,
-            Email.Of($"{firstName1.ToLower()}.rodriguez@example.com"),
+            Email.Of(email),
             Password.Of(passwordHasher.Hash("123456")),
-            Phone.Of("04123349280"),
-            Dni.Of(DniType.V, "29625840"),
+            Phone.Of("04123349280"), // You can change this if needed
+            Dni.Of(DniType.V, "29625840"), // Change as necessary
             Status.Available,
-            Location.Of(address1: "La Castellana", address2: "Calle el Tartago", coordinates: Coordinates.Of("10.507365", "-66.859987"), city: "Caracas", state: "Miranda", zip: "1060")
-        );
-
-        provider.AddDriver(
-            Guid.NewGuid(),
-            DriverName.Of(firstName2, "Gonzalez"),
-            provider.Id,
-            vehicles[1].Id,
-            Email.Of($"{firstName2.ToLower()}.gonzalez@example.com"),
-            Password.Of(passwordHasher.Hash("123456")),
-            Phone.Of("04123349281"),
-            Dni.Of(DniType.V, "29625841"),
-            Status.Available,
-            Location.Of(address1: "Avenida los Mangos", address2: "", coordinates: Coordinates.Of("10.50177", "-66.8728"), city: "Caracas", state: "Miranda", zip: "1060")
+            Location.Of(address1: "La Castellana", address2: "", coordinates: Coordinates.Of("10.507365", "-66.859987"), city: "Caracas", state: "Miranda", zip: "1060")
         );
     }
 }
+
