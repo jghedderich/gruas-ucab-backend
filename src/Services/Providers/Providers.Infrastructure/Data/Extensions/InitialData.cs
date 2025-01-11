@@ -56,14 +56,19 @@ public class InitialData
             VehicleType.Heavy,
             Brand.Of(brand1),
             Model.Of("Heavy Duty"),
-            2022
+            2022,
+            "#000000",
+            "ABC-123"
+
         );
         provider.AddVehicle(
             Guid.NewGuid(),
             VehicleType.Medium,
             Brand.Of(brand2),
             Model.Of("Cargo"),
-            2021
+            2021,
+            "#5abbe8",
+            "DEF-456"
         );
     }
 

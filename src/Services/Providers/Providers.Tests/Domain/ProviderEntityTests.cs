@@ -66,9 +66,10 @@ public class ProviderEntityTests
         var dni = Dni.Of(DniType.V, "87654321");
         var phone = Phone.Of("04123456789");
         var status = Status.Available;
+        var location = Location.Of("testAddress1", "testAddress2", Coordinates.Of("0.12456", "14.545723"), "testCity", "testState", "1060" );
 
         // Act
-        _provider.AddDriver(id, driverName, providerId, vehicleId, email, password, phone, dni, status);
+        _provider.AddDriver(id, driverName, providerId, vehicleId, email, password, phone, dni, status, location);
         
         // Assert
         _provider.Drivers.Count().Should().Be(1);

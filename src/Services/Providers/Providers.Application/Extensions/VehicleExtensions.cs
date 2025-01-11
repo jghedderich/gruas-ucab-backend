@@ -11,6 +11,8 @@ public static class VehicleExtensions
                 Brand: v.Brand,
                 Model: v.Model,
                 Year: v.Year,
+                LicensePlate: v.LicensePlate,
+                Color: v.Color,
                 IsActive: v.IsActive
             ));
     }
@@ -29,6 +31,8 @@ public static class VehicleExtensions
                 Brand: vehicle.Brand.Value,
                 Model: vehicle.Model.Value,
                 Year: vehicle.Year,
+                LicensePlate: vehicle.LicensePlate,
+                Color: vehicle.Color,
                 IsActive: vehicle.IsActive
             );
     }

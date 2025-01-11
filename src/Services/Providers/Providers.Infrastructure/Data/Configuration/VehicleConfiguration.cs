@@ -23,6 +23,10 @@ public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
 
         builder.Property(p => p.Year).HasMaxLength(4);
 
+        builder.Property(p => p.LicensePlate).HasMaxLength(7);
+
+        builder.Property(p => p.Color).HasMaxLength(7);
+
         builder.Property(v => v.Type)
             .HasConversion(t => t.ToString(),
             vehicleType => (VehicleType)Enum.Parse(typeof(VehicleType), vehicleType));
