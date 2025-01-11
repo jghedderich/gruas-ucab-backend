@@ -20,7 +20,9 @@ public class CreateVehicleHandler(IApplicationDbContext dbContext) : ICommandHan
                 type: (VehicleType)Enum.Parse(typeof(VehicleType), vehicleDto.Type),
                 brand: Brand.Of(vehicleDto.Brand),
                 model: Model.Of(vehicleDto.Model),
-                year: vehicleDto.Year
+                year: vehicleDto.Year,
+                licensePlate: vehicleDto.LicensePlate,
+                color: vehicleDto.Color
             );
 
         return newVehicle;

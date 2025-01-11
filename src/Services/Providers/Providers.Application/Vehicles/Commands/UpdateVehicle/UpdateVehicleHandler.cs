@@ -29,6 +29,6 @@ public class UpdateVehicleHandler(IApplicationDbContext dbContext) : ICommandHan
         var updatedModel = Model.Of(vehicleDto.Model);
         var updatedYear = vehicleDto.Year;
 
-        vehicle.Update(updatedType, updatedBrand, updatedModel, updatedYear);
+        vehicle.Update(updatedType, updatedBrand, updatedModel, updatedYear, vehicle.LicensePlate, vehicle.Color);
     }
 }

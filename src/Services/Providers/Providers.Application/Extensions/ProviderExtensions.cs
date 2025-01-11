@@ -21,7 +21,7 @@ public static class ProviderExtensions
                 p.Company.Rif,
                 p.Company.State,
                 p.Company.City),
-            Vehicles: p.Vehicles.Select(v => new VehicleDto(v.Id, v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year, v.IsActive)).ToList(),
+            Vehicles: p.Vehicles.Select(v => new VehicleDto(v.Id, v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year, v.LicensePlate, v.Color, v.IsActive)).ToList(),
             Drivers: p.Drivers.Select(d =>
                 new DriverDto(d.Id, d.VehicleId, d.ProviderId,
                     new NameDto(d.DriverName.FirstName, d.DriverName.LastName),
@@ -69,7 +69,7 @@ public static class ProviderExtensions
                     provider.Company.Rif,
                     provider.Company.State,
                     provider.Company.City),
-                Vehicles: provider.Vehicles.Select(v => new VehicleDto(v.Id,v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year, v.IsActive)).ToList(),
+                Vehicles: provider.Vehicles.Select(v => new VehicleDto(v.Id,v.ProviderId, v.Type.ToString(), v.Brand.Value, v.Model.Value, v.Year, v.LicensePlate, v.Color, v.IsActive)).ToList(),
                 Drivers: provider.Drivers.Select(d => 
                     new DriverDto(d.Id, d.VehicleId,d.ProviderId, 
                         new NameDto(d.DriverName.FirstName, d.DriverName.LastName), 

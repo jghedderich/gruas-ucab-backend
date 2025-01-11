@@ -8,5 +8,7 @@ public record VehicleDto(
     string Brand, 
     string Model, 
     int Year,
+    string LicensePlate,
+    string Color,
     bool? IsActive
     );
