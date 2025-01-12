@@ -12,7 +12,6 @@ public class UpdateOrderStatusHandlerI(IApplicationDbContext dbContext)
         var order = await dbContext.Orders
             .FindAsync([orderId], cancellationToken: cancellationToken) ?? throw new OrderNotFoundException(command.Order.Id);
 
-
         UpdateOrderStatus(order, status);
 
         dbContext.Orders.Update(order);
