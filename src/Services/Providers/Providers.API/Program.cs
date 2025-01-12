@@ -2,7 +2,6 @@ using Providers.Infrastructure;
 using Providers.Application;
 using Providers.Infrastructure.Data.Extensions;
 using Providers.API;
-using BuildingBlocks.Messaging.MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -11,12 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
-    .AddApplicationServices()
+    .AddApplicationServices(builder.Configuration)
     .AddInfrastructureServices(builder.Configuration)
     .AddApiServices(builder.Configuration);
-
-// Async Communication Services
-builder.Services.AddMessageBroker(builder.Configuration);
 
 builder.Services.AddAuthentication(options =>
 {
