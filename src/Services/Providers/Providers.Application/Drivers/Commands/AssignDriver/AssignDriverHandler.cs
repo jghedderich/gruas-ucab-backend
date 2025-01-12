@@ -23,7 +23,7 @@ public class AssignDriverHandler(IApplicationDbContext dbContext, IEmailSender e
                 Notification = new Notification
                 {
                     Title = "Nueva orden asignada",
-                    Body = $"Te asignaron la orden {command.Driver.OrderId}. Abre la app para mas información."
+                    Body = "Ingrese a la app para mas información."
                 }
             };
 
@@ -37,7 +37,7 @@ public class AssignDriverHandler(IApplicationDbContext dbContext, IEmailSender e
 
         } else
         {
-            await emailSender.SendEmailAsync(driver.Email.Value, "Nueva orden asignada", $"Te asignaron la orden {command.Driver.OrderId}. Abre la app para mas información.");
+            await emailSender.SendEmailAsync(driver.Email.Value, "Nueva orden asignada", "Abre la app para mas información.");
         }
 
 

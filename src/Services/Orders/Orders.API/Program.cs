@@ -5,14 +5,18 @@ using Orders.Infrastructure.Data.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BuildingBlocks.Messaging.MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services
-    .AddApplicationServices(builder.Configuration)
+    .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
     .AddApiServices(builder.Configuration);
+
+// Async Communication Services
+builder.Services.AddMessageBroker(builder.Configuration);
 
 builder.Services.AddAuthentication(options =>
 {
