@@ -6,7 +6,7 @@ namespace Providers.API.Endpoints.Drivers;
 public record GetDriversResponse(PaginatedResult<DriverDto> Drivers);
 
 public class GetDrivers : ICarterModule
-{
+{ 
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("/drivers", async ([AsParameters] PaginationRequest request, ISender sender) =>
