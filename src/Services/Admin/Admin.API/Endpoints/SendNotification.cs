@@ -1,5 +1,6 @@
 ﻿using Admin.Infrastructure.Settings;
 using FirebaseAdmin.Messaging;
+using Hangfire;
 
 namespace Admin.API.Endpoints;
 
@@ -10,25 +11,15 @@ public class SendNotification : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/notifications/send", async (SendNotificationRequest request, IFirebaseMessagingService messagingService) =>
+        app.MapPost("/notifications/send", (SendNotificationRequest request) =>
         {
-
             try
             {
-                var message = new Message()
-                {
-                    Token = request.DeviceToken, // Replace with the device token you get from the Firebase Console
-                    Notification = new Notification()
-                    {
-                        Title = request.Title,
-                        Body = request.Body
-                    }
-                };
-                // Send the message
-                string response = FirebaseMessaging.DefaultInstance.SendAsync(message).Result;
-                Console.WriteLine("Successfully sent message: " + response);
-                var response1 = new SendNotificationResponse(true, null);
-                return Results.Ok(response1);
+                // Programa un trabajo en Hangfire para enviar la notificación después del tiempo especificado
+                BackgroundJob.Schedule(() => SendNotificationJob(request), TimeSpan.Parse(request.Time));
+
+                var response = new SendNotificationResponse(true, null);
+                return Results.Ok(response);
             }
             catch (Exception ex)
             {
@@ -40,6 +31,25 @@ public class SendNotification : ICarterModule
         .Produces<SendNotificationResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status500InternalServerError)
         .WithSummary("Send Notification")
-        .WithDescription("Send a push notification to a specific device using Firebase.");
+        .WithDescription("Schedule a push notification to be sent after a specific time.");
+    }
+
+    // Método que será ejecutado por Hangfire
+    [AutomaticRetry(Attempts = 3)] // Retries en caso de error
+    public static async Task SendNotificationJob(SendNotificationRequest request)
+    {
+        var message = new Message()
+        {
+            Token = request.DeviceToken,
+            Notification = new Notification()
+            {
+                Title = request.Title,
+                Body = request.Body
+            }
+        };
+
+        // Enviar notificación con Firebase
+        string response = await FirebaseMessaging.DefaultInstance.SendAsync(message);
+        Console.WriteLine("Successfully sent message: " + response);
     }
 }
