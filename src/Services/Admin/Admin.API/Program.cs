@@ -7,6 +7,8 @@ using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Hangfire;
+using Hangfire.SqlServer;
 
 var firebaseApp = FirebaseApp.Create(new AppOptions()
 {
@@ -43,6 +45,14 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddHangfire(config =>
+    config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseDefaultTypeSerializer()
+        .UseSqlServerStorage(builder.Configuration.GetConnectionString("Database"))
+);
+builder.Services.AddHangfireServer();
+
 var app = builder.Build();
 
 app.UseApiServices();
@@ -54,5 +64,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseHangfireDashboard();
+app.MapHangfireDashboard();
 
 app.Run();
