@@ -37,7 +37,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
             if (entry.State == EntityState.Deleted)
             {
                 entry.State = EntityState.Modified;
-                entry.Entity.IsActive = false;
+                entry.Entity.IsActive = !entry.Entity.IsActive;
             }
 
         }
