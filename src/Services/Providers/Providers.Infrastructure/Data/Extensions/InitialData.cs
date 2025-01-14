@@ -7,7 +7,7 @@ namespace Providers.Infrastructure.Data.Extensions;
 public class InitialData
 {
     private static readonly List<Provider> _providers;
-    private static readonly Random _random = new Random();
+    private static readonly Random _random = new();
 
     static InitialData()
     {
@@ -35,8 +35,8 @@ public class InitialData
             )
         };
 
-        AddVehiclesToProvider(_providers[0], "Volvo", "Scania", "Kenworth", "Peterbilt", "Freightliner");
-        AddVehiclesToProvider(_providers[1], "Mercedes-Benz", "MAN", "Hino", "Isuzu", "Mack");
+        AddVehiclesToProvider(_providers[0], "Volvo", "Scania", "Kenworth", "Peterbilt", "Freightliner", "Ford", "Chevrolet", "Dodge", "GMC");
+        AddVehiclesToProvider(_providers[1], "Mercedes-Benz", "MAN", "Hino", "Isuzu", "Mack", "Toyota", "Nissan", "Hyundai", "Kia");
 
         // Adding specified drivers
         AddDriverToProvider(_providers[0], "Juan", "Hedderich", "04123349280", "29625840");
@@ -65,15 +65,16 @@ public class InitialData
 
     private static void AddVehiclesToProvider(Provider provider, params string[] brands)
     {
-        var models = new[] { "Heavy Duty", "Cargo", "T370", "389", "M2 106" };
-        var colors = new[] { "#000000", "#5abbe8", "#ff0000", "#00ff00", "#0000ff" };
-        var licensePlates = new[] { "ABC-123", "DEF-456", "GHI-789", "JKL-012", "MNO-345" };
+        var models = new[] { "Heavy Duty", "Cargo", "T370", "389", "M2 106", "F-450", "Silverado", "Ram 3500", "Sierra 3500" };
+        var colors = new[] { "#000000", "#5abbe8", "#ff0000", "#00ff00", "#0000ff", "#ffff00", "#ff00ff", "#00ffff", "#ffffff" };
+        var licensePlates = new[] { "ABC-123", "DEF-456", "GHI-789", "JKL-012", "MNO-345", "PQR-678", "STU-901", "VWX-234", "YZA-567" };
+        var types = new[] { VehicleType.Heavy, VehicleType.Medium, VehicleType.Light, VehicleType.Motorcycle };
 
         for (int i = 0; i < brands.Length; i++)
         {
             provider.AddVehicle(
                 Guid.NewGuid(),
-                VehicleType.Heavy,
+                types[_random.Next(types.Length)], // Randomly assign a vehicle type
                 Brand.Of(brands[i]),
                 Model.Of(models[i]),
                 2022 - i,
@@ -93,7 +94,7 @@ public class InitialData
             Guid.NewGuid(),
             DriverName.Of(firstName, lastName),
             provider.Id,
-            vehicles[0].Id,
+            vehicles[provider.Drivers.Count].Id, // Assign a unique vehicle to each driver
             Email.Of("jghedderich@proton.me"),
             Password.Of(passwordHasher.Hash("123456")),
             Phone.Of(phone),
@@ -106,10 +107,10 @@ public class InitialData
     private static Coordinates GenerateRandomCoordinates()
     {
         // Bounding box for Caracas, Venezuela
-        double minLat = 10.4806;
-        double maxLat = 10.5086;
-        double minLon = -66.9036;
-        double maxLon = -66.8526;
+        double minLat = 10.4103;
+        double maxLat = 10.5097;
+        double minLon = -66.8902;
+        double maxLon = -66.8036;
 
         double latitude = minLat + (_random.NextDouble() * (maxLat - minLat));
         double longitude = minLon + (_random.NextDouble() * (maxLon - minLon));
@@ -117,4 +118,5 @@ public class InitialData
         return Coordinates.Of(latitude.ToString("F6"), longitude.ToString("F6"));
     }
 }
+
 
