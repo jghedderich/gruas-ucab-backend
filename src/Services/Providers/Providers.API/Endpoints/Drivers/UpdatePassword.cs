@@ -1,10 +1,12 @@
-﻿using Providers.Application.Drivers.Commands.UpdateDriverPassword;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Drivers.Commands.UpdateDriverPassword;
 
 namespace Drivers.API.Endpoints.Drivers;
 
 public record UpdateDriverPasswordRequest(UpdatePasswordDto Driver);
 public record UpdateDriverPasswordResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateDriverPassword : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

@@ -1,7 +1,9 @@
-﻿using BuildingBlocks.Hashing;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Hashing;
 
 namespace Providers.Application.Drivers.Commands.UpdateDriverPassword;
 
+[ExcludeFromCodeCoverage]
 public class UpdateDriverPasswordHandlerI(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<UpdateDriverPasswordCommand, UpdateDriverPasswordResult>
 {

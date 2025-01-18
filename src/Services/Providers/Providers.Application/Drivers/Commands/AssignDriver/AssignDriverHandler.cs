@@ -1,9 +1,11 @@
 ﻿using BuildingBlocks.Firebase;
 using System.Net.Http.Json;
 using BuildingBlocks.Emails;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Providers.Application.Drivers.Commands.AssignDriver;
 
+[ExcludeFromCodeCoverage]
 public class AssignDriverHandler(IApplicationDbContext dbContext, IEmailSender emailSender)
     : ICommandHandler<AssignDriverCommand, AssignDriverResult>
 {

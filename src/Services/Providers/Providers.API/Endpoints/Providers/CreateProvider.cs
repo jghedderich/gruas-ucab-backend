@@ -1,10 +1,12 @@
-﻿using Providers.Application.Providers.Commands.CreateProvider;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Providers.Commands.CreateProvider;
 
 namespace Providers.API.Endpoints.Providers;
 
 public record CreateProviderRequest(ProviderDto Provider);
 public record CreateProviderResponse(Guid Id);
 
+[ExcludeFromCodeCoverage]
 public class CreateProvider : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

@@ -1,8 +1,11 @@
-﻿using Providers.Application.Drivers.Queries.GetDriverById;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Drivers.Queries.GetDriverById;
 
 namespace Providers.API.Endpoints.Drivers;
 
 public record GetDriverByIdResponse(DriverDto Driver);
+
+[ExcludeFromCodeCoverage]
 public class GetDriverById : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

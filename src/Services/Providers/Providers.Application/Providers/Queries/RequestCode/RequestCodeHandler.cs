@@ -1,8 +1,11 @@
-﻿using BuildingBlocks.Caching;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Caching;
 using BuildingBlocks.Emails;
 using BuildingBlocks.Exceptions;
 
 namespace Providers.Application.Providers.Queries.RequestCode;
+
+[ExcludeFromCodeCoverage]
 public class RequestCodeHandler(IApplicationDbContext dbContext, IEmailSender emailSender, IRedisCacheService redisCache)
     : IQueryHandler<RequestCodeQuery, RequestCodeResult>
 {

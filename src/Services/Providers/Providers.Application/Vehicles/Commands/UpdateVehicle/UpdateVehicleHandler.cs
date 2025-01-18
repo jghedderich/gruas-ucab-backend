@@ -1,6 +1,9 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
+
 namespace Providers.Application.Vehicles.Commands.UpdateVehicle;
 
+[ExcludeFromCodeCoverage]
 public class UpdateVehicleHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateVehicleCommand, UpdateVehicleResult>
 {
     public async Task<UpdateVehicleResult> Handle(UpdateVehicleCommand command, CancellationToken cancellationToken)

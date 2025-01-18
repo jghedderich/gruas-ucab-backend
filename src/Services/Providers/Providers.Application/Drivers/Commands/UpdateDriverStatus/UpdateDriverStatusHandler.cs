@@ -1,5 +1,8 @@
-﻿namespace Providers.Application.Drivers.Commands.UpdateDriverStatus;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Application.Drivers.Commands.UpdateDriverStatus;
+
+[ExcludeFromCodeCoverage]
 public class UpdateDriverStatusHandlerI(IApplicationDbContext dbContext)
     : ICommandHandler<UpdateDriverStatusCommand, UpdateDriverStatusResult>
 {

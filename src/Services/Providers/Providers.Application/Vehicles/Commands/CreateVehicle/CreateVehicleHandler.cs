@@ -1,5 +1,8 @@
-﻿namespace Providers.Application.Vehicles.Commands.CreateVehicle;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Application.Vehicles.Commands.CreateVehicle;
+
+[ExcludeFromCodeCoverage]
 public class CreateVehicleHandler(IApplicationDbContext dbContext) : ICommandHandler<CreateVehicleCommand, CreateVehicleResult>
 {
     public async Task<CreateVehicleResult> Handle(CreateVehicleCommand command, CancellationToken cancellationToken)

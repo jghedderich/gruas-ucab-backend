@@ -1,10 +1,12 @@
-﻿using Providers.API.Endpoints.Drivers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.API.Endpoints.Drivers;
 using Providers.Application.Vehicles.Commands.DeleteVehicle;
 
 namespace Providers.API.Endpoints.Vehicles;
 
 public record DeleteVehicleResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class DeleteVehicle : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

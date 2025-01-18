@@ -1,4 +1,5 @@
-﻿using Providers.Application.Drivers.Commands.UpdateDriver;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Drivers.Commands.UpdateDriver;
 
 namespace Providers.API.Endpoints.Drivers;
 
@@ -6,6 +7,7 @@ public record UpdateDriverRequest(DriverDto Driver);
 
 public record UpdateDriverResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateDriver : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

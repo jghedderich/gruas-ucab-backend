@@ -1,9 +1,10 @@
-﻿using BuildingBlocks.Emails;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Emails;
 using BuildingBlocks.Hashing;
-using Providers.Application.Dtos;
 
 namespace Providers.Application.Providers.Commands.CreateProvider;
 
+[ExcludeFromCodeCoverage]
 public class CreateProviderHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, IEmailSender emailSender)
     : ICommandHandler<CreateProviderCommand, CreateProviderResult>
 {

@@ -1,5 +1,8 @@
-﻿namespace Providers.Application.Vehicles.Commands.DeleteVehicle;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Application.Vehicles.Commands.DeleteVehicle;
+
+[ExcludeFromCodeCoverage]
 public class DeleteVehicleHandler(IApplicationDbContext dbContext) : ICommandHandler<DeleteVehicleCommand, DeleteVehicleResult>
 {
     public async Task<DeleteVehicleResult> Handle(DeleteVehicleCommand command, CancellationToken cancellationToken)

@@ -1,8 +1,10 @@
-﻿using BuildingBlocks.Pagination;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Pagination;
 using Providers.Application.Extensions;
 
 namespace Providers.Application.Drivers.Queries.GetDrivers;
 
+[ExcludeFromCodeCoverage]
 public class GetDriversHandler(IApplicationDbContext dbContext) : IQueryHandler<GetDriversQuery, GetDriversResult>
 {
     public async Task<GetDriversResult> Handle(GetDriversQuery query, CancellationToken cancellationToken)

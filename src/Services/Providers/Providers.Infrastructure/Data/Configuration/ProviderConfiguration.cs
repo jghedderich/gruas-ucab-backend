@@ -1,22 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Providers.Domain.Models;
 using Providers.Domain.ValueObjects;
 
 namespace Providers.Infrastructure.Data.Configuration;
 
+[ExcludeFromCodeCoverage]
 public class ProviderConfiguration : IEntityTypeConfiguration<Provider>
 {
     public void Configure(EntityTypeBuilder<Provider> builder)
     {
         builder.HasKey(p => p.Id);
    
-        //// provider has many drivers
+        // provider has many drivers
         builder.HasMany(d => d.Drivers)
             .WithOne()
             .HasForeignKey(d => d.ProviderId);
 
-        //// provider has many vehicles
+        // provider has many vehicles
         builder.HasMany(v => v.Vehicles)
             .WithOne()
             .HasForeignKey(v => v.ProviderId);

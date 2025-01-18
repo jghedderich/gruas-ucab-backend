@@ -1,5 +1,8 @@
-﻿namespace Providers.Application.Providers.Commands.DeleteProvider;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Application.Providers.Commands.DeleteProvider;
+
+[ExcludeFromCodeCoverage]
 public class DeleteProviderHandler(IApplicationDbContext dbContext)
     : ICommandHandler<DeleteProviderCommand, DeleteProviderResult>
 {

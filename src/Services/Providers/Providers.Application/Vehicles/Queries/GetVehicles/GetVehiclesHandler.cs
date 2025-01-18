@@ -1,8 +1,10 @@
-﻿using BuildingBlocks.Pagination;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Pagination;
 using Providers.Application.Extensions;
 
 namespace Providers.Application.Vehicles.Queries.GetVehicles;
 
+[ExcludeFromCodeCoverage]
 public class GetVehicleHandler(IApplicationDbContext dbContext) : IQueryHandler<GetVehiclesQuery, GetVehiclesResult>
 {
     public async Task<GetVehiclesResult> Handle(GetVehiclesQuery query, CancellationToken cancellationToken)

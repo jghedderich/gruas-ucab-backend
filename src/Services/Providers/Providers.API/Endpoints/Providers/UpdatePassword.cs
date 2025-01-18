@@ -1,10 +1,12 @@
-﻿using Providers.Application.Providers.Commands.UpdateProviderPassword;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Providers.Commands.UpdateProviderPassword;
 
 namespace Providers.API.Endpoints.Providers;
 
 public record UpdateProviderPasswordRequest(UpdatePasswordDto Provider);
 public record UpdateProviderPasswordResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateProviderPassword : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

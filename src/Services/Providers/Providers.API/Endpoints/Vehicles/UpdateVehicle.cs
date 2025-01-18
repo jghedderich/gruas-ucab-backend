@@ -1,4 +1,5 @@
-﻿using Providers.API.Endpoints.Providers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.API.Endpoints.Providers;
 using Providers.Application.Vehicles.Commands.UpdateVehicle;
 
 namespace Providers.API.Endpoints.Vehicles;
@@ -6,6 +7,7 @@ namespace Providers.API.Endpoints.Vehicles;
 public record UpdateVehicleRequest(VehicleDto Vehicle);
 public record UpdateVehicleResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateVehicle : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

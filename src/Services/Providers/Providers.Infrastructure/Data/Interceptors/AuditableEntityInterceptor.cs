@@ -1,5 +1,8 @@
-﻿namespace Providers.Infrastructure.Data.Interceptors;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Infrastructure.Data.Interceptors;
+
+[ExcludeFromCodeCoverage]
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)

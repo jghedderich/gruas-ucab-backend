@@ -1,4 +1,5 @@
-﻿using Providers.API.Endpoints.Drivers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.API.Endpoints.Drivers;
 using Providers.Application.Vehicles.Commands.CreateVehicle;
 
 namespace Providers.API.Endpoints.Vehicles;
@@ -7,6 +8,7 @@ public record CreateVehicleRequest(VehicleDto Vehicle);
 
 public record CreateVehicleResponse(Guid Id);
 
+[ExcludeFromCodeCoverage]
 public class CreateVehicle : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
