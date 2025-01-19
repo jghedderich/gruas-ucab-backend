@@ -1,8 +1,5 @@
-﻿using FluentValidation;
-using Admin.Application.Dtos;
-using BuildingBlocks.CQRS;
-
-namespace Admin.Application.Departments.Commands.CreateDepartment;
+﻿
+namespace Admin.Application.Departament.Commands.CreateDepartament;
 
 public record CreateDepartmentCommand(DepartmentDto Department)
     : ICommand<CreateDepartmentResult>;

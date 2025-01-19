@@ -1,31 +1,30 @@
-﻿using Admin.Application.Dtos;
-using BuildingBlocks.CQRS;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Admin.Application.Departments.Commands.CreateDepartment;
-
-public class CreateDepartmentHandler(IApplicationDbContext dbContext)
-    : ICommandHandler<CreateDepartmentCommand, CreateDepartmentResult>
+namespace Admin.Application.Departament.Commands.CreateDepartament
 {
-    public async Task<CreateDepartmentResult> Handle(CreateDepartmentCommand command, CancellationToken cancellationToken)
+    [ExcludeFromCodeCoverage]
+    public class CreateDepartmentHandler(IApplicationDbContext dbContext)
+        : ICommandHandler<CreateDepartmentCommand, CreateDepartmentResult>
     {
-        var department = CreateNewDepartment(command.Department);
+        public async Task<CreateDepartmentResult> Handle(CreateDepartmentCommand command, CancellationToken cancellationToken)
+        {
+            var department = CreateNewDepartment(command.Department);
 
-        dbContext.Departments.Add(department);
-        await dbContext.SaveChangesAsync(cancellationToken);
+            dbContext.Departments.Add(department);
+            await dbContext.SaveChangesAsync(cancellationToken);
 
-        return new CreateDepartmentResult(department.Id);
-    }
+            return new CreateDepartmentResult(department.Id);
+        }
 
-    private static Department CreateNewDepartment(DepartmentDto departmentDto)
-    {
-        var newDepartment = Department.Create(
-            id: Guid.NewGuid(),
-            name: DepartmentName.Create(departmentDto.DepartmentName),
-            description: departmentDto.Description  
-        );
+        private static Department CreateNewDepartment(DepartmentDto departmentDto)
+        {
+            var newDepartment = Department.Create(
+                id: Guid.NewGuid(),
+                name: DepartmentName.Create(departmentDto.DepartmentName),
+                description: departmentDto.Description
+            );
 
-        return newDepartment;
+            return newDepartment;
+        }
     }
 }

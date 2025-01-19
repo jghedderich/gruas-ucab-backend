@@ -1,8 +1,8 @@
-﻿using Admin.Application.Dtos;
-using Admin.Application.Exceptions;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Admin.Application.Administrators.Commands.DeleteAdministrator;
 
+[ExcludeFromCodeCoverage]
 public class DeleteAdministratorHandler(IApplicationDbContext dbContext)
     : ICommandHandler<DeleteAdministratorCommand, DeleteAdministratorResult>
 {

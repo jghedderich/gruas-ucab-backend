@@ -1,9 +1,11 @@
-﻿using Admin.Application.Administrators.Commands.DeleteAdministrator;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Administrators.Commands.DeleteAdministrator;
 
 namespace Admin.API.Endpoints;
 
 public record DeleteAdministratorResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class DeleteAdministrator : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

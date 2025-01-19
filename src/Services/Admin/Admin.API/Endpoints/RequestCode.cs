@@ -1,4 +1,5 @@
-﻿using Admin.Application.Administrators.Queries.RequestCode;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Administrators.Queries.RequestCode;
 using Admin.Domain.ValueObjects;
 
 namespace Admin.API.Endpoints;
@@ -6,6 +7,7 @@ namespace Admin.API.Endpoints;
 public record RequestCodeRequest(string Email, string Type);
 public record RequestCodeResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class RequestCode : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

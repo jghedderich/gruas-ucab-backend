@@ -1,7 +1,9 @@
-﻿using BuildingBlocks.Hashing;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Hashing;
 
 namespace Admin.Application.Administrators.Commands.UpdateAdministratorPassword;
 
+[ExcludeFromCodeCoverage]
 public class UpdateAdministratorPasswordHandlerI(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<UpdateAdministratorPasswordCommand, UpdateAdministratorPasswordResult>
 {

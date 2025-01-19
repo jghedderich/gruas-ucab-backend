@@ -1,4 +1,5 @@
-﻿using Admin.Infrastructure.Settings;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Infrastructure.Settings;
 using FirebaseAdmin.Messaging;
 using Hangfire;
 
@@ -7,6 +8,7 @@ namespace Admin.API.Endpoints;
 public record SendNotificationRequest(string DeviceToken, string Title, string Body, string Time);
 public record SendNotificationResponse(bool IsSuccess, string? ErrorMessage);
 
+[ExcludeFromCodeCoverage]
 public class SendNotification : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

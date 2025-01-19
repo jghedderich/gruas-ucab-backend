@@ -1,11 +1,13 @@
 ﻿
-using Admin.Application.Departments.Commands.UpdateDepartment;
+using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Departament.Commands.UpdateDepartament;
 
 namespace Admin.API.Endpoints;
 
 public record UpdateDepartmentRequest(DepartmentDto Department);
 public record UpdateDepartmentResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateDepartment : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

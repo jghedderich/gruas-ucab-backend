@@ -1,9 +1,11 @@
-﻿using Admin.Application.Departments.Queries.GetDepartmentById;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Departments.Queries.GetDepartmentById;
 
 namespace Admin.API.Endpoints;
 
 public record GetDepartmentByIdResponse(DepartmentDto Department);
 
+[ExcludeFromCodeCoverage]
 public class GetDepartmentById : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

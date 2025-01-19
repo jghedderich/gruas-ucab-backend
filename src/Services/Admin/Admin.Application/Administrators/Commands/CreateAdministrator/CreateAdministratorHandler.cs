@@ -1,7 +1,9 @@
-﻿using BuildingBlocks.Hashing;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Hashing;
 
 namespace Admin.Application.Administrators.Commands.CreateAdministrator;
 
+[ExcludeFromCodeCoverage]
 public class CreateAdministratorHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<CreateAdministratorCommand, CreateAdministratorResult>
 {

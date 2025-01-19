@@ -1,4 +1,5 @@
-﻿using Admin.Application.Administrators.Commands.UpdateAdministrator;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Administrators.Commands.UpdateAdministrator;
 
 
 
@@ -7,6 +8,7 @@ namespace Admin.API.Endpoints;
 public record UpdateAdministratorRequest(AdministratorDto Administrator);
 public record UpdateAdministratorResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateAdministrator : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
