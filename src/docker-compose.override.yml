@@ -47,7 +47,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_HTTPS_PORTS=0
       - ConnectionStrings__Database=Server=providersdb;Database=ProvidersDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
       - MessageBroker__Host=amqp://gruas-mq:5672
       - MessageBroker__UserName=guest
@@ -67,7 +67,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_HTTPS_PORTS=0
       - ConnectionStrings__Database=Server=admindb;Database=AdminDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
       - MessageBroker__Host=amqp://gruas-mq:5672
       - MessageBroker__UserName=guest
@@ -87,7 +87,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_HTTPS_PORTS=0
       - ConnectionStrings__Database=Server=ordersdb;Database=OrdersDb;User Id=sa;Password=Equipo9#2024;Encrypt=False;TrustServerCertificate=True
       - MessageBroker__Host=amqp://gruas-mq:5672
       - MessageBroker__UserName=guest
@@ -107,7 +107,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_HTTPS_PORTS=0
     depends_on:
       - providers.api
       - orders.api
