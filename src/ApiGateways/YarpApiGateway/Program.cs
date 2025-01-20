@@ -24,6 +24,8 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("http://localhost:3000");
         builder.WithOrigins("http://localhost:3001");
         builder.WithOrigins("https://gruas-ucab.netlify.app");
+        //Aqui va la URL del front!
+
         builder.AllowAnyMethod();
         builder.AllowAnyHeader();
         builder.AllowCredentials();

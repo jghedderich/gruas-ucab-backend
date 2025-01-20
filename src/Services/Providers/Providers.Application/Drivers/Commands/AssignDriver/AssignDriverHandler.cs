@@ -1,48 +1,53 @@
-﻿using BuildingBlocks.Firebase;
-using System.Net.Http.Json;
-using BuildingBlocks.Emails;
+﻿using BuildingBlocks.Emails;
+using Providers.Application.Settings;
 using System.Diagnostics.CodeAnalysis;
+
 
 namespace Providers.Application.Drivers.Commands.AssignDriver;
 
 [ExcludeFromCodeCoverage]
-public class AssignDriverHandler(IApplicationDbContext dbContext, IEmailSender emailSender)
-    : ICommandHandler<AssignDriverCommand, AssignDriverResult>
+public class AssignDriverHandler(
+    IApplicationDbContext dbContext,
+    IEmailSender emailSender,
+    IFirebaseMessagingService firebaseMessagingService // This should now be recognized
+) : ICommandHandler<AssignDriverCommand, AssignDriverResult>
 {
     public async Task<AssignDriverResult> Handle(AssignDriverCommand command, CancellationToken cancellationToken)
     {
+        // Buscar el conductor en la base de datos
         var driver = await dbContext.Drivers
-            .FindAsync([command.Driver.DriverId], cancellationToken: cancellationToken) ?? throw new DriverNotFoundException(command.Driver.DriverId);
+            .FindAsync(new object[] { command.Driver.DriverId }, cancellationToken: cancellationToken)
+            ?? throw new DriverNotFoundException(command.Driver.DriverId);
 
-        if (driver.Token != null)
+        // Verificar si el conductor tiene un token de dispositivo registrado
+        if (!string.IsNullOrEmpty(driver.Token))
         {
-            var client = new HttpClient();
-
-            var fcmMessage = new FcmMessage
+            try
             {
-                To = driver.Token,
-                Priority = "high",
-                Notification = new Notification
-                {
-                    Title = "Nueva orden asignada",
-                    Body = "Ingrese a la app para mas información."
-                }
-            };
-
-            var response = await client.PostAsJsonAsync("https://fcm.googleapis.com/fcm/send", fcmMessage, cancellationToken);
-
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("Failed to send FCM message");
+                // Enviar notificación push utilizando Firebase
+                await firebaseMessagingService.SendPushNotificationAsync(
+                    deviceToken: driver.Token,
+                    messageTitle: "Nueva orden asignada!",
+                    messageBody: "Abre la app para más información."
+                );
             }
-
-        } else
+            catch (Exception ex)
+            {
+                // Manejar errores de envío de notificación
+                throw new Exception("Error al enviar notificación push al conductor.", ex);
+            }
+        }
+        else
         {
-            await emailSender.SendEmailAsync(driver.Email.Value, "Nueva orden asignada", "Abre la app para mas información.");
+            // Enviar un correo electrónico si no hay un token disponible
+            await emailSender.SendEmailAsync(
+                driver.Email.Value,
+                "Nueva orden asignada",
+                "Abre la app para más información."
+            );
         }
 
-
-        return new AssignDriverResult(true);
+        // Retornar el resultado de la asignación
+        return new AssignDriverResult(true); // Fix the constructor call
     }
 }
