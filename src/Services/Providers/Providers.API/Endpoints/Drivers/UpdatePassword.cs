@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Providers.Application.Drivers.Commands.UpdateDriverPassword;
 
-namespace Drivers.API.Endpoints.Drivers;
+namespace Providers.API.Endpoints.Drivers;
 
 public record UpdateDriverPasswordRequest(UpdatePasswordDto Driver);
 public record UpdateDriverPasswordResponse(bool IsSuccess);

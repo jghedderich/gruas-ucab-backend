@@ -5,6 +5,14 @@ using Providers.API;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+
+var firebaseApp = FirebaseApp.Create(new AppOptions()
+{
+    Credential = GoogleCredential.FromFile(Path.Combine(Directory.GetCurrentDirectory(), "firebase-credentials.json"))
+});
+
 
 var builder = WebApplication.CreateBuilder(args);
 
