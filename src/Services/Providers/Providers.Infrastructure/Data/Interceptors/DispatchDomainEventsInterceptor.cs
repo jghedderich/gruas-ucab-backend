@@ -1,9 +1,11 @@
 ﻿
 
+using System.Diagnostics.CodeAnalysis;
 using MediatR;
 
 namespace Providers.Infrastructure.Data.Interceptors;
 
+[ExcludeFromCodeCoverage]
 internal class DispatchDomainEventsInterceptor(IMediator mediator) : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)

@@ -1,8 +1,10 @@
-﻿using Admin.Application.Dtos;
-using Admin.Application.Exceptions;
+﻿
+using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Departments.Commands.DeleteDepartment;
 
-namespace Admin.Application.Departments.Commands.DeleteDepartment;
+namespace Admin.Application.Departament.Commands.DeleteDepartament;
 
+[ExcludeFromCodeCoverage]
 public class DeleteDepartmentHandler(IApplicationDbContext dbContext)
     : ICommandHandler<DeleteDepartmentCommand, DeleteDepartmentResult>
 {

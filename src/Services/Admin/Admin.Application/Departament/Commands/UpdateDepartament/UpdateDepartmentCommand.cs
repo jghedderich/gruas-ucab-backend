@@ -1,6 +1,4 @@
-﻿using Admin.Application.Dtos;
-
-namespace Admin.Application.Departments.Commands.UpdateDepartment;
+﻿namespace Admin.Application.Departament.Commands.UpdateDepartament;
 
 public record UpdateDepartmentCommand(DepartmentDto Department)
     : ICommand<UpdateDepartmentResult>;

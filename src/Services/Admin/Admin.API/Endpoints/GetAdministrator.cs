@@ -1,10 +1,12 @@
 ﻿using BuildingBlocks.Pagination;
 using Admin.Application.Administrators.Queries.GetAdministrators;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Admin.API.Endpoints;
 
 public record GetAdministratorsResponse(PaginatedResult<AdministratorDto> Administrators);
 
+[ExcludeFromCodeCoverage]
 public class GetAdministrators : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

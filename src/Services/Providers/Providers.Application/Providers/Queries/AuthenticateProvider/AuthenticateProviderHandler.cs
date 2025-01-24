@@ -2,10 +2,12 @@
 using BuildingBlocks.Hashing;
 using BuildingBlocks.Jwt;
 using Providers.Application.Extensions;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Authentication;
 
 namespace Providers.Application.Providers.Queries.AuthenticateProvider;
 
+[ExcludeFromCodeCoverage]
 public class AuthenticateProviderHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, TokenProvider tokenProvider)
     : IQueryHandler<AuthenticateProviderQuery, AuthenticateProviderResult>
 {

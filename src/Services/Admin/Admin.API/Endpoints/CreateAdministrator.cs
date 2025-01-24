@@ -1,10 +1,12 @@
-﻿using Admin.Application.Administrators.Commands.CreateAdministrator;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Administrators.Commands.CreateAdministrator;
 
 namespace Admin.API.Endpoints;
 
 public record CreateAdministratorRequest(AdministratorDto Administrator);
 public record CreateAdministratorResponse(Guid Id);
 
+[ExcludeFromCodeCoverage]
 public class CreateAdministrator : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

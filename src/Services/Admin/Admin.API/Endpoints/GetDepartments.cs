@@ -1,10 +1,12 @@
 ﻿using BuildingBlocks.Pagination;
 using Admin.Application.Departments.Queries.GetDepartments;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Admin.API.Endpoints;
 
 public record GetDepartmentsResponse(PaginatedResult<DepartmentDto> Departments);
 
+[ExcludeFromCodeCoverage]
 public class GetDepartments : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

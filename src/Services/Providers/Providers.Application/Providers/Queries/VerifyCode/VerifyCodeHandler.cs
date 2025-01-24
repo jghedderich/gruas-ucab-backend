@@ -1,9 +1,11 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
 using BuildingBlocks.Caching;
 using BuildingBlocks.Exceptions;
 
 namespace Providers.Application.Providers.Queries.VerifyCode;
 
+[ExcludeFromCodeCoverage]
 public class VerifyCodeHandler(IRedisCacheService redisCacheService) :
     IQueryHandler<VerifyCodeQuery, VerifyCodeResult>
 

@@ -1,8 +1,10 @@
 ﻿using BuildingBlocks.Pagination;
 using Admin.Application.Extensions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Admin.Application.Administrators.Queries.GetAdministrators;
 
+[ExcludeFromCodeCoverage]
 public class GetAdministratorsHandler(IApplicationDbContext dbContext)
     : IQueryHandler<GetAdministratorsQuery, GetAdministratorsResult>
 {

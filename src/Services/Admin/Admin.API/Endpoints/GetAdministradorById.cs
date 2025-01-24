@@ -1,9 +1,11 @@
-﻿using Admin.Application.Administrators.Queries.GetAdministratorById;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Administrators.Queries.GetAdministratorById;
 
 namespace Admin.API.Endpoints;
 
 public record GetAdministratorByIdResponse(AdministratorDto Administrator);
 
+[ExcludeFromCodeCoverage]
 public class GetAdministratorById : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using Admin.Application.Dtos;
-using BuildingBlocks.CQRS;
-
+﻿
 namespace Admin.Application.Administrators.Commands.CreateAdministrator;
 
 public record CreateAdministratorCommand(AdministratorDto Administrator)

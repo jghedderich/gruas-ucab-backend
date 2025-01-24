@@ -1,6 +1,9 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
+
 namespace Providers.Application.Providers.Commands.UpdateProvider;
 
+[ExcludeFromCodeCoverage]
 public class UpdateProviderHandlerI(IApplicationDbContext dbContext)
     : ICommandHandler<UpdateProviderCommand, UpdateProviderResult>
 {

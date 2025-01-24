@@ -1,9 +1,11 @@
-﻿using Providers.Application.Providers.Queries.GetProviderById;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Providers.Queries.GetProviderById;
 
 namespace Providers.API.Endpoints.Providers;
 
 public record GetProviderByIdResponse(ProviderDto Provider);
 
+[ExcludeFromCodeCoverage]
 public class GetProvidersById : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

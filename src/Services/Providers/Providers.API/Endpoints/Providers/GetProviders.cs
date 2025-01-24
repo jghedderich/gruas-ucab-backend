@@ -1,10 +1,12 @@
-﻿using BuildingBlocks.Pagination;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Pagination;
 using Providers.Application.Providers.Queries.GetProviders;
 
 namespace Providers.API.Endpoints.Providers;
 
 public record GetProvidersResponse(PaginatedResult<ProviderDto> Providers);
 
+[ExcludeFromCodeCoverage]
 public class GetProviders : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

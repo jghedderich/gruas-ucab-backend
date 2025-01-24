@@ -4,10 +4,12 @@ using BuildingBlocks.Hashing;
 using BuildingBlocks.Jwt;
 using Drivers.Application.Drivers.Queries.AuthenticateDriver;
 using Providers.Application.Extensions;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Authentication;
 
 namespace Providers.Application.Drivers.Queries.AuthenticateDriver;
 
+[ExcludeFromCodeCoverage]
 public class AuthenticateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, TokenProvider tokenProvider)
     : IQueryHandler<AuthenticateDriverQuery, AuthenticateDriverResult>
 {

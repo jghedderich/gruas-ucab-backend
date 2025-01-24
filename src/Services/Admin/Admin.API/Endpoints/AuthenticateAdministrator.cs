@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
 using Admin.Application.Administrators.Queries.AuthenticateAdmin;
 using Admin.Domain.ValueObjects;
 
@@ -7,6 +8,7 @@ namespace Admin.API.Endpoints;
 public record AuthenticateAdministratorRequest(string Email, string Password);
 public record AuthenticateAdministratorResponse(AdministratorDto Administrator, string Token);
 
+[ExcludeFromCodeCoverage]
 public class AuthenticateAdministrator : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

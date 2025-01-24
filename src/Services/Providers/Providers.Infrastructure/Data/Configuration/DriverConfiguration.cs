@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Providers.Domain.Models;
 using Providers.Domain.ValueObjects;
 
 namespace Providers.Infrastructure.Data.Configuration;
 
+[ExcludeFromCodeCoverage]
 public class DriverConfiguration : IEntityTypeConfiguration<Driver>
 {
     public void Configure(EntityTypeBuilder<Driver> builder)

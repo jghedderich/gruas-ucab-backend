@@ -1,4 +1,5 @@
-﻿using Providers.Application.Providers.Queries.AuthenticateProvider;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Providers.Queries.AuthenticateProvider;
 using Providers.Domain.ValueObjects;
 
 namespace Providers.API.Endpoints.Providers;
@@ -6,6 +7,7 @@ namespace Providers.API.Endpoints.Providers;
 public record AuthenticateProviderRequest(string Email, string Password);
 public record AuthenticateProviderResponse(ProviderDto Provider, string Token);
 
+[ExcludeFromCodeCoverage]
 public class AuthenticateProvider : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

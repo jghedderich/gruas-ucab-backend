@@ -1,5 +1,8 @@
-﻿namespace Providers.Application.Drivers.Commands.UpdateDriver;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Application.Drivers.Commands.UpdateDriver;
+
+[ExcludeFromCodeCoverage]
 public class UpdateDriverHandler(IApplicationDbContext dbContext) : ICommandHandler<UpdateDriverCommand, UpdateDriverResult>
 {
     public async Task<UpdateDriverResult> Handle(UpdateDriverCommand command, CancellationToken cancellationToken)

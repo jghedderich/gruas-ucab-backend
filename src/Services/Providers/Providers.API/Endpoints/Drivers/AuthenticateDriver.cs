@@ -1,4 +1,5 @@
-﻿using Drivers.Application.Drivers.Queries.AuthenticateDriver;
+﻿using System.Diagnostics.CodeAnalysis;
+using Drivers.Application.Drivers.Queries.AuthenticateDriver;
 using Providers.Domain.ValueObjects;
 
 namespace Drivers.API.Endpoints.Drivers;
@@ -6,6 +7,7 @@ namespace Drivers.API.Endpoints.Drivers;
 public record AuthenticateDriverRequest(string Email, string Password, string Token);
 public record AuthenticateDriverResponse(DriverDto Driver, string Token);
 
+[ExcludeFromCodeCoverage]
 public class AuthenticateDriver : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

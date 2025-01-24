@@ -1,8 +1,10 @@
-﻿using BuildingBlocks.Pagination;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Pagination;
 using Providers.Application.Extensions;
 
 namespace Providers.Application.Providers.Queries.GetProviders;
 
+[ExcludeFromCodeCoverage]
 public class GetProvidersHandler(IApplicationDbContext dbContext) : IQueryHandler<GetProvidersQuery, GetProvidersResult>
 {
   public async Task<GetProvidersResult> Handle(GetProvidersQuery query, CancellationToken cancellationToken){

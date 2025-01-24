@@ -1,9 +1,11 @@
-﻿using Admin.Domain.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Domain.Models;
 using Admin.Domain.ValueObjects;
 using BuildingBlocks.Hashing;
 
 namespace Admin.Infrastructure.Data.Extensions
 {
+    [ExcludeFromCodeCoverage]
     internal class InitialData
     {
         private static readonly List<Administrator> _administrators;

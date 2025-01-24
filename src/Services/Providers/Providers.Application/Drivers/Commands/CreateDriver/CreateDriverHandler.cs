@@ -1,9 +1,11 @@
-﻿using BuildingBlocks.Emails;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Emails;
 using BuildingBlocks.Hashing;
 using Providers.Domain.Models;
 
 namespace Providers.Application.Drivers.Commands.CreateDriver;
 
+[ExcludeFromCodeCoverage]
 public class CreateDriverHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, IEmailSender emailSender) 
     : ICommandHandler<CreateDriverCommand, CreateDriverResult>
 {

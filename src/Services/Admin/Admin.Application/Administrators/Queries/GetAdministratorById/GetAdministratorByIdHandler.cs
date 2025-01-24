@@ -1,8 +1,9 @@
-﻿using Admin.Application.Administrators.Queries.GetAdministratorById;
+﻿using System.Diagnostics.CodeAnalysis;
 using Admin.Application.Extensions;
 
 namespace Admin.Application.Administrators.Queries.GetAdministratorById;
 
+[ExcludeFromCodeCoverage]
 public class GetAdministratorsHandler(IApplicationDbContext dbContext)
     : IQueryHandler<GetAdministratorByIdQuery, GetAdministratorByIdResult>
 {

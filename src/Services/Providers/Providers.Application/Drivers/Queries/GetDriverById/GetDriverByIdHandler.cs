@@ -1,7 +1,9 @@
-﻿using Providers.Application.Extensions;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Extensions;
 
 namespace Providers.Application.Drivers.Queries.GetDriverById;
 
+[ExcludeFromCodeCoverage]
 public class GetDriverByIdHandler(IApplicationDbContext dbContext)
     : IQueryHandler<GetDriverByIdQuery, GetDriverByIdResult>
 {

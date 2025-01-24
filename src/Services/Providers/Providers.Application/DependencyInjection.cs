@@ -2,6 +2,7 @@
 using BuildingBlocks.Messaging.MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Providers.Application.Settings;
 using System.Reflection;
 
 namespace Providers.Application;
@@ -18,6 +19,15 @@ public static class DependencyInjection
         });
 
         services.AddMessageBroker(configuration, Assembly.GetExecutingAssembly());
+
+        services.Configure<FirebaseMessagingSettings>(options =>
+        {
+            options.ChannelId = "default_channel";
+            options.MessageSound = "default";
+        });
+        services.AddScoped<IFirebaseMessagingService, FirebaseMessagingService>();
+        services.AddScoped<IFirebaseAppClient, FirebaseAppClient>();
+        services.AddScoped<IFirebaseMessagingClient, FirebaseMessagingClient>();
 
         return services;
     }

@@ -1,9 +1,12 @@
-﻿using Providers.API.Endpoints.Drivers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.API.Endpoints.Drivers;
 using Providers.Application.Vehicles.Queries.GetVehicleById;
 
 namespace Providers.API.Endpoints.Vehicles;
 
 public record GetVehicleByIdResponse(VehicleDto Vehicle);
+
+[ExcludeFromCodeCoverage]
 public class GetVehicleById : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

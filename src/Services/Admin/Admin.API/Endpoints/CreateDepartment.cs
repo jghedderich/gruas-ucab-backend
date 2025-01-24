@@ -1,10 +1,12 @@
-﻿using Admin.Application.Departments.Commands.CreateDepartment;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Departament.Commands.CreateDepartament;
 
 namespace Admin.API.Endpoints;
 
 public record CreateDepartmentRequest(DepartmentDto Department);
 public record CreateDepartmentResponse(Guid Id);
 
+[ExcludeFromCodeCoverage]
 public class CreateDepartment : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

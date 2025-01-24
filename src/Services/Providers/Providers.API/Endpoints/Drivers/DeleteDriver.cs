@@ -1,9 +1,11 @@
-﻿using Providers.Application.Drivers.Commands.DeleteDriver;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Drivers.Commands.DeleteDriver;
 
 namespace Providers.API.Endpoints.Drivers;
 
 public record DeleteDriverResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class DeleteDriver : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

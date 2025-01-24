@@ -1,9 +1,11 @@
-﻿using Admin.Application.Departments.Commands.DeleteDepartment;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Departments.Commands.DeleteDepartment;
 
 namespace Admin.API.Endpoints;
 
 public record DeleteDepartmentResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class DeleteDepartment : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

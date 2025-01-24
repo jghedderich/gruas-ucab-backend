@@ -1,4 +1,5 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
 using Admin.Application.Administrators.Commands.UpdateAdministratorPassword;
 
 namespace Admin.API.Endpoints;
@@ -6,6 +7,7 @@ namespace Admin.API.Endpoints;
 public record UpdateAdministratorPasswordRequest(UpdatePasswordDto Administrator);
 public record UpdateAdministratorPasswordResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateAdministratorPassword : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

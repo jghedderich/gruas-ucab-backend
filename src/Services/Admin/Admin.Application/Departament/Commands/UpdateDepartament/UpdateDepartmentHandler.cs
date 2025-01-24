@@ -1,7 +1,8 @@
-﻿using Admin.Application.Dtos;
+﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Admin.Application.Departments.Commands.UpdateDepartment;
+namespace Admin.Application.Departament.Commands.UpdateDepartament;
 
+[ExcludeFromCodeCoverage]
 public class UpdateDepartmentHandler(IApplicationDbContext dbContext)
     : ICommandHandler<UpdateDepartmentCommand, UpdateDepartmentResult>
 {

@@ -2,10 +2,12 @@
 using BuildingBlocks.Exceptions;
 using BuildingBlocks.Hashing;
 using BuildingBlocks.Jwt;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Authentication;
 
 namespace Admin.Application.Administrators.Queries.AuthenticateAdmin;
 
+[ExcludeFromCodeCoverage]
 public class AuthenticateAdminHandler(IApplicationDbContext dbContext, IPasswordHasher passwordHasher, TokenProvider tokenProvider)
     : IQueryHandler<AuthenticateAdminQuery, AuthenticateAdminResult>
 {

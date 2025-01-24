@@ -1,5 +1,8 @@
-﻿namespace Providers.Infrastructure.Data.Interceptors;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Infrastructure.Data.Interceptors;
+
+[ExcludeFromCodeCoverage]
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
@@ -37,7 +40,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
             if (entry.State == EntityState.Deleted)
             {
                 entry.State = EntityState.Modified;
-                entry.Entity.IsActive = false;
+                entry.Entity.IsActive = !entry.Entity.IsActive;
             }
 
         }

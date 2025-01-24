@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Builder;
 
 namespace Admin.Infrastructure.Data.Extensions
 {
+    [ExcludeFromCodeCoverage]
     public static class DatabaseExtensions
     {
         public static async Task InitializeDatabase(this WebApplication app)

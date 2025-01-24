@@ -1,5 +1,8 @@
-﻿namespace Providers.Application.Drivers.Commands.DeleteDriver;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Providers.Application.Drivers.Commands.DeleteDriver;
+
+[ExcludeFromCodeCoverage]
 public class DeleteDriverHandler(IApplicationDbContext dbContext) : ICommandHandler<DeleteDriverCommand, DeleteDriverResult>
 {
     public async Task<DeleteDriverResult> Handle(DeleteDriverCommand command, CancellationToken cancellationToken)

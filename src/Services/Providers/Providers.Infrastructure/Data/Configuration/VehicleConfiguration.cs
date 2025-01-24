@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Providers.Domain.Models;
-using Providers.Domain.ValueObjects;
 
 namespace Providers.Infrastructure.Data.Configuration;
 
+[ExcludeFromCodeCoverage]
 public class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
 {
     public void Configure(EntityTypeBuilder<Vehicle> builder)

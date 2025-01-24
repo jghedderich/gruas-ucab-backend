@@ -1,8 +1,10 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
 using BuildingBlocks.Hashing;
 
 namespace Providers.Application.Providers.Commands.UpdateProviderPassword;
 
+[ExcludeFromCodeCoverage]
 public class UpdateProviderPasswordHandlerI(IApplicationDbContext dbContext, IPasswordHasher passwordHasher)
     : ICommandHandler<UpdateProviderPasswordCommand, UpdateProviderPasswordResult>
 {

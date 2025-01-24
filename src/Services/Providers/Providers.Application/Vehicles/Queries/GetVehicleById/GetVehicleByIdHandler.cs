@@ -1,7 +1,9 @@
-﻿using Providers.Application.Extensions;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Extensions;
 
 namespace Providers.Application.Vehicles.Queries.GetVehicleById;
 
+[ExcludeFromCodeCoverage]
 public class GetVehicleByIdHandler(IApplicationDbContext dbContext) : IQueryHandler<GetVehicleByIdQuery, GetVehicleByIdResult>
 {
     public async Task<GetVehicleByIdResult> Handle(GetVehicleByIdQuery query, CancellationToken cancellationToken)

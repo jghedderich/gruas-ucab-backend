@@ -1,10 +1,12 @@
-﻿using Providers.Application.Drivers.Commands.UpdateDriverPassword;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Drivers.Commands.UpdateDriverPassword;
 
-namespace Drivers.API.Endpoints.Drivers;
+namespace Providers.API.Endpoints.Drivers;
 
 public record UpdateDriverPasswordRequest(UpdatePasswordDto Driver);
 public record UpdateDriverPasswordResponse(bool IsSuccess);
 
+[ExcludeFromCodeCoverage]
 public class UpdateDriverPassword : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
@@ -23,7 +25,6 @@ public class UpdateDriverPassword : ICarterModule
         .Produces<UpdateDriverPasswordResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Update Driver Password")
-        .WithDescription("Update Driver Password")
-        .RequireAuthorization();
+        .WithDescription("Update Driver Password");
     }
 }

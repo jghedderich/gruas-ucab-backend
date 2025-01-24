@@ -1,4 +1,5 @@
-﻿using Providers.Application.Drivers.Commands.CreateDriver;
+﻿using System.Diagnostics.CodeAnalysis;
+using Providers.Application.Drivers.Commands.CreateDriver;
 
 namespace Providers.API.Endpoints.Drivers;
 
@@ -6,6 +7,7 @@ public record CreateDriverRequest(DriverDto Driver);
 
 public record CreateDriverResponse(Guid Id);
 
+[ExcludeFromCodeCoverage]
 public class CreateDriver : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

@@ -1,4 +1,5 @@
-﻿using BuildingBlocks.Pagination;
+﻿using System.Diagnostics.CodeAnalysis;
+using BuildingBlocks.Pagination;
 using Providers.API.Endpoints.Drivers;
 using Providers.Application.Vehicles.Queries.GetVehicles;
 
@@ -6,6 +7,7 @@ namespace Providers.API.Endpoints.Vehicles;
 
 public record GetVehiclesResponse(PaginatedResult<VehicleDto> Vehicles);
 
+[ExcludeFromCodeCoverage]
 public class GetVehicles : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

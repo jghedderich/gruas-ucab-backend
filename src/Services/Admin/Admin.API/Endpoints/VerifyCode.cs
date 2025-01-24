@@ -1,4 +1,5 @@
-﻿using Admin.Application.Administrators.Queries.VerifyCode;
+﻿using System.Diagnostics.CodeAnalysis;
+using Admin.Application.Administrators.Queries.VerifyCode;
 using Admin.Domain.ValueObjects;
 
 namespace Admin.API.Endpoints;
@@ -6,6 +7,7 @@ namespace Admin.API.Endpoints;
 public record VerifyCodeRequest(string Email, string Code);
 public record VerifyCodeResponse(VerifyCodeDto VerifyDto);
 
+[ExcludeFromCodeCoverage]
 public class VerifyCode : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)

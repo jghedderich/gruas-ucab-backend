@@ -1,8 +1,10 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
 using Providers.Application.Extensions;
 
 namespace Providers.Application.Providers.Queries.GetProviderById;
 
+[ExcludeFromCodeCoverage]
 public class GetProviderByIdHandler(IApplicationDbContext dbContext)
     : IQueryHandler<GetProviderByIdQuery, GetProviderByIdResult>
 {

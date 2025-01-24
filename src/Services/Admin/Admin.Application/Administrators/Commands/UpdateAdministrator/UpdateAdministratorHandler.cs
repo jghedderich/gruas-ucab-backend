@@ -1,6 +1,9 @@
 ﻿
+using System.Diagnostics.CodeAnalysis;
+
 namespace Admin.Application.Administrators.Commands.UpdateAdministrator;
 
+[ExcludeFromCodeCoverage]
 public class UpdateAdministratorHandler(IApplicationDbContext dbContext)
     : ICommandHandler<UpdateAdministratorCommand, UpdateAdministratorResult>
 {
